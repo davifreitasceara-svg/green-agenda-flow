@@ -1,6 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Truck, Sparkles, PenTool, ShieldCheck, ArrowRight } from "lucide-react";
+import { toast } from "sonner";
+import { Truck, Sparkles, PenTool, ShieldCheck, ArrowRight, Star } from "lucide-react";
+
 
 import { Header } from "@/components/Header";
 import { Stories, type Story } from "@/components/Stories";
