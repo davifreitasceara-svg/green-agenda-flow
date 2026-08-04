@@ -46,12 +46,14 @@ export function Header({ cartCount }: { cartCount: number }) {
               </span>
             )}
           </button>
-          <button
-            aria-label="Menu"
+          <Link
+            to="/contato"
+            aria-label="Contato"
             className="grid h-10 w-10 place-items-center rounded-lg text-foreground transition-all duration-300 hover:bg-accent hover:text-primary md:hidden"
           >
             <Menu className="h-5 w-5" />
-          </button>
+          </Link>
+
         </div>
       </div>
 
