@@ -64,8 +64,43 @@ const benefits = [
   { icon: Sparkles, title: "Papel premium", text: "Offset 90g certificado FSC." },
 ];
 
+const testimonials = [
+  {
+    name: "Camila Rocha",
+    role: "Arquiteta · Fortaleza/CE",
+    quote:
+      "A agenda personalizada com meu nome ficou impecável. O papel não borra com caneta gel e a encadernação abre 180°.",
+  },
+  {
+    name: "Rafael Menezes",
+    role: "Vetor Contabilidade · 500 unidades",
+    quote:
+      "Pedimos brindes corporativos com o nosso logo em hot stamping. Entregaram antes do prazo e com embalagem individual.",
+  },
+  {
+    name: "Juliana Alves",
+    role: "Estudante de Medicina",
+    quote:
+      "Uso a acadêmica há dois anos. A grade de horários e os adesivos salvam a minha rotina de plantões.",
+  },
+];
+
 function Index() {
   const [cart, setCart] = useState(0);
+  const [email, setEmail] = useState("");
+
+  const handleNewsletter = (e: React.FormEvent) => {
+    e.preventDefault();
+    const value = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value) || value.length > 255) {
+      toast.error("Informe um e-mail válido");
+      return;
+    }
+    setEmail("");
+    toast.success("Pronto! Seu cupom de 10% chega por e-mail.");
+  };
+
+
 
   return (
     <div className="min-h-screen bg-background font-sans">
