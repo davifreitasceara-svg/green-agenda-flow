@@ -29,16 +29,23 @@ export function Footer() {
         <div>
           <h2 className="text-sm font-semibold uppercase tracking-[0.18em]">Links úteis</h2>
           <ul className="mt-4 space-y-2.5 text-sm text-primary-foreground/75">
-            {["Sobre a gráfica", "Prazos de produção", "Frete e entrega", "Trocas e devoluções", "Fale conosco"].map(
-              (l) => (
-                <li key={l}>
-                  <a href="/" className="transition-colors duration-300 hover:text-primary-foreground">
-                    {l}
-                  </a>
-                </li>
-              ),
-            )}
+            {["Sobre a gráfica", "Prazos de produção", "Frete e entrega", "Trocas e devoluções"].map((l) => (
+              <li key={l}>
+                <Link to="/" className="transition-colors duration-300 hover:text-primary-foreground">
+                  {l}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                to="/contato"
+                className="transition-colors duration-300 hover:text-primary-foreground"
+              >
+                Fale conosco
+              </Link>
+            </li>
           </ul>
+
         </div>
 
         <div>
