@@ -56,18 +56,28 @@ export function Header({ cartCount }: { cartCount: number }) {
       </div>
 
       <nav className="hidden border-t border-border md:block">
-        <ul className="mx-auto flex max-w-7xl gap-8 px-6 py-2.5 text-sm font-medium text-muted-foreground">
+        <ul className="mx-auto flex max-w-7xl items-center gap-8 px-6 py-2.5 text-sm font-medium text-muted-foreground">
           {["Planners 2027", "Agendas Diárias", "Executivas", "Personalizadas", "Acadêmicas", "Brindes"].map(
             (item) => (
               <li key={item}>
-                <a href="/" className="story-link transition-colors duration-300 hover:text-primary">
+                <Link to="/" className="story-link transition-colors duration-300 hover:text-primary">
                   {item}
-                </a>
+                </Link>
               </li>
             ),
           )}
+          <li className="ml-auto">
+            <Link
+              to="/contato"
+              activeProps={{ className: "text-primary" }}
+              className="font-semibold transition-colors duration-300 hover:text-primary"
+            >
+              Contato
+            </Link>
+          </li>
         </ul>
       </nav>
+
     </header>
   );
 }
