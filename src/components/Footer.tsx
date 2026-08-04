@@ -1,4 +1,6 @@
+import { Link } from "@tanstack/react-router";
 import { Instagram, Facebook, MessageCircle, Mail, MapPin, Phone } from "lucide-react";
+
 
 export function Footer() {
   return (
