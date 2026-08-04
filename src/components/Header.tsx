@@ -1,4 +1,6 @@
+import { Link } from "@tanstack/react-router";
 import { Search, ShoppingBag, User, Menu } from "lucide-react";
+
 
 export function Header({ cartCount }: { cartCount: number }) {
   return (
