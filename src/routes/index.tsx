@@ -1,6 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Truck, Sparkles, PenTool, ShieldCheck, ArrowRight } from "lucide-react";
+import { toast } from "sonner";
+import { Truck, Sparkles, PenTool, ShieldCheck, ArrowRight, Star } from "lucide-react";
+
 
 import { Header } from "@/components/Header";
 import { Stories, type Story } from "@/components/Stories";
@@ -62,8 +64,43 @@ const benefits = [
   { icon: Sparkles, title: "Papel premium", text: "Offset 90g certificado FSC." },
 ];
 
+const testimonials = [
+  {
+    name: "Camila Rocha",
+    role: "Arquiteta · Fortaleza/CE",
+    quote:
+      "A agenda personalizada com meu nome ficou impecável. O papel não borra com caneta gel e a encadernação abre 180°.",
+  },
+  {
+    name: "Rafael Menezes",
+    role: "Vetor Contabilidade · 500 unidades",
+    quote:
+      "Pedimos brindes corporativos com o nosso logo em hot stamping. Entregaram antes do prazo e com embalagem individual.",
+  },
+  {
+    name: "Juliana Alves",
+    role: "Estudante de Medicina",
+    quote:
+      "Uso a acadêmica há dois anos. A grade de horários e os adesivos salvam a minha rotina de plantões.",
+  },
+];
+
 function Index() {
   const [cart, setCart] = useState(0);
+  const [email, setEmail] = useState("");
+
+  const handleNewsletter = (e: React.FormEvent) => {
+    e.preventDefault();
+    const value = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value) || value.length > 255) {
+      toast.error("Informe um e-mail válido");
+      return;
+    }
+    setEmail("");
+    toast.success("Pronto! Seu cupom de 10% chega por e-mail.");
+  };
+
+
 
   return (
     <div className="min-h-screen bg-background font-sans">
@@ -142,7 +179,15 @@ function Index() {
 
             <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {products.map((p) => (
-                <ProductCard key={p.id} product={p} onAdd={() => setCart((c) => c + 1)} />
+                <ProductCard
+                  key={p.id}
+                  product={p}
+                  onAdd={() => {
+                    setCart((c) => c + 1);
+                    toast.success(`${p.name} adicionada ao carrinho`);
+                  }}
+                />
+
               ))}
             </div>
           </div>
@@ -157,15 +202,90 @@ function Index() {
               Pedidos a partir de 50 unidades com logo em hot stamping, miolo customizado e embalagem
               individual. Receba um orçamento em até 24 horas.
             </p>
-            <a
-              href="/"
+            <Link
+              to="/contato"
               className="mt-7 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-hover"
             >
               Solicitar orçamento <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
+          </div>
+        </section>
+
+        <section className="bg-surface py-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+              Quem já planeja com a gente
+            </p>
+            <h2 className="mt-2 font-display text-3xl font-semibold text-primary-deep">
+              Mais de 12 mil agendas entregues
+            </h2>
+
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {testimonials.map((t) => (
+                <figure
+                  key={t.name}
+                  className="flex h-full flex-col rounded-lg border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
+                >
+                  <div className="flex gap-1 text-primary">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-current" />
+                    ))}
+                  </div>
+                  <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    “{t.quote}”
+                  </blockquote>
+                  <figcaption className="mt-5 flex items-center gap-3">
+                    <span className="grid h-10 w-10 place-items-center rounded-full bg-accent font-semibold text-primary">
+                      {t.name.charAt(0)}
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block truncate text-sm font-semibold text-primary-deep">
+                        {t.name}
+                      </span>
+                      <span className="block truncate text-xs text-muted-foreground">{t.role}</span>
+                    </span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
+          <div
+            className="grid gap-6 rounded-2xl px-6 py-10 sm:px-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center"
+            style={{ background: "var(--gradient-hero)" }}
+          >
+            <div>
+              <h2 className="font-display text-2xl font-semibold text-primary-foreground sm:text-3xl">
+                Receba lançamentos e cupons antes de todo mundo
+              </h2>
+              <p className="mt-2 text-sm text-primary-foreground/80">
+                Um e-mail por mês, com novidades da produção e 10% na primeira compra.
+              </p>
+            </div>
+            <form onSubmit={handleNewsletter} className="flex flex-col gap-3 sm:flex-row">
+              <input
+                type="email"
+                required
+                maxLength={255}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                aria-label="Seu e-mail"
+                placeholder="seu@email.com"
+                className="h-12 w-full min-w-0 rounded-lg border border-transparent bg-background px-4 text-sm text-foreground outline-none transition-all duration-300 focus:ring-2 focus:ring-background/60"
+              />
+              <button
+                type="submit"
+                className="h-12 shrink-0 rounded-lg bg-background px-6 text-sm font-semibold text-primary transition-all duration-300 hover:bg-surface"
+              >
+                Quero receber
+              </button>
+            </form>
           </div>
         </section>
       </main>
+
 
       <Footer />
     </div>
