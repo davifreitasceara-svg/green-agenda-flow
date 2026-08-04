@@ -179,7 +179,15 @@ function Index() {
 
             <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {products.map((p) => (
-                <ProductCard key={p.id} product={p} onAdd={() => setCart((c) => c + 1)} />
+                <ProductCard
+                  key={p.id}
+                  product={p}
+                  onAdd={() => {
+                    setCart((c) => c + 1);
+                    toast.success(`${p.name} adicionada ao carrinho`);
+                  }}
+                />
+
               ))}
             </div>
           </div>
