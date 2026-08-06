@@ -36,33 +36,22 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {images.map((img, i) => (
-          <div key={i} className="relative w-full h-full shrink-0 flex items-center justify-center overflow-hidden bg-black">
+          <div key={i} className="relative w-full h-full shrink-0 flex items-center justify-center overflow-hidden bg-white">
             
-            {/* 1. Fundo Desfocado com animação "respirando" (Pulse/Scale) */}
+            {/* Fundo Desfocado Base */}
             <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-[60px] opacity-50 transition-transform duration-[10s] ease-in-out hover:scale-125 scale-110"
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-2xl scale-110 opacity-70"
               style={{ backgroundImage: `url(${img.src})` }}
             />
             
-            {/* 2. Textura de Grade (Grid Pattern) para um ar moderno/tech */}
-            <div className="absolute inset-0 opacity-20"
-                 style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}
-            />
+            {/* Camada de Vidro Fosco (Frosted Glass) suave e claro */}
+            <div className="absolute inset-0 bg-white/60 backdrop-blur-md" />
             
-            {/* 3. Vignette escuro nas bordas para focar no centro */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
-
-            {/* 4. Brilho (Glow) dinâmico bem atrás da agenda */}
-            <div 
-              className="absolute w-3/4 h-3/4 bg-cover bg-center bg-no-repeat blur-[100px] opacity-60 rounded-full"
-              style={{ backgroundImage: `url(${img.src})` }}
-            />
-            
-            {/* Imagem Principal flutuando com sombra premium */}
+            {/* Imagem Principal */}
             <img
               src={img.src}
               alt={img.alt}
-              className="relative z-10 w-full h-full max-w-5xl object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-transform duration-700 hover:scale-[1.02]"
+              className="relative z-10 w-full h-full object-contain p-8 drop-shadow-xl"
             />
           </div>
         ))}

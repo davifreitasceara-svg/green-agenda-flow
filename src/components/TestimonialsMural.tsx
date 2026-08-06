@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { MessageCircleHeart, Plus, X } from "lucide-react";
+import { MessageCircleHeart, Plus, X, Star } from "lucide-react";
 
 type Comment = {
   id: string;
   name: string;
   text: string;
   date: number;
+  rating?: number;
 };
 
 const defaultComments: Comment[] = [
@@ -14,12 +15,14 @@ const defaultComments: Comment[] = [
     name: "Thamires Cambui",
     text: "Géssica do céu! Eu tô encantada, apaixonada, maravilhada de como ficou lindo esses planners! Você é uma benção de Deus na vida das pessoas que trabalham com encadernação! Tá tudo incrível!!! Parabéns!!",
     date: Date.now() - 100000,
+    rating: 5,
   },
   {
     id: "2",
     name: "Vanessa Souza",
     text: "Eu bati o recorde de vendas nas agendas, pra mim que trabalha sozinha, não tenho as máquinas mais tops... eu considero que vendi muito bem, vendi mais de 40 agendas... fiz tão corrida que não dá neh pra postar tudo... mas foram mais de 40 agendas",
     date: Date.now() - 50000,
+    rating: 5,
   }
 ];
 
@@ -28,6 +31,9 @@ export function TestimonialsMural() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newName, setNewName] = useState("");
   const [newText, setNewText] = useState("");
+  const [newRating, setNewRating] = useState(5);
+
+  const emojis = ["😍", "❤️", "👏", "✨", "🤩", "🙌", "🔥"];
 
   useEffect(() => {
     const saved = localStorage.getItem("multicopy_testimonials");
@@ -48,6 +54,7 @@ export function TestimonialsMural() {
       name: newName,
       text: newText,
       date: Date.now(),
+      rating: newRating,
     };
 
     const updatedComments = [newComment, ...comments];
@@ -56,6 +63,7 @@ export function TestimonialsMural() {
     
     setNewName("");
     setNewText("");
+    setNewRating(5);
     setIsModalOpen(false);
   };
 
@@ -93,9 +101,18 @@ export function TestimonialsMural() {
                 key={comment.id}
                 className="rounded-2xl bg-white border border-primary/20 p-6 lg:p-8 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-md flex flex-col items-center text-center"
               >
-                <h3 className="font-bold text-black text-sm md:text-base mb-4">
+                <h3 className="font-bold text-black text-sm md:text-base mb-1">
                   {comment.name}
                 </h3>
+                {/* Estrelinhas */}
+                <div className="flex gap-0.5 text-amber-400 mb-4">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-3 w-3 ${i < (comment.rating || 5) ? "fill-current" : "text-gray-200 fill-gray-200"}`}
+                    />
+                  ))}
+                </div>
                 <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-medium">
                   {comment.text}
                 </p>
@@ -133,6 +150,22 @@ export function TestimonialsMural() {
               </div>
               
               <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Sua Avaliação</label>
+                <div className="flex gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => setNewRating(star)}
+                      className={`transition-colors ${star <= newRating ? "text-amber-400" : "text-gray-200 hover:text-amber-200"}`}
+                    >
+                      <Star className="h-6 w-6 fill-current" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+              
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Seu Comentário</label>
                 <textarea 
                   value={newText}
@@ -142,6 +175,20 @@ export function TestimonialsMural() {
                   rows={4}
                   className="w-full rounded-lg border border-gray-300 p-3 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-shadow resize-none"
                 />
+                
+                {/* Emojis Rápidos */}
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {emojis.map((emoji, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setNewText(prev => prev + emoji)}
+                      className="rounded-full bg-gray-100 hover:bg-gray-200 px-2 py-1 text-sm transition-colors"
+                    >
+                      {emoji}
+                    </button>
+                  ))}
+                </div>
               </div>
               
               <button 
