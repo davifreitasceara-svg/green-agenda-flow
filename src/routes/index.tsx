@@ -1,11 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Truck, Sparkles, PenTool, ShieldCheck, ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { Truck, Sparkles, PenTool, ShieldCheck, ArrowRight, Star, ShoppingBag, Instagram, Lightbulb } from "lucide-react";
+
+import arteColecao from "@/assets/arte-colecao.png";
+import { products } from "@/data/products";
 
 import { Header } from "@/components/Header";
 import { Stories, type Story } from "@/components/Stories";
 import { ProductCard, type Product } from "@/components/ProductCard";
+import { SalesCard } from "@/components/SalesCard";
+import { ProductCarousel } from "@/components/ProductCarousel";
+import { TestimonialsMural } from "@/components/TestimonialsMural";
 import { Footer } from "@/components/Footer";
+import { HeroCarousel } from "@/components/HeroCarousel";
+import { VideoPlayer } from "@/components/VideoPlayer";
+import { HoverSlider, type HoverSlide } from "@/components/HoverSlider";
 
 import planner2027 from "@/assets/planner-2027.jpg";
 import executiva from "@/assets/agenda-executiva.jpg";
@@ -15,6 +25,16 @@ import academica from "@/assets/agenda-academica.jpg";
 import luxo from "@/assets/agenda-luxo.jpg";
 import storyProducao from "@/assets/story-producao.jpg";
 import storyPromo from "@/assets/story-promo.jpg";
+import bannerColecoes from "@/assets/banner-colecoes.png";
+import bannerMiolo from "@/assets/banner-miolo.png";
+import colecaoJesus from "@/assets/colecao-jesus.png";
+import delicada1 from "@/assets/colecao-delicada-1.png";
+import delicada2 from "@/assets/colecao-delicada-2.png";
+import delicada3 from "@/assets/colecao-delicada-3.png";
+import delicada4 from "@/assets/colecao-delicada-4.png";
+import masculina2027 from "@/assets/masculina-2027.png";
+import doceComoMel from "@/assets/doce-como-mel.png";
+import bannerFofa from "@/assets/banner-fofa.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,14 +66,7 @@ const stories: Story[] = [
   { id: "5", label: "Clientes", image: luxo, caption: "500 agendas entregues para a equipe da Vetor Contabilidade." },
 ];
 
-const products: Product[] = [
-  { id: "p1", name: "Agenda Planner 2027 Esmeralda", description: "Wire-o metálico, 320 páginas, papel offset 90g com marcador de página.", price: 129.9, oldPrice: 159.9, image: planner2027, tag: "Novo", rating: 4.9 },
-  { id: "p2", name: "Agenda Executiva Couro Verde", description: "Capa em couro sintético, costura reforçada e elástico de fechamento.", price: 189.9, image: executiva, tag: "Mais vendido", rating: 4.8 },
-  { id: "p3", name: "Agenda Personalizada com Nome", description: "Capa kraft com hot stamping do seu nome e miolo semanal exclusivo.", price: 149.9, image: personalizada, tag: "Novo", rating: 5 },
-  { id: "p4", name: "Agenda Pocket Semanal Menta", description: "Formato 12x18cm, capa soft touch e caneta metálica inclusa.", price: 74.9, oldPrice: 89.9, image: pocket, tag: "Esgotando", rating: 4.7 },
-  { id: "p5", name: "Agenda Acadêmica 2027", description: "Planejamento por disciplina, adesivos e grade de horários destacável.", price: 99.9, image: academica, rating: 4.6 },
-  { id: "p6", name: "Agenda Permanente Luxo", description: "Tecido verde floresta, fita marcadora dourada e miolo sem datas.", price: 219.9, image: luxo, tag: "Esgotando", rating: 4.9 },
-];
+// Produtos agora vêm de src/data/products.ts
 
 const benefits = [
   { icon: PenTool, title: "Personalização real", text: "Nome, logo e miolo sob medida." },
@@ -65,40 +78,44 @@ const benefits = [
 function Index() {
   const [cart, setCart] = useState(0);
 
+  const carouselImages = [
+    { src: masculina2027, alt: "Agenda 2027 Masculina" },
+    { src: doceComoMel, alt: "Agenda Doce como mel" },
+    { src: bannerFofa, alt: "Coleção Fofa 2027" },
+  ];
+
+  const hoverSlides: HoverSlide[] = [
+    { id: "hs1", label: "Acabamento Premium", image: executiva, description: "Couro sintético com costura reforçada" },
+    { id: "hs2", label: "Hot Stamping", image: personalizada, description: "Personalização dourada artesanal" },
+    { id: "hs3", label: "Wire-o Metálico", image: planner2027, description: "Encadernação resistente e elegante" },
+    { id: "hs4", label: "Papel Offset 90g", image: academica, description: "Certificado FSC, toque suave" },
+    { id: "hs5", label: "Embalagem Especial", image: luxo, description: "Caixa presenteável inclusa" },
+  ];
+
+
   return (
-    <div className="min-h-screen bg-background font-sans">
-      <Header cartCount={cart} />
-      <Stories stories={stories} />
+    <div className="min-h-screen bg-background font-sans relative overflow-hidden">
+      {/* GLOBAL WATERMARK PATTERN */}
+      <div 
+        className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" 
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='0.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5'/%3E%3Cpath d='M9 18h6'/%3E%3Cpath d='M10 22h4'/%3E%3C/svg%3E")`,
+          backgroundSize: '120px 120px'
+        }}
+      ></div>
+
+      <div className="relative z-10">
+        <Header cartCount={cart} />
+        <Stories stories={stories} />
 
       <main>
-        <section className="mx-auto max-w-7xl px-4 pt-6 sm:px-6">
-          <div
-            className="relative overflow-hidden rounded-2xl px-6 py-14 sm:px-14 sm:py-20"
-            style={{ background: "var(--gradient-hero)" }}
-          >
-            <div className="relative z-10 max-w-xl">
-              <span className="inline-flex rounded-full bg-primary-foreground/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground">
-                Pré-venda aberta
-              </span>
-              <h1 className="mt-5 font-display text-4xl font-semibold leading-tight text-primary-foreground sm:text-5xl">
-                Nova Coleção de Agendas 2027
-              </h1>
-              <p className="mt-4 text-base text-primary-foreground/80 sm:text-lg">
-                Planners, agendas diárias e executivas impressas na nossa gráfica, com papel premium e
-                personalização com o seu nome.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <a
-                  href="#produtos"
-                  className="inline-flex items-center gap-2 rounded-lg bg-background px-6 py-3 text-sm font-semibold text-primary transition-all duration-300 hover:bg-surface hover:gap-3"
-                >
-                  Comprar agora <ArrowRight className="h-4 w-4" />
-                </a>
-                <span className="text-sm text-primary-foreground/75">Frete grátis acima de R$ 199</span>
-              </div>
-            </div>
-            <div className="pointer-events-none absolute -right-16 -top-20 h-72 w-72 rounded-full bg-primary-foreground/10" />
-            <div className="pointer-events-none absolute -bottom-24 right-24 h-56 w-56 rounded-full bg-primary-foreground/10" />
+        {/* === HERO === */}
+        <section className="w-full pt-6">
+          <div className="relative w-full overflow-hidden bg-surface/50">
+             <HeroCarousel
+               images={carouselImages}
+               autoPlayMs={4500}
+             />
           </div>
         </section>
 
@@ -120,6 +137,76 @@ function Index() {
             ))}
           </div>
         </section>
+
+        {/* === NOVOS LANÇAMENTOS (CONHEÇA NOSSA PRODUÇÃO) === */}
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+          <div className="flex flex-col items-center justify-center mb-10 text-center">
+            <div className="flex items-center justify-center w-20 h-20 bg-black rounded-full border-4 border-primary shadow-sm mb-4">
+              <Lightbulb className="w-10 h-10 text-primary" />
+            </div>
+            <h2 className="text-5xl md:text-7xl text-primary tracking-wide" style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}>
+              novos lançamentos
+            </h2>
+          </div>
+          
+          <div className="overflow-hidden rounded-2xl border border-border bg-surface/50">
+            <div className="grid items-stretch gap-0 lg:grid-cols-2">
+              {/* LEFT — Video */}
+              <div className="relative flex h-full w-full items-center justify-center border-r border-border/50">
+                <VideoPlayer />
+              </div>
+
+              {/* RIGHT — Product Carousel */}
+              <div className="relative flex min-w-0 flex-1 items-center justify-center p-6 lg:p-10 bg-white overflow-hidden">
+                {/* Watermark / Filtro de Desenho no fundo branco */}
+                <div className="absolute -right-10 top-1/2 -translate-y-1/2 opacity-20 pointer-events-none text-primary -rotate-12">
+                  <Lightbulb strokeWidth={1.5} className="w-[400px] h-[400px] md:w-[700px] md:h-[700px]" />
+                </div>
+                
+                <div className="relative z-10 w-full">
+                  <ProductCarousel products={products} onAdd={() => setCart((c) => c + 1)} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* === SUCESSO DE VENDAS === */}
+        <div className="w-full bg-primary/5 py-16 my-8 border-y border-primary/10 relative overflow-hidden">
+          <div className="absolute top-0 left-1/2 w-[800px] h-[400px] -translate-x-1/2 bg-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
+          
+          <section className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
+            <div className="flex flex-col items-center justify-center text-center mb-12">
+              <h2 className="flex flex-col items-center relative">
+                <span 
+                  className="font-display text-6xl md:text-7xl text-primary opacity-90 -mb-4 z-10 drop-shadow-sm transition-transform hover:scale-105" 
+                  style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}
+                >
+                  sucesso
+                </span>
+                <span className="flex items-center gap-3 font-display text-3xl md:text-5xl font-black tracking-tighter uppercase bg-gradient-to-r from-gray-900 via-gray-700 to-black bg-clip-text text-transparent drop-shadow-sm">
+                  <Sparkles className="h-6 w-6 text-primary opacity-90" />
+                  de vendas!
+                  <Sparkles className="h-6 w-6 text-primary opacity-90" />
+                </span>
+              </h2>
+            </div>
+            
+            <div className="relative flex w-full overflow-hidden items-center group">
+              {/* Fade edges */}
+              <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[oklch(0.98_0.01_160)] to-transparent z-10 pointer-events-none mix-blend-multiply"></div>
+              <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[oklch(0.98_0.01_160)] to-transparent z-10 pointer-events-none mix-blend-multiply"></div>
+
+              <div className="flex w-max gap-6 pb-8 pt-4 animate-marquee group-hover:[animation-play-state:paused]">
+                {[...products, ...products, ...products, ...products].map((p, i) => (
+                  <div key={`${p.id}-${i}`} className="shrink-0">
+                    <SalesCard product={p} onAdd={() => setCart((c) => c + 1)} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        </div>
 
         <section id="produtos" className="bg-surface py-14">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -148,6 +235,39 @@ function Index() {
           </div>
         </section>
 
+        <TestimonialsMural />
+
+        {/* === INSTAGRAM PROMO === */}
+        <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 flex justify-center">
+          <a 
+            href="https://www.instagram.com/multicopy_/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group flex flex-col items-center text-center transition-transform duration-300 hover:scale-105"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white shadow-md mb-4 transition-transform group-hover:-translate-y-1 group-hover:shadow-lg">
+              <Instagram className="h-6 w-6" />
+            </div>
+            
+            <h3 className="font-sans text-2xl font-bold text-black mb-1">
+              @multicopy_
+            </h3>
+            
+            <p className="font-display text-4xl text-primary mb-1 leading-tight tracking-tight" style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}>
+              Acompanhe nossa
+            </p>
+            
+            <p className="font-sans text-3xl font-black text-black uppercase tracking-tighter mb-4">
+              produção criativa
+            </p>
+            
+            <span className="bg-primary/10 text-primary font-bold px-4 py-1.5 rounded-full text-sm flex items-center gap-2 border border-primary/20">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              Somos mais de 300 seguidores!
+            </span>
+          </a>
+        </section>
+
         <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
           <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-soft sm:p-12">
             <h2 className="font-display text-3xl font-semibold text-primary-deep">
@@ -168,6 +288,7 @@ function Index() {
       </main>
 
       <Footer />
+      </div>
     </div>
   );
 }

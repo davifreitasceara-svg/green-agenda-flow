@@ -1,92 +1,103 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Facebook, MessageCircle, Mail, MapPin, Phone } from "lucide-react";
-
+import { Mail, Clock, Lightbulb } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-primary-deep text-primary-foreground">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <p className="font-display text-xl font-semibold">Multicopy Gráfica</p>
-          <p className="mt-3 text-sm text-primary-foreground/75">
-            Agendas e planners impressos com acabamento artesanal desde 1998. Papel certificado,
-            encadernação reforçada e personalização sob medida.
-          </p>
-          <div className="mt-5 flex gap-3">
-            {[Instagram, Facebook, MessageCircle].map((Icon, i) => (
-              <a
-                key={i}
-                href="/"
-                aria-label="Rede social"
-                className="grid h-9 w-9 place-items-center rounded-lg bg-primary-foreground/10 transition-all duration-300 hover:bg-primary-foreground/25"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
+    <footer className="relative bg-black text-white pt-20 pb-16 font-sans mt-24 border-t-4 border-primary">
+      {/* Top Logo Badge */}
+      <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center justify-center w-24 h-24 bg-black rounded-full border-4 border-primary shadow-sm z-10">
+        <Lightbulb className="w-12 h-12 text-primary" />
+      </div>
+
+      <div className="mx-auto max-w-7xl px-6">
+        {/* Newsletter Section */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-16 border-b border-white/10 pb-12">
+          <div className="text-center md:text-left">
+            <h2 className="text-5xl md:text-7xl text-primary mb-2 tracking-wide" style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}>
+              fique por dentro
+            </h2>
+            <p className="text-lg font-bold">cadastre-se!</p>
+            <p className="text-sm opacity-80">receba nossas novidades</p>
+          </div>
+          
+          <div className="flex w-full max-w-2xl gap-2 bg-white/5 p-1.5 rounded-lg shadow-sm border border-white/10">
+            <input 
+              type="email" 
+              placeholder="Cadastre seu e-mail..." 
+              className="flex-1 bg-transparent px-4 py-3 outline-none text-sm text-white placeholder-gray-400"
+            />
+            <button className="bg-primary text-black px-8 py-3 rounded-md font-bold text-sm uppercase transition-colors hover:bg-primary/80">
+              Enviar
+            </button>
           </div>
         </div>
 
-        <div>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.18em]">Links úteis</h2>
-          <ul className="mt-4 space-y-2.5 text-sm text-primary-foreground/75">
-            {["Sobre a gráfica", "Prazos de produção", "Frete e entrega", "Trocas e devoluções"].map((l) => (
-              <li key={l}>
-                <Link to="/" className="transition-colors duration-300 hover:text-primary-foreground">
-                  {l}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link
-                to="/contato"
-                className="transition-colors duration-300 hover:text-primary-foreground"
-              >
-                Fale conosco
-              </Link>
-            </li>
-          </ul>
+        {/* Links Grid */}
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+          
+          {/* Column 1: Contact Info */}
+          <div className="flex flex-col gap-6">
+            <a href="https://wa.me/5585989059679" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white/5 p-4 rounded-xl shadow-sm hover:bg-white/10 transition-colors border border-white/10 w-max">
+              <div className="bg-primary p-2.5 rounded-full text-black shadow-sm">
+                <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <div className="text-sm">
+                <span className="block font-medium opacity-80">Chama a gente</span>
+                <span className="block font-black text-base text-primary">no WhatsApp!!</span>
+              </div>
+            </a>
+            
+            <div className="flex items-start gap-4 mt-2">
+              <Mail className="w-6 h-6 mt-1 text-primary" />
+              <div className="text-sm">
+                <span className="block opacity-80 mb-1">Mande-me email</span>
+                <a href="mailto:estudiocriativog19@gmail.com" className="font-medium hover:underline text-base hover:text-primary">estudiocriativog19@gmail.com</a>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 mt-2">
+              <Clock className="w-6 h-6 mt-1 text-primary" />
+              <div className="text-sm">
+                <span className="block opacity-80 mb-1">Nossos Horários</span>
+                <span className="block font-medium text-base">seg a sexta</span>
+                <span className="block font-medium text-base">09 às 18h</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Column 2: Institucional */}
+          <div>
+            <h2 className="font-bold text-xl mb-6 tracking-wide text-primary">institucional</h2>
+            <ul className="space-y-4 text-sm font-medium uppercase opacity-80">
+              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">QUEM SOMOS</Link></li>
+              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">MEUS DOWNLOADS</Link></li>
+              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">CONTATO</Link></li>
+              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">BLOG ESTÚDIOG19</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 3: Informações */}
+          <div>
+            <h2 className="font-bold text-xl mb-6 tracking-wide text-primary">informações</h2>
+            <ul className="space-y-4 text-sm font-medium uppercase opacity-80">
+              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">POLÍTICA DE PRIVACIDADE</Link></li>
+              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">POLÍTICA DE USO</Link></li>
+              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">PERGUNTAS FREQUENTES</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Minha Conta */}
+          <div>
+            <h2 className="font-bold text-xl mb-6 tracking-wide text-primary">minha conta</h2>
+            <ul className="space-y-4 text-sm font-medium uppercase opacity-80">
+              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">FAÇA SEU LOGIN</Link></li>
+              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">MINHA CONTA</Link></li>
+              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">EDITAR CADASTRO</Link></li>
+              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">MEUS PEDIDOS</Link></li>
+            </ul>
+          </div>
 
         </div>
-
-        <div>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.18em]">Agendas</h2>
-          <ul className="mt-4 space-y-2.5 text-sm text-primary-foreground/75">
-            {["Planners 2027", "Agendas diárias", "Executivas", "Personalizadas", "Acadêmicas", "Brindes corporativos"].map(
-              (l) => (
-                <li key={l}>
-                  <a href="/" className="transition-colors duration-300 hover:text-primary-foreground">
-                    {l}
-                  </a>
-                </li>
-              ),
-            )}
-          </ul>
-        </div>
-
-        <div>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.18em]">Contato</h2>
-          <ul className="mt-4 space-y-3 text-sm text-primary-foreground/75">
-            <li className="flex gap-2">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-              Av. Santos Dumont, 1200 — Aldeota, Fortaleza/CE
-            </li>
-            <li className="flex gap-2">
-              <Phone className="mt-0.5 h-4 w-4 shrink-0" />
-              (85) 3222-4500
-            </li>
-            <li className="flex gap-2">
-              <Mail className="mt-0.5 h-4 w-4 shrink-0" />
-              contato@multicopygrafica.com.br
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="border-t border-primary-foreground/15">
-        <p className="mx-auto max-w-7xl px-6 py-5 text-xs text-primary-foreground/60">
-          © {new Date().getFullYear()} Multicopy Gráfica · CNPJ 00.000.000/0001-00 · Todos os direitos
-          reservados
-        </p>
       </div>
     </footer>
   );
