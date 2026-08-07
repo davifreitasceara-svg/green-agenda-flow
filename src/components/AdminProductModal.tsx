@@ -10,6 +10,7 @@ export type AdminProductData = {
   price: number;
   tag: string;
   image?: string;
+  images?: string[];
 };
 
 export function AdminProductModal({ 
@@ -25,8 +26,9 @@ export function AdminProductModal({
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [tag, setTag] = useState("");
-  const [file, setFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const [tag, setTag] = useState("");
+  const [existingImages, setExistingImages] = useState<string[]>([]);
+  const [newFiles, setNewFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
   const [success, setSuccess] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -37,50 +39,49 @@ export function AdminProductModal({
       setDescription(initialData.description);
       setPrice(initialData.price.toString());
       setTag(initialData.tag || "");
-      setFile(null);
-      setPreview(initialData.image || null);
+      setExistingImages(initialData.images || (initialData.image ? [initialData.image] : []));
+      setNewFiles([]);
       setSuccess(false);
     } else if (isOpen) {
       setName("");
       setDescription("");
       setPrice("");
       setTag("");
-      setFile(null);
-      setPreview(null);
+      setExistingImages([]);
+      setNewFiles([]);
       setSuccess(false);
     }
   }, [isOpen, initialData]);
-
-  useEffect(() => {
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setPreview(url);
-      return () => URL.revokeObjectURL(url);
-    }
-  }, [file]);
 
   if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !price || (!file && !initialData)) return alert("Preencha o nome, preço e envie uma foto.");
+    if (!name || !price || (existingImages.length === 0 && newFiles.length === 0)) {
+      return alert("Preencha o nome, preço e envie pelo menos uma foto.");
+    }
     
     setUploading(true);
 
     try {
-      let publicUrl = "";
+      const uploadedUrls: string[] = [];
 
-      if (file) {
-        const fileExt = file.name.split('.').pop();
+      // Upload new files
+      for (const f of newFiles) {
+        const fileExt = f.name.split('.').pop();
         const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
         const filePath = `products/${fileName}`;
         
-        const { error: uploadError } = await supabase.storage.from('multicopy-assets').upload(filePath, file);
+        const { error: uploadError } = await supabase.storage.from('multicopy-assets').upload(filePath, f);
         if (uploadError) throw uploadError;
 
         const { data } = supabase.storage.from('multicopy-assets').getPublicUrl(filePath);
-        publicUrl = data.publicUrl;
+        uploadedUrls.push(data.publicUrl);
       }
+
+      const finalImages = [...existingImages, ...uploadedUrls];
+      const mainImage = finalImages[0];
+      const extraImages = finalImages.slice(1);
 
       if (initialData?.id) {
         const updates: Record<string, any> = {
@@ -88,8 +89,9 @@ export function AdminProductModal({
           description,
           price: parseFloat(price),
           tag: tag || null,
+          main_image_url: mainImage,
+          extra_image_urls: extraImages
         };
-        if (publicUrl) updates.main_image_url = publicUrl;
 
         const { error } = await supabase.from("products").update(updates).eq("id", initialData.id);
         if (error) throw error;
@@ -102,7 +104,8 @@ export function AdminProductModal({
           price: parseFloat(price),
           tag: tag || null,
           rating: 5,
-          main_image_url: publicUrl
+          main_image_url: mainImage,
+          extra_image_urls: extraImages
         }]);
         if (error) throw error;
       }
@@ -218,38 +221,66 @@ export function AdminProductModal({
 
             {/* Right: Image Preview */}
             <div className="flex flex-col gap-2">
-              <label className="flex items-center gap-1.5 text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
-                <Image className="w-3 h-3" /> Foto
+              <label className="flex items-center justify-between text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
+                <span className="flex items-center gap-1.5"><Image className="w-3 h-3" /> Fotos</span>
+                <span className="text-[9px] bg-gray-100 px-1.5 py-0.5 rounded text-gray-400">{existingImages.length + newFiles.length} adicionadas</span>
               </label>
-              <button
-                type="button"
-                onClick={() => fileRef.current?.click()}
-                className="relative w-full aspect-square rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 overflow-hidden flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all group"
-              >
-                {preview ? (
-                  <>
-                    <img src={preview} alt="Preview" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <Upload className="w-6 h-6 text-white" />
-                    </div>
-                  </>
-                ) : (
-                  <div className="flex flex-col items-center gap-1 text-gray-400">
-                    <Upload className="w-6 h-6" />
-                    <span className="text-[10px] font-bold">Enviar foto</span>
+              
+              <div className="grid grid-cols-2 gap-2">
+                {/* Existing Images */}
+                {existingImages.map((img, i) => (
+                  <div key={i} className="relative aspect-square rounded-xl border border-gray-200 overflow-hidden group">
+                    <img src={img} alt="Product" className="w-full h-full object-cover" />
+                    <button 
+                      type="button"
+                      onClick={() => setExistingImages(prev => prev.filter((_, idx) => idx !== i))}
+                      className="absolute top-1 right-1 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                    {i === 0 && (
+                      <span className="absolute bottom-1 left-1 bg-black/70 text-white text-[9px] font-bold px-1.5 py-0.5 rounded backdrop-blur-sm">Principal</span>
+                    )}
                   </div>
-                )}
-              </button>
+                ))}
+                
+                {/* New Files Preview */}
+                {newFiles.map((file, i) => (
+                  <div key={i} className="relative aspect-square rounded-xl border border-primary/50 overflow-hidden group">
+                    <img src={URL.createObjectURL(file)} alt="New Product" className="w-full h-full object-cover" />
+                    <button 
+                      type="button"
+                      onClick={() => setNewFiles(prev => prev.filter((_, idx) => idx !== i))}
+                      className="absolute top-1 right-1 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+                ))}
+
+                {/* Upload Button */}
+                <button
+                  type="button"
+                  onClick={() => fileRef.current?.click()}
+                  className="aspect-square rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 flex flex-col items-center justify-center hover:border-primary hover:bg-primary/5 transition-all text-gray-400 hover:text-primary"
+                >
+                  <Upload className="w-5 h-5 mb-1" />
+                  <span className="text-[9px] font-bold">Adicionar</span>
+                </button>
+              </div>
+
               <input 
                 ref={fileRef}
                 type="file" 
                 accept="image/*" 
-                onChange={e => setFile(e.target.files?.[0] || null)} 
+                multiple
+                onChange={e => {
+                  if (e.target.files) {
+                    setNewFiles(prev => [...prev, ...Array.from(e.target.files!)]);
+                  }
+                }} 
                 className="hidden" 
               />
-              {file && (
-                <p className="text-[10px] text-primary font-semibold text-center truncate">{file.name}</p>
-              )}
             </div>
           </div>
 

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Plus, X } from "lucide-react";
+import { Plus, X, Trash2 } from "lucide-react";
 import { useAdmin } from "@/hooks/useAdmin";
 import { AdminStoryModal } from "./AdminStoryModal";
+import { supabase } from "../lib/supabase";
 
 export type Story = {
   id: string;
@@ -141,6 +142,21 @@ export function Stories({ stories }: { stories: Story[] }) {
             >
               <X className="h-4 w-4" />
             </button>
+
+            {isAdmin && (
+              <button
+                onClick={async () => {
+                  if (confirm("Deletar este story permanentemente?")) {
+                    await supabase.from("stories").delete().eq("id", active.id);
+                    window.location.reload();
+                  }
+                }}
+                aria-label="Deletar story"
+                className="absolute right-14 top-7 z-40 grid h-8 w-8 place-items-center rounded-full bg-red-500/80 text-white transition-all duration-300 hover:bg-red-600"
+              >
+                <Trash2 className="h-4 w-4" />
+              </button>
+            )}
 
             {/* Tap Zones */}
             <div className="absolute inset-y-12 left-0 w-1/2 z-20 cursor-pointer" onClick={handlePrev} />
