@@ -35,6 +35,12 @@ export function ProductCard({
   return (
     <div
       className="group flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-border/50 bg-white shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:ring-black/10"
+      onMouseEnter={() => {
+        if (allImages.length > 1) setCurrentImg(1);
+      }}
+      onMouseLeave={() => {
+        if (allImages.length > 1) setCurrentImg(0);
+      }}
     >
       <Link
         to="/produto/$id"

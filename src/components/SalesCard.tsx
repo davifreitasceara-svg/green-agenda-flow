@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Eye, CreditCard } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import type { Product } from "./ProductCard";
@@ -8,17 +9,24 @@ const brl = (v: number) =>
 
 export function SalesCard({ product }: { product: Product }) {
   const { addItem } = useCart();
+  const allImages = product.images && product.images.length > 1 ? product.images : [product.image];
+  const [isHovered, setIsHovered] = useState(false);
+
   // Mock discount calculation if oldPrice exists
   const discount = product.oldPrice 
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100) 
     : 0;
 
   return (
-    <div className="flex flex-col w-[260px] lg:w-[280px] shrink-0 font-sans">
+    <div 
+      className="flex flex-col w-[260px] lg:w-[280px] shrink-0 font-sans"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <Link to="/produto/$id" params={{ id: product.id }} className="group relative block overflow-hidden rounded-xl bg-white border border-border/40 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-md">
         <div className="aspect-[4/5] w-full overflow-hidden bg-surface/30">
           <img
-            src={product.image}
+            src={isHovered && allImages.length > 1 ? allImages[1] : allImages[0]}
             alt={product.name}
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
