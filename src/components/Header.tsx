@@ -58,15 +58,6 @@ export function Header() {
                  <div className="bg-primary text-black rounded-[16px] rounded-bl-none px-2.5 py-1.5 mr-2 font-display text-base shadow-sm transform -rotate-6">oie</div>
                  <span>Seja muito<br/>bem-vindo!</span>
               </div>
-              
-              {/* Social Icons */}
-              <div className="flex gap-1.5 ml-2">
-                {[Instagram, Facebook].map((Icon, i) => (
-                  <a key={i} href="#" className="w-7 h-7 flex items-center justify-center rounded-full bg-black text-white hover:bg-primary hover:text-black transition-all hover:scale-110 hover:-translate-y-1 shadow-sm">
-                    <Icon className="w-3.5 h-3.5" />
-                  </a>
-                ))}
-              </div>
             </div>
           </div>
 
