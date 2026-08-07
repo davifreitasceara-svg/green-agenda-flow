@@ -7,7 +7,7 @@ type Comment = {
   id: string;
   name: string;
   text: string;
-  date: number;
+  created_at: string;
   rating?: number;
   avatar_url?: string;
 };
@@ -17,14 +17,14 @@ const defaultComments: Comment[] = [
     id: "1",
     name: "Thamires Cambui",
     text: "Géssica do céu! Eu tô encantada, apaixonada, maravilhada de como ficou lindo esses planners! Você é uma benção de Deus na vida das pessoas que trabalham com encadernação! Tá tudo incrível!!! Parabéns!!",
-    date: Date.now() - 100000,
+    created_at: new Date(Date.now() - 100000).toISOString(),
     rating: 5,
   },
   {
     id: "2",
     name: "Vanessa Souza",
     text: "Eu bati o recorde de vendas nas agendas, pra mim que trabalha sozinha, não tenho as máquinas mais tops... eu considero que vendi muito bem, vendi mais de 40 agendas... fiz tão corrida que não dá neh pra postar tudo... mas foram mais de 40 agendas",
-    date: Date.now() - 50000,
+    created_at: new Date(Date.now() - 50000).toISOString(),
     rating: 5,
   }
 ];
@@ -39,14 +39,23 @@ export function TestimonialsMural() {
 
   const emojis = ["😍", "❤️", "👏", "✨", "🤩", "🙌", "🔥"];
 
+  const fetchComments = async () => {
+      const { data, error } = await supabase
+        .from('testimonials')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error("Error fetching comments:", error);
+        // Fallback to defaults if no table or error
+        setComments(defaultComments);
+      } else {
+        setComments(data && data.length > 0 ? data : defaultComments);
+      }
+  };
+
   useEffect(() => {
-    const saved = localStorage.getItem("multicopy_testimonials");
-    if (saved) {
-      setComments(JSON.parse(saved));
-    } else {
-      setComments(defaultComments);
-      localStorage.setItem("multicopy_testimonials", JSON.stringify(defaultComments));
-    }
+    fetchComments();
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
@@ -65,27 +74,38 @@ export function TestimonialsMural() {
     return () => subscription.unsubscribe();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newName.trim() || !newText.trim()) return;
 
-    const newComment: Comment = {
-      id: Math.random().toString(36).substr(2, 9),
+    const newComment = {
       name: user?.user_metadata?.full_name || newName,
       text: newText,
-      date: Date.now(),
       rating: newRating,
       avatar_url: user?.user_metadata?.avatar_url,
     };
 
-    const updatedComments = [newComment, ...comments];
-    setComments(updatedComments);
-    localStorage.setItem("multicopy_testimonials", JSON.stringify(updatedComments));
+    // Optimistic UI update
+    const optimisticComment: Comment = {
+      ...newComment,
+      id: Math.random().toString(36).substr(2, 9),
+      created_at: new Date().toISOString(),
+    };
     
+    setComments([optimisticComment, ...comments]);
     setNewName("");
     setNewText("");
     setNewRating(5);
     setIsModalOpen(false);
+
+    // Save to Supabase
+    const { error } = await supabase.from('testimonials').insert([newComment]);
+    
+    if (error) {
+      console.error("Error inserting comment:", error);
+      // Rollback on error
+      fetchComments(); 
+    }
   };
 
   return (
@@ -117,7 +137,7 @@ export function TestimonialsMural() {
 
           {/* Right Side: Comments Grid */}
           <div className="grid gap-6 sm:grid-cols-2">
-            {comments.slice(0, 2).map(comment => (
+            {comments.slice(0, 4).map(comment => (
               <div 
                 key={comment.id}
                 className="rounded-2xl bg-white border border-primary/20 p-6 lg:p-8 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-md flex flex-col items-center text-center"
