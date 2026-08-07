@@ -62,7 +62,7 @@ export function Header({ cartCount }: { cartCount: number }) {
 
           {/* RIGHT: Actions */}
           <div className="flex items-center gap-3 md:gap-4">
-            <Link to="/" className="hidden sm:flex items-center gap-2 bg-primary/10 pr-4 pl-1 py-1 rounded-full border border-primary/20 hover:bg-primary/20 transition-all shadow-sm hover:shadow-md group">
+            <Link to="/login" className="hidden sm:flex items-center gap-2 bg-primary/10 pr-4 pl-1 py-1 rounded-full border border-primary/20 hover:bg-primary/20 transition-all shadow-sm hover:shadow-md group">
               <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center group-hover:scale-105 transition-transform group-hover:bg-primary group-hover:text-black">
                 <User className="w-4 h-4" />
               </div>
