@@ -1,11 +1,14 @@
-import { createFileRoute, Link, useParams } from "@tanstack/react-router";
-import { ArrowLeft, ShoppingBag, Truck, ShieldCheck, Check } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowLeft, ShoppingBag, Truck, ShieldCheck, Check, Edit, Loader2 } from "lucide-react";
 import { products } from "@/data/products";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useState, useEffect } from "react";
 import { useCart } from "@/contexts/CartContext";
-import { VideoPlayer } from "@/components/VideoPlayer";
+import { useAdmin } from "@/hooks/useAdmin";
+import { AdminProductModal } from "@/components/AdminProductModal";
+import { supabase } from "@/lib/supabase";
+import type { Product } from "@/components/ProductCard";
 
 export const Route = createFileRoute("/produto/$id")({
   component: ProdutoDetalhes,
@@ -16,12 +19,38 @@ const brl = (v: number) =>
 
 function ProdutoDetalhes() {
   const { id } = Route.useParams();
-  const product = products.find((p) => p.id === id);
+  const { isAdmin } = useAdmin();
   const { addItem } = useCart();
+  
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
   const [added, setAdded] = useState(false);
-  const [isVideoMaximized, setIsVideoMaximized] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState("A5");
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  useEffect(() => {
+    async function fetchProduct() {
+      const { data, error } = await supabase.from('products').select('*').eq('id', id).single();
+      if (data && !error) {
+        setProduct({
+          id: data.id,
+          name: data.name,
+          description: data.description || "",
+          price: Number(data.price),
+          image: data.main_image_url,
+          images: [data.main_image_url, ...(data.extra_image_urls || [])],
+          tag: data.tag,
+          rating: data.rating || 5
+        });
+      } else {
+        const staticProd = products.find((p) => p.id === id);
+        if (staticProd) setProduct(staticProd);
+      }
+      setLoading(false);
+    }
+    fetchProduct();
+  }, [id]);
 
   const allImages = product?.images && product.images.length > 1 ? product.images : product ? [product.image] : [];
 
@@ -33,6 +62,18 @@ function ProdutoDetalhes() {
     }, 3000);
     return () => clearInterval(interval);
   }, [allImages.length]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col bg-background font-sans">
+        <Header />
+        <main className="flex-1 flex flex-col items-center justify-center">
+          <Loader2 className="w-10 h-10 animate-spin text-primary" />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -133,9 +174,19 @@ function ProdutoDetalhes() {
                 <span className="text-sm font-medium text-muted-foreground">({product.rating.toFixed(1)} avaliações)</span>
               </div>
               
-              <h1 className="font-display text-4xl font-semibold text-primary-deep md:text-5xl lg:leading-tight">
-                {product.name}
-              </h1>
+              <div className="flex items-start justify-between gap-4">
+                <h1 className="font-display text-4xl font-semibold text-primary-deep md:text-5xl lg:leading-tight">
+                  {product.name}
+                </h1>
+                {isAdmin && (
+                  <button 
+                    onClick={() => setIsEditModalOpen(true)}
+                    className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-gray-800 transition-colors shrink-0 shadow-md"
+                  >
+                    <Edit className="w-4 h-4" /> Editar Produto
+                  </button>
+                )}
+              </div>
               
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
                 {product.description} A escolha perfeita para organizar o seu ano de 2027 com elegância e praticidade. Feito com materiais premium para durar o ano inteiro.
@@ -216,6 +267,22 @@ function ProdutoDetalhes() {
       </main>
 
       <Footer />
+
+      {isAdmin && (
+        <AdminProductModal 
+          isOpen={isEditModalOpen} 
+          onClose={() => setIsEditModalOpen(false)} 
+          initialData={{
+            id: product.id,
+            name: product.name,
+            description: product.description || "",
+            price: product.price,
+            tag: product.tag || "",
+            image: product.image,
+            images: product.images || []
+          }}
+        />
+      )}
     </div>
   );
 }
