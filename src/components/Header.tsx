@@ -5,6 +5,7 @@ import { supabase } from "../lib/supabase";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "./ui/dropdown-menu";
 import { useCart } from "@/contexts/CartContext";
+import logo from "@/assets/logo.png";
 
 export function Header() {
   const [user, setUser] = useState<SupabaseUser | null>(null);
@@ -45,15 +46,11 @@ export function Header() {
           {/* LEFT: Logo & Welcome */}
           <div className="flex items-center gap-4 md:gap-6">
             <Link to="/" className="flex items-center group">
-              <div className="relative">
-                <Lightbulb className="w-12 h-12 text-black fill-primary transition-transform group-hover:rotate-12 group-hover:scale-110" strokeWidth={1.5} />
-                <Sparkles className="absolute -top-1 -left-1 w-4 h-4 text-primary" />
-              </div>
-              <div className="flex flex-col items-start leading-none ml-1">
-                <span className="text-[11px] font-bold text-gray-500 ml-1 mb-[-2px]">estúdio</span>
-                <span className="text-5xl font-black text-black tracking-tighter" style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive", transform: "scaleY(1.1)" }}>Multicopy</span>
-                <span className="text-[8px] text-gray-400 font-bold uppercase tracking-[0.2em] mt-1 ml-0.5">Arquivos Digitais</span>
-              </div>
+              <img 
+                src={logo} 
+                alt="Multicopy" 
+                className="h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-105" 
+              />
             </Link>
 
             <div className="hidden lg:flex items-center gap-3">
