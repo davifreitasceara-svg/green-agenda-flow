@@ -1,7 +1,29 @@
+import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { Search, ShoppingBag, User, Instagram, Facebook, Youtube, Lightbulb, MessageCircle, Gift, Grid, Book, Calendar, Phone, Download, Menu, Sparkles } from "lucide-react";
+import { Search, ShoppingBag, User, Instagram, Facebook, Youtube, Lightbulb, MessageCircle, Gift, Grid, Book, Calendar, Phone, Download, Menu, Sparkles, LogOut, Settings } from "lucide-react";
+import { supabase } from "../lib/supabase";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "./ui/dropdown-menu";
 
 export function Header({ cartCount }: { cartCount: number }) {
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  };
+
   return (
     <header className="w-full font-sans shadow-sm sticky top-0 z-50">
       {/* Top Thin Bar */}
@@ -62,14 +84,42 @@ export function Header({ cartCount }: { cartCount: number }) {
 
           {/* RIGHT: Actions */}
           <div className="flex items-center gap-3 md:gap-4">
-            <Link to="/login" className="hidden sm:flex items-center gap-2 bg-primary/10 pr-4 pl-1 py-1 rounded-full border border-primary/20 hover:bg-primary/20 transition-all shadow-sm hover:shadow-md group">
-              <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center group-hover:scale-105 transition-transform group-hover:bg-primary group-hover:text-black">
-                <User className="w-4 h-4" />
-              </div>
-              <div className="text-[10px] font-bold text-black leading-tight">
-                iniciar sessão<br/><span className="font-medium text-gray-500">ou</span> criar uma conta
-              </div>
-            </Link>
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger className="outline-none">
+                  <div className="hidden sm:flex items-center gap-2 bg-primary/10 pr-4 pl-1 py-1 rounded-full border border-primary/20 hover:bg-primary/20 transition-all shadow-sm hover:shadow-md cursor-pointer group">
+                    <img 
+                      src={user.user_metadata?.avatar_url || "https://ui-avatars.com/api/?name=" + (user.user_metadata?.full_name || "User")} 
+                      alt="Avatar" 
+                      className="w-8 h-8 rounded-full border border-primary/30 object-cover group-hover:scale-105 transition-transform" 
+                    />
+                    <div className="text-[10px] font-bold text-black leading-tight text-left">
+                      olá, {user.user_metadata?.full_name?.split(" ")[0] || "Usuário"}<br/><span className="font-medium text-gray-500">minha conta</span>
+                    </div>
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48 bg-white border border-border shadow-lg rounded-xl overflow-hidden mt-1 p-1 z-[100]">
+                  <DropdownMenuItem className="cursor-pointer text-sm font-semibold rounded-lg hover:bg-primary/10 py-2">
+                    <Settings className="w-4 h-4 mr-2" />
+                    Configurações
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator className="bg-border my-1" />
+                  <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-sm font-semibold text-red-600 rounded-lg hover:bg-red-50 py-2">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sair
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link to="/login" className="hidden sm:flex items-center gap-2 bg-primary/10 pr-4 pl-1 py-1 rounded-full border border-primary/20 hover:bg-primary/20 transition-all shadow-sm hover:shadow-md group">
+                <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center group-hover:scale-105 transition-transform group-hover:bg-primary group-hover:text-black">
+                  <User className="w-4 h-4" />
+                </div>
+                <div className="text-[10px] font-bold text-black leading-tight text-left">
+                  iniciar sessão<br/><span className="font-medium text-gray-500">ou</span> criar uma conta
+                </div>
+              </Link>
+            )}
 
             <a href="https://wa.me/5585989059679" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary text-black flex items-center justify-center shadow-sm hover:bg-black hover:text-primary transition-all hover:scale-110 hover:-rotate-12 border-2 border-transparent">
               <MessageCircle className="w-5 h-5" />
