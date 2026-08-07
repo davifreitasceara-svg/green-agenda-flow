@@ -26,7 +26,8 @@ export function CartSidebar() {
     let message = `Olá, gostaria de finalizar um pedido! 🛒\n\n*Resumo do Pedido:*\n`;
     
     items.forEach((item) => {
-      message += `${item.quantity}x ${item.product.name} - ${formatPrice(item.product.price * item.quantity)}\n`;
+      const sizeText = item.size ? ` (Tamanho: ${item.size})` : "";
+      message += `${item.quantity}x ${item.product.name}${sizeText} - ${formatPrice(item.product.price * item.quantity)}\n`;
     });
 
     message += `\n*Total:* ${formatPrice(totalPrice)}\n`;
@@ -65,7 +66,7 @@ export function CartSidebar() {
           ) : (
             <div className="space-y-6">
               {items.map((item) => (
-                <div key={item.product.id} className="flex gap-4 rounded-xl border border-border/50 bg-background p-3 shadow-sm">
+                <div key={item.cartItemId} className="flex gap-4 rounded-xl border border-border/50 bg-background p-3 shadow-sm">
                   <div className="h-24 w-20 shrink-0 overflow-hidden rounded-lg border border-border/50">
                     <img
                       src={item.product.image}
@@ -79,12 +80,17 @@ export function CartSidebar() {
                         <h4 className="font-semibold text-foreground line-clamp-2 leading-tight">
                           {item.product.name}
                         </h4>
+                        {item.size && (
+                          <p className="mt-0.5 text-[10px] uppercase font-bold text-muted-foreground">
+                            Tam: {item.size}
+                          </p>
+                        )}
                         <p className="mt-1 text-sm font-medium text-primary">
                           {formatPrice(item.product.price)}
                         </p>
                       </div>
                       <button
-                        onClick={() => removeItem(item.product.id)}
+                        onClick={() => removeItem(item.cartItemId)}
                         className="text-muted-foreground hover:text-destructive shrink-0"
                       >
                         <Trash2 className="h-4 w-4" />
@@ -93,7 +99,7 @@ export function CartSidebar() {
                     <div className="flex items-center gap-3">
                       <div className="flex items-center rounded-lg border border-border bg-surface">
                         <button
-                          onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                          onClick={() => updateQuantity(item.cartItemId, item.quantity - 1)}
                           className="flex h-8 w-8 items-center justify-center text-foreground hover:bg-accent hover:text-primary rounded-l-lg transition-colors"
                         >
                           <Minus className="h-3 w-3" />
@@ -102,7 +108,7 @@ export function CartSidebar() {
                           {item.quantity}
                         </span>
                         <button
-                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.cartItemId, item.quantity + 1)}
                           className="flex h-8 w-8 items-center justify-center text-foreground hover:bg-accent hover:text-primary rounded-r-lg transition-colors"
                         >
                           <Plus className="h-3 w-3" />
