@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Truck, Sparkles, PenTool, ShieldCheck, ArrowRight, Star, ShoppingBag, Instagram, Lightbulb } from "lucide-react";
+import { Truck, Sparkles, PenTool, ShieldCheck, ArrowRight, Star, ShoppingBag, Instagram, Lightbulb, Briefcase } from "lucide-react";
 
 import arteColecao from "@/assets/arte-colecao.png";
 import { products } from "@/data/products";
@@ -16,6 +16,7 @@ import { Footer } from "@/components/Footer";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { HoverSlider, type HoverSlide } from "@/components/HoverSlider";
+import { MarqueeDemo } from "@/components/MarqueeDemo";
 
 import planner2027 from "@/assets/planner-2027.jpg";
 import executiva from "@/assets/agenda-executiva.jpg";
@@ -153,7 +154,7 @@ function Index() {
             <div className="grid items-stretch gap-0 lg:grid-cols-2">
               {/* LEFT — Video */}
               <div className="relative flex h-full w-full items-center justify-center border-r border-border/50">
-                <VideoPlayer />
+                <VideoPlayer src="/novos-lancamentos.mp4" />
               </div>
 
               {/* RIGHT — Product Carousel */}
@@ -268,21 +269,35 @@ function Index() {
           </a>
         </section>
 
-        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-          <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-soft sm:p-12">
-            <h2 className="font-display text-3xl font-semibold text-primary-deep">
-              Agendas corporativas com a sua marca
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-              Pedidos a partir de 50 unidades com logo em hot stamping, miolo customizado e embalagem
-              individual. Receba um orçamento em até 24 horas.
-            </p>
-            <a
-              href="/"
-              className="mt-7 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-hover"
-            >
-              Solicitar orçamento <ArrowRight className="h-4 w-4" />
-            </a>
+        <MarqueeDemo />
+
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 relative">
+          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-primary-deep via-primary to-primary-hover p-10 text-center shadow-[0_20px_50px_rgba(8,_112,_60,_0.3)] sm:p-16 border border-white/10 group">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30"></div>
+            <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-white/20 blur-3xl transition-transform duration-1000 group-hover:scale-150"></div>
+            
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-white/10 shadow-inner backdrop-blur-md border border-white/20">
+                <Briefcase className="h-10 w-10 text-white" />
+              </div>
+
+              <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mb-6 tracking-wide drop-shadow-sm" style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}>
+                Agendas corporativas com a sua marca
+              </h2>
+              
+              <p className="mx-auto mt-2 max-w-2xl text-lg md:text-xl text-white/90 leading-relaxed font-light">
+                Pedidos a partir de <strong className="font-semibold text-white">50 unidades</strong> com logo em hot stamping, 
+                miolo customizado e embalagem individual. Receba um orçamento em até 24 horas.
+              </p>
+              
+              <a
+                href="/"
+                className="group/btn mt-10 flex items-center gap-3 rounded-full bg-white px-8 py-4 text-base font-bold text-primary-deep shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(255,255,255,0.4)]"
+              >
+                Solicitar Orçamento Exclusivo 
+                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+              </a>
+            </div>
           </div>
         </section>
       </main>
