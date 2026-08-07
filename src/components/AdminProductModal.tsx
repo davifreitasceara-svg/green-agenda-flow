@@ -26,7 +26,6 @@ export function AdminProductModal({
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [tag, setTag] = useState("");
-  const [tag, setTag] = useState("");
   const [existingImages, setExistingImages] = useState<string[]>([]);
   const [newFiles, setNewFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
