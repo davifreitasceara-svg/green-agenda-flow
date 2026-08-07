@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "../lib/supabase";
 import { Link } from "@tanstack/react-router";
 import { Truck, Sparkles, PenTool, ShieldCheck, ArrowRight, Star, ShoppingBag, Instagram, Lightbulb, Briefcase } from "lucide-react";
 
@@ -78,6 +79,45 @@ const benefits = [
 ];
 
 function Index() {
+  const [dbProducts, setDbProducts] = useState<Product[]>([]);
+  const [dbStories, setDbStories] = useState<Story[]>([]);
+  
+  useEffect(() => {
+    async function loadData() {
+      // Load Products
+      const { data: pData } = await supabase.from('products').select('*').order('created_at', { ascending: false });
+      if (pData && pData.length > 0) {
+        // Map DB products to expected shape
+        const mappedProducts = pData.map((p: any) => ({
+          id: p.id,
+          name: p.name,
+          description: p.description || "",
+          price: Number(p.price),
+          image: p.main_image_url,
+          images: [p.main_image_url, ...(p.extra_image_urls || [])],
+          tag: p.tag,
+          rating: p.rating || 5
+        }));
+        setDbProducts(mappedProducts);
+      }
+
+      // Load Stories
+      const { data: sData } = await supabase.from('stories').select('*').order('created_at', { ascending: false });
+      if (sData && sData.length > 0) {
+        const mappedStories = sData.map((s: any) => ({
+          id: s.id,
+          label: s.label,
+          image: s.image_url,
+          caption: s.caption || ""
+        }));
+        setDbStories(mappedStories);
+      }
+    }
+    loadData();
+  }, []);
+
+  const displayProducts = dbProducts.length > 0 ? dbProducts : products;
+  const displayStories = dbStories.length > 0 ? dbStories : stories;
 
   const carouselImages = [
     { src: masculina2027, srcMobile: promocaoCelular, alt: "Agenda 2027 Masculina" },
@@ -107,7 +147,7 @@ function Index() {
 
       <div className="relative z-10">
         <Header />
-        <Stories stories={stories} />
+        <Stories stories={displayStories} />
 
       <main>
         {/* === HERO === */}
@@ -165,7 +205,7 @@ function Index() {
                 </div>
                 
                 <div className="relative z-10 w-full">
-                  <ProductCarousel products={products} />
+                  <ProductCarousel products={displayProducts} />
                 </div>
               </div>
             </div>
@@ -199,7 +239,7 @@ function Index() {
               <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[oklch(0.98_0.01_160)] to-transparent z-10 pointer-events-none mix-blend-multiply"></div>
 
               <div className="flex w-max gap-6 pb-8 pt-4 animate-marquee group-hover:[animation-play-state:paused]">
-                {[...products, ...products, ...products, ...products].map((p, i) => (
+                {[...displayProducts, ...displayProducts, ...displayProducts, ...displayProducts].map((p, i) => (
                   <div key={`${p.id}-${i}`} className="shrink-0">
                     <SalesCard product={p} />
                   </div>
@@ -229,7 +269,7 @@ function Index() {
             </div>
 
             <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {products.map((p) => (
+              {displayProducts.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}
             </div>
