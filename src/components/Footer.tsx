@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Clock, Lightbulb } from "lucide-react";
+import { Mail, Clock } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 export function Footer() {
   return (
     <footer className="relative bg-black text-white pt-20 pb-16 font-sans mt-24 border-t-4 border-primary">
       {/* Top Logo Badge */}
-      <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center justify-center w-24 h-24 bg-black rounded-full border-4 border-primary shadow-sm z-10">
-        <Lightbulb className="w-12 h-12 text-primary" />
+      <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center justify-center w-24 h-24 bg-white rounded-full border-4 border-primary shadow-sm z-10 p-2 overflow-hidden">
+        <img src={logo} alt="Multicopy" className="w-full h-full object-contain" />
       </div>
 
       <div className="mx-auto max-w-7xl px-6">
