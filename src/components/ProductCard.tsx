@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { ShoppingBag, Star } from "lucide-react";
+import { ShoppingBag, Star, Edit } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { useAdmin } from "@/hooks/useAdmin";
 import { useCart } from "@/contexts/CartContext";
 
 export type Product = {
@@ -24,6 +25,7 @@ export function ProductCard({
 }: {
   product: Product;
 }) {
+  const { isAdmin } = useAdmin();
   const { addItem } = useCart();
   const allImages = product.images && product.images.length > 1 ? product.images : [product.image];
   const [currentImg, setCurrentImg] = useState(0);
@@ -35,9 +37,18 @@ export function ProductCard({
       className="group flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-border/50 bg-white shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:ring-black/10"
     >
       <div className="relative overflow-hidden bg-surface/50 p-4 pb-0">
+        {isAdmin && (
+          <Link 
+            to="/admin"
+            className="absolute top-4 left-4 z-20 flex items-center gap-1 bg-black text-white px-2 py-1 rounded shadow text-[10px] font-bold hover:bg-gray-800 transition-colors"
+            onClick={(e) => { e.stopPropagation(); }}
+          >
+            <Edit className="w-3 h-3" /> Editar
+          </Link>
+        )}
         {product.tag && (
           <span
-            className={`absolute left-4 top-4 z-10 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider shadow-sm backdrop-blur-md ${
+            className={`absolute right-4 top-4 z-10 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider shadow-sm backdrop-blur-md ${
               product.tag === "Esgotando"
                 ? "bg-destructive/90 text-destructive-foreground ring-1 ring-destructive/20"
                 : "bg-primary/90 text-primary-foreground ring-1 ring-primary/20"
