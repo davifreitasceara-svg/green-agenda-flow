@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { MessageCircleHeart, Plus, X, Star } from "lucide-react";
+import { MessageCircleHeart, Plus, X, Star, User } from "lucide-react";
+import { supabase } from "../lib/supabase";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 type Comment = {
   id: string;
@@ -7,6 +9,7 @@ type Comment = {
   text: string;
   date: number;
   rating?: number;
+  avatar_url?: string;
 };
 
 const defaultComments: Comment[] = [
@@ -32,6 +35,7 @@ export function TestimonialsMural() {
   const [newName, setNewName] = useState("");
   const [newText, setNewText] = useState("");
   const [newRating, setNewRating] = useState(5);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
 
   const emojis = ["😍", "❤️", "👏", "✨", "🤩", "🙌", "🔥"];
 
@@ -43,6 +47,22 @@ export function TestimonialsMural() {
       setComments(defaultComments);
       localStorage.setItem("multicopy_testimonials", JSON.stringify(defaultComments));
     }
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      if (session?.user?.user_metadata?.full_name) {
+        setNewName(session.user.user_metadata.full_name);
+      }
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      if (session?.user?.user_metadata?.full_name) {
+        setNewName(session.user.user_metadata.full_name);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -51,10 +71,11 @@ export function TestimonialsMural() {
 
     const newComment: Comment = {
       id: Math.random().toString(36).substr(2, 9),
-      name: newName,
+      name: user?.user_metadata?.full_name || newName,
       text: newText,
       date: Date.now(),
       rating: newRating,
+      avatar_url: user?.user_metadata?.avatar_url,
     };
 
     const updatedComments = [newComment, ...comments];
@@ -101,6 +122,13 @@ export function TestimonialsMural() {
                 key={comment.id}
                 className="rounded-2xl bg-white border border-primary/20 p-6 lg:p-8 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-md flex flex-col items-center text-center"
               >
+                {comment.avatar_url ? (
+                  <img src={comment.avatar_url} alt={comment.name} className="w-12 h-12 rounded-full mb-3 border border-primary/20 object-cover" />
+                ) : (
+                  <div className="w-12 h-12 rounded-full mb-3 border border-primary/20 bg-gray-100 flex items-center justify-center text-gray-400">
+                    <User className="w-6 h-6" />
+                  </div>
+                )}
                 <h3 className="font-bold text-black text-sm md:text-base mb-1">
                   {comment.name}
                 </h3>
@@ -137,17 +165,31 @@ export function TestimonialsMural() {
             <h3 className="text-xl font-bold text-black mb-6">Deixe seu depoimento</h3>
             
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Seu Nome</label>
-                <input 
-                  type="text" 
-                  value={newName}
-                  onChange={(e) => setNewName(e.target.value)}
-                  placeholder="Ex: Maria Silva"
-                  required
-                  className="w-full rounded-lg border border-gray-300 p-3 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-shadow"
-                />
-              </div>
+              {user ? (
+                <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                  <img 
+                    src={user.user_metadata?.avatar_url || "https://ui-avatars.com/api/?name=" + (user.user_metadata?.full_name || "User")} 
+                    alt="Avatar" 
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500">Publicando como:</p>
+                    <p className="font-bold text-black">{user.user_metadata?.full_name || "Usuário"}</p>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Seu Nome</label>
+                  <input 
+                    type="text" 
+                    value={newName}
+                    onChange={(e) => setNewName(e.target.value)}
+                    placeholder="Ex: Maria Silva"
+                    required
+                    className="w-full rounded-lg border border-gray-300 p-3 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-shadow"
+                  />
+                </div>
+              )}
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Sua Avaliação</label>
