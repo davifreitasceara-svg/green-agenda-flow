@@ -16,7 +16,7 @@ export function FloatingVideo() {
       className={`fixed z-50 transition-all duration-500 ease-in-out shadow-2xl overflow-hidden bg-black border-2 border-primary rounded-xl cursor-pointer ${
         isExpanded
           ? "bottom-4 right-4 md:bottom-10 md:right-10 w-[80vw] h-[60vh] md:w-[600px] md:h-[400px]"
-          : "bottom-4 right-4 w-32 h-52 md:w-40 md:h-64 hover:scale-105"
+          : "bottom-4 right-4 w-24 h-40 md:w-40 md:h-64 hover:scale-105"
       }`}
     >
       <div 
