@@ -129,6 +129,8 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+import { FloatingVideo } from "@/components/FloatingVideo";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
@@ -139,6 +141,7 @@ function RootComponent() {
         <Outlet />
         <Toaster position="top-center" richColors />
         <CartSidebar />
+        <FloatingVideo />
       </CartProvider>
     </QueryClientProvider>
   );
