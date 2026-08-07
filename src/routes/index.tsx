@@ -21,6 +21,7 @@ import { MarqueeDemo } from "@/components/MarqueeDemo";
 import { useAdmin } from "@/hooks/useAdmin";
 import { AdminProductModal } from "@/components/AdminProductModal";
 import { Plus } from "lucide-react";
+import { AboutUsScroll } from "@/components/AboutUsScroll";
 
 import planner2027 from "@/assets/planner-2027.jpg";
 import executiva from "@/assets/agenda-executiva.jpg";
@@ -355,6 +356,7 @@ function Index() {
             </div>
           </div>
         </section>
+        <AboutUsScroll />
       </main>
 
       <Footer />
