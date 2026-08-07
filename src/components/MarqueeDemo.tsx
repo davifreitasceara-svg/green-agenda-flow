@@ -16,7 +16,7 @@ export function MarqueeDemo() {
         baseVelocity={8}
         slowdownOnHover={true}
         draggable={true}
-        repeat={2}
+        repeat={1}
         dragSensitivity={0.1}
         className="w-full h-full scale-105"
         responsive
@@ -44,6 +44,7 @@ export function MarqueeDemo() {
                 alt={`Galeria ${i}`}
                 className="w-full h-full object-cover rounded-md shadow-sm border border-black/5"
                 draggable={false}
+                loading="lazy"
                 onClick={() => { if (img.link) window.open(img.link, '_blank') }}
               />
             )}
