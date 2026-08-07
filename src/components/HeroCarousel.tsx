@@ -51,7 +51,7 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
             <img
               src={img.src}
               alt={img.alt}
-              className="relative z-10 w-full h-full object-contain p-8 drop-shadow-xl"
+              className="relative z-10 w-full h-full object-cover object-center p-0 md:object-contain md:p-8 drop-shadow-xl"
             />
           </div>
         ))}
