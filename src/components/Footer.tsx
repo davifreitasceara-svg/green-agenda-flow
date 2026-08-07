@@ -99,6 +99,29 @@ export function Footer() {
           </div>
 
         </div>
+
+        {/* Footer Bottom */}
+        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-sm opacity-80 gap-6">
+          <p>© {new Date().getFullYear()} Multicopy. Todos os direitos reservados.</p>
+          <div className="flex items-center gap-3">
+            <span className="text-xs uppercase tracking-wider font-medium opacity-60">Desenvolvido por</span>
+            <div className="flex flex-col items-center">
+               <div className="flex items-center text-gray-300">
+                 <span className="text-3xl font-light -mt-2">{"{"}</span>
+                 <div className="relative mx-1 mt-1">
+                   {/* Simplified Rocket icon representation to match logo */}
+                   <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                     <path d="M12 2C8 6 8 12 8 16c-1.33 1.33-2 3-2 4 1-0.33 2.67-1 4-2 1 1 2.67 1.67 4 2 0-1-0.67-2.67-2-4 0-4 0-10-4-14zM12 4.5c2 3.5 2 8 2 11.5 0 1-0.5 2-1 3-0.5-1-1-2-1-3 0-3.5 0-8 2-11.5z" />
+                     <circle cx="12" cy="11" r="2" fill="currentColor" />
+                   </svg>
+                 </div>
+                 <span className="text-3xl font-light -mt-2">{"}"}</span>
+               </div>
+               <span className="font-bold tracking-widest text-white text-base leading-none mt-1" style={{ fontFamily: "serif" }}>DVSCODES</span>
+               <span className="text-[9px] text-white opacity-80 leading-none mt-1" style={{ fontFamily: "serif" }}>desenvolvedor de sistemas</span>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Check, Settings, ArrowRight, LayoutTemplate, Smartphone, FileText, CheckCircle2 } from "lucide-react";
 
-type AgendaSize = "A4" | "A5" | "A6";
+type AgendaSize = "A5" | "A6";
 type AgendaBinding = "Wire-o" | "Costurada";
 type AgendaCover = "Couro" | "Papelão" | "Plástico";
 type AgendaTheme = "Boneco" | "Floral" | "Minimalista";
@@ -14,7 +14,7 @@ export function AgendaBuilder() {
 
   const basePrice = 49.90;
   
-  const sizeMultiplier = size === "A4" ? 1.5 : size === "A6" ? 0.8 : 1;
+  const sizeMultiplier = size === "A6" ? 0.8 : 1;
   const bindingCost = binding === "Wire-o" ? 15 : 25;
   const coverCost = cover === "Couro" ? 40 : cover === "Papelão" ? 20 : 10;
 
@@ -42,18 +42,7 @@ export function AgendaBuilder() {
               <h3 className="text-xl font-bold text-black">Escolha o Tamanho</h3>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <button 
-                onClick={() => setSize("A4")}
-                className={`flex flex-col items-center justify-center gap-3 p-6 rounded-2xl border-2 transition-all ${size === "A4" ? "border-primary bg-primary/5" : "border-gray-200 hover:border-gray-300"}`}
-              >
-                <FileText className={`w-12 h-12 ${size === "A4" ? "text-primary" : "text-gray-400"}`} strokeWidth={1} />
-                <div className="text-center">
-                  <p className="font-bold text-gray-800">A4 (Grande)</p>
-                  <p className="text-xs text-gray-500 mt-1">21 x 29.7 cm</p>
-                </div>
-              </button>
-
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <button 
                 onClick={() => setSize("A5")}
                 className={`flex flex-col items-center justify-center gap-3 p-6 rounded-2xl border-2 transition-all ${size === "A5" ? "border-primary bg-primary/5 shadow-md scale-105" : "border-gray-200 hover:border-gray-300"}`}
