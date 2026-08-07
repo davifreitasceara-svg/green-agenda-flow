@@ -14,20 +14,20 @@ function AdminPage() {
   const [activeTab, setActiveTab] = useState<"products" | "stories">("products");
   
   const navigate = useNavigate();
-  const ADMIN_EMAIL = "cjwbete@gmail.com";
+  const ADMIN_EMAILS = ["cjwbete@gmail.com", "davifreitasceara@gmail.com"];
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
       setIsLoading(false);
-      if (!session?.user || session.user.email !== ADMIN_EMAIL) {
+      if (!session?.user || !session.user.email || !ADMIN_EMAILS.includes(session.user.email)) {
         navigate({ to: "/login" });
       }
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
-      if (!session?.user || session.user.email !== ADMIN_EMAIL) {
+      if (!session?.user || !session.user.email || !ADMIN_EMAILS.includes(session.user.email)) {
         navigate({ to: "/login" });
       }
     });
@@ -39,7 +39,7 @@ function AdminPage() {
     return <div className="min-h-screen flex items-center justify-center font-sans">Carregando painel...</div>;
   }
 
-  if (!user || user.email !== ADMIN_EMAIL) {
+  if (!user || !user.email || !ADMIN_EMAILS.includes(user.email)) {
     return null; 
   }
 
