@@ -36,6 +36,7 @@ import delicada4 from "@/assets/colecao-delicada-4.png";
 import masculina2027 from "@/assets/masculina-2027.png";
 import doceComoMel from "@/assets/doce-como-mel.png";
 import bannerFofa from "@/assets/banner-fofa.png";
+import promocaoCelular from "@/assets/promoção-celuar.png.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -80,9 +81,9 @@ function Index() {
   const [cart, setCart] = useState(0);
 
   const carouselImages = [
-    { src: masculina2027, alt: "Agenda 2027 Masculina" },
-    { src: doceComoMel, alt: "Agenda Doce como mel" },
-    { src: bannerFofa, alt: "Coleção Fofa 2027" },
+    { src: masculina2027, srcMobile: promocaoCelular, alt: "Agenda 2027 Masculina" },
+    { src: doceComoMel, srcMobile: promocaoCelular, alt: "Agenda Doce como mel" },
+    { src: bannerFofa, srcMobile: promocaoCelular, alt: "Coleção Fofa 2027" },
   ];
 
   const hoverSlides: HoverSlide[] = [
