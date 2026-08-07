@@ -61,7 +61,7 @@ export function Header() {
               
               {/* Social Icons */}
               <div className="flex gap-1.5 ml-2">
-                {[Instagram, Facebook, Youtube, Menu].map((Icon, i) => (
+                {[Instagram, Facebook].map((Icon, i) => (
                   <a key={i} href="#" className="w-7 h-7 flex items-center justify-center rounded-full bg-black text-white hover:bg-primary hover:text-black transition-all hover:scale-110 hover:-translate-y-1 shadow-sm">
                     <Icon className="w-3.5 h-3.5" />
                   </a>
