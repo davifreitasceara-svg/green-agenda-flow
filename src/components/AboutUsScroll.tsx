@@ -1,6 +1,6 @@
 import React from "react";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
-import { Printer } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 export function AboutUsScroll() {
   return (
@@ -36,8 +36,8 @@ export function AboutUsScroll() {
             </div>
 
             <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center text-white">
-              <div className="w-24 h-24 bg-primary/20 backdrop-blur-md text-primary rounded-full flex items-center justify-center mb-8 border border-primary/30 shadow-[0_0_40px_rgba(16,185,129,0.3)]">
-                <Printer className="w-12 h-12" />
+              <div className="w-28 h-28 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-8 border border-white/20 shadow-[0_0_40px_rgba(16,185,129,0.2)] p-4">
+                <img src={logo} alt="Multicopy Logo" className="w-full h-full object-contain drop-shadow-md" />
               </div>
               
               <h3 className="text-3xl md:text-5xl font-bold mb-6 leading-tight tracking-tight text-white drop-shadow-md">
@@ -48,18 +48,19 @@ export function AboutUsScroll() {
                 Somos uma equipe comprometida em dar vida aos seus projetos, sejam agendas personalizadas, cartões de visita, panfletos ou materiais corporativos. 
               </p>
               
-              <p className="text-base md:text-xl text-gray-300 leading-relaxed mb-10 max-w-3xl">
+              <p className="text-base md:text-xl text-gray-300 leading-relaxed max-w-3xl">
                 Cada detalhe é pensado com cuidado para que o resultado final esteja à altura das suas expectativas. Afinal, uma boa impressão faz toda a diferença.
               </p>
-              
-              <div className="bg-white/5 border border-white/10 px-8 py-4 rounded-full backdrop-blur-sm">
-                <p className="text-sm md:text-lg text-primary font-bold tracking-widest uppercase">
-                  Criatividade • Qualidade • Excelência
-                </p>
-              </div>
             </div>
           </div>
         </ContainerScroll>
+      </div>
+      
+      {/* Cursive Text Below Animation */}
+      <div className="relative w-full flex justify-center pb-20 pt-10 bg-surface">
+        <h2 className="text-4xl md:text-6xl text-primary" style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}>
+          a arte de transformar ideias
+        </h2>
       </div>
     </section>
   );
