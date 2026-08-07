@@ -36,8 +36,8 @@ export function AboutUsScroll() {
             </div>
 
             <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center text-white">
-              <div className="w-28 h-28 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-8 border border-white/20 shadow-[0_0_40px_rgba(16,185,129,0.2)] p-4">
-                <img src={logo} alt="Multicopy Logo" className="w-full h-full object-contain drop-shadow-md" />
+              <div className="w-28 h-28 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-8 border border-white/20 shadow-[0_0_40px_rgba(16,185,129,0.2)] overflow-hidden">
+                <img src={logo} alt="Multicopy Logo" className="w-full h-full object-cover rounded-full drop-shadow-md" />
               </div>
               
               <h3 className="text-3xl md:text-5xl font-bold mb-6 leading-tight tracking-tight text-white drop-shadow-md">
