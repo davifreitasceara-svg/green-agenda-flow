@@ -18,6 +18,9 @@ import { HeroCarousel } from "@/components/HeroCarousel";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { HoverSlider, type HoverSlide } from "@/components/HoverSlider";
 import { MarqueeDemo } from "@/components/MarqueeDemo";
+import { useAdmin } from "@/hooks/useAdmin";
+import { AdminProductModal } from "@/components/AdminProductModal";
+import { Plus } from "lucide-react";
 
 import planner2027 from "@/assets/planner-2027.jpg";
 import executiva from "@/assets/agenda-executiva.jpg";
@@ -81,6 +84,8 @@ const benefits = [
 function Index() {
   const [dbProducts, setDbProducts] = useState<Product[]>([]);
   const [dbStories, setDbStories] = useState<Story[]>([]);
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
+  const { isAdmin } = useAdmin();
   
   useEffect(() => {
     async function loadData() {
@@ -252,13 +257,23 @@ function Index() {
         <section id="produtos" className="bg-surface py-14">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4">
-              <div className="min-w-0">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-                  Destaques
-                </p>
-                <h2 className="mt-2 font-display text-3xl font-semibold text-primary-deep">
-                  Agendas mais desejadas
-                </h2>
+              <div className="min-w-0 flex items-center gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                    Destaques
+                  </p>
+                  <h2 className="mt-2 font-display text-3xl font-semibold text-primary-deep">
+                    Agendas mais desejadas
+                  </h2>
+                </div>
+                {isAdmin && (
+                  <button 
+                    onClick={() => setIsAddProductModalOpen(true)}
+                    className="flex items-center gap-2 bg-black text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-gray-800 transition-colors mt-6"
+                  >
+                    <Plus className="w-4 h-4" /> Novo Produto
+                  </button>
+                )}
               </div>
               <a
                 href="/"
@@ -344,6 +359,11 @@ function Index() {
 
       <Footer />
       </div>
+
+      <AdminProductModal 
+        isOpen={isAddProductModalOpen} 
+        onClose={() => setIsAddProductModalOpen(false)} 
+      />
     </div>
   );
 }

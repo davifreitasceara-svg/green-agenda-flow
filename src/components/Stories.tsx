@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Plus, X } from "lucide-react";
 import { useAdmin } from "@/hooks/useAdmin";
-import { Link } from "@tanstack/react-router";
+import { AdminStoryModal } from "./AdminStoryModal";
 
 export type Story = {
   id: string;
@@ -14,6 +14,7 @@ export function Stories({ stories }: { stories: Story[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [progress, setProgress] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { isAdmin } = useAdmin();
 
   useEffect(() => {
@@ -66,12 +67,12 @@ export function Stories({ stories }: { stories: Story[] }) {
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
         <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {isAdmin && (
-            <Link to="/admin" className="flex w-[76px] shrink-0 snap-start flex-col items-center gap-2">
+            <button onClick={() => setIsModalOpen(true)} className="flex w-[76px] shrink-0 snap-start flex-col items-center gap-2">
               <span className="grid h-16 w-16 place-items-center rounded-full border-2 border-dashed border-primary/60 text-primary transition-all duration-300 hover:bg-accent">
                 <Plus className="h-6 w-6" />
               </span>
               <span className="truncate text-[11px] font-bold text-primary">Novo</span>
-            </Link>
+            </button>
           )}
 
           {stories.map((story, i) => (
@@ -157,6 +158,8 @@ export function Stories({ stories }: { stories: Story[] }) {
           </div>
         </div>
       )}
+      
+      <AdminStoryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }
