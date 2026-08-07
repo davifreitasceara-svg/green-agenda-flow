@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { X, Loader2, Upload, Image, Type, FileText, Check } from "lucide-react";
 import { supabase } from "../lib/supabase";
 
@@ -68,7 +69,9 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
     }
   };
 
-  return (
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <div 
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
       onClick={onClose}
@@ -194,6 +197,7 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

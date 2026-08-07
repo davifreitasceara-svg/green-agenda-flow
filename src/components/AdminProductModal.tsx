@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { X, Loader2, Upload, Image, Tag, DollarSign, Type, FileText, Trash2, Check } from "lucide-react";
 import { supabase } from "../lib/supabase";
 
@@ -136,7 +137,9 @@ export function AdminProductModal({
 
   const tagOptions = ["Novo", "Esgotando", "Mais vendido", ""];
 
-  return (
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <div 
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
       onClick={onClose}
@@ -321,6 +324,7 @@ export function AdminProductModal({
           to { opacity: 1; transform: scale(1) translateY(0); }
         }
       `}</style>
-    </div>
+    </div>,
+    document.body
   );
 }
