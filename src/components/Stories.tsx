@@ -11,18 +11,44 @@ export type Story = {
 export function Stories({ stories }: { stories: Story[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [progress, setProgress] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     if (openIndex === null) return;
     setProgress(0);
-    const started = Date.now();
-    const timer = window.setInterval(() => {
-      const pct = Math.min(100, ((Date.now() - started) / 5000) * 100);
-      setProgress(pct);
-      if (pct >= 100) setOpenIndex((i) => (i !== null && i < stories.length - 1 ? i + 1 : null));
+  }, [openIndex]);
+
+  useEffect(() => {
+    if (openIndex === null || isPaused) return;
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setOpenIndex((i) => (i !== null && i < stories.length - 1 ? i + 1 : null));
+          return 100;
+        }
+        return prev + 1;
+      });
     }, 50);
-    return () => window.clearInterval(timer);
-  }, [openIndex, stories.length]);
+    return () => clearInterval(interval);
+  }, [openIndex, isPaused, stories.length]);
+
+  const handlePrev = (e: React.MouseEvent | React.TouchEvent) => {
+    e.stopPropagation();
+    if (openIndex !== null && openIndex > 0) {
+      setOpenIndex(openIndex - 1);
+    }
+  };
+
+  const handleNext = (e: React.MouseEvent | React.TouchEvent) => {
+    e.stopPropagation();
+    if (openIndex !== null) {
+      setOpenIndex(openIndex < stories.length - 1 ? openIndex + 1 : null);
+    }
+  };
+
+  const handlePointerDown = () => setIsPaused(true);
+  const handlePointerUp = () => setIsPaused(false);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenIndex(null);
@@ -78,10 +104,13 @@ export function Stories({ stories }: { stories: Story[] }) {
           onClick={() => setOpenIndex(null)}
         >
           <div
-            className="relative w-full max-w-sm overflow-hidden rounded-2xl bg-primary-deep"
+            className="relative w-full max-w-sm overflow-hidden rounded-2xl bg-primary-deep touch-none select-none"
             onClick={(e) => e.stopPropagation()}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+            onPointerLeave={handlePointerUp}
           >
-            <div className="absolute inset-x-3 top-3 z-10 flex gap-1">
+            <div className="absolute inset-x-3 top-3 z-30 flex gap-1">
               {stories.map((s, i) => (
                 <span key={s.id} className="h-[3px] flex-1 overflow-hidden rounded-full bg-background/35">
                   <span
@@ -98,21 +127,27 @@ export function Stories({ stories }: { stories: Story[] }) {
                 </span>
               ))}
             </div>
+            
             <button
               onClick={() => setOpenIndex(null)}
               aria-label="Fechar story"
-              className="absolute right-3 top-7 z-10 grid h-8 w-8 place-items-center rounded-full bg-foreground/40 text-background transition-all duration-300 hover:bg-foreground/70"
+              className="absolute right-3 top-7 z-40 grid h-8 w-8 place-items-center rounded-full bg-foreground/40 text-background transition-all duration-300 hover:bg-foreground/70"
             >
               <X className="h-4 w-4" />
             </button>
+
+            {/* Tap Zones */}
+            <div className="absolute inset-y-12 left-0 w-1/2 z-20 cursor-pointer" onClick={handlePrev} />
+            <div className="absolute inset-y-12 right-0 w-1/2 z-20 cursor-pointer" onClick={handleNext} />
+
             <img
               src={active.image}
               alt={active.caption}
-              className="aspect-[9/16] w-full object-cover"
+              className="aspect-[9/16] w-full object-cover pointer-events-none"
             />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-foreground/85 to-transparent p-5 pt-14">
-              <p className="text-sm font-semibold text-background">{active.label}</p>
-              <p className="mt-1 text-sm text-background/80">{active.caption}</p>
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-foreground/85 to-transparent p-5 pt-14 pointer-events-none z-10">
+              <p className="text-sm font-semibold text-background drop-shadow-md">{active.label}</p>
+              <p className="mt-1 text-sm text-background/90 drop-shadow-md">{active.caption}</p>
             </div>
           </div>
         </div>
