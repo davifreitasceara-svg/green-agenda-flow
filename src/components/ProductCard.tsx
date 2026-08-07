@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ShoppingBag, Star } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { useCart } from "@/contexts/CartContext";
 
 export type Product = {
   id: string;
@@ -20,11 +21,10 @@ const brl = (v: number) =>
 
 export function ProductCard({
   product,
-  onAdd,
 }: {
   product: Product;
-  onAdd: () => void;
 }) {
+  const { addItem } = useCart();
   const allImages = product.images && product.images.length > 1 ? product.images : [product.image];
   const [currentImg, setCurrentImg] = useState(0);
 
@@ -114,7 +114,7 @@ export function ProductCard({
             onClick={(e) => {
               e.preventDefault(); // Evita que o link dispare ao clicar no botão
               e.stopPropagation();
-              onAdd();
+              addItem(product);
             }}
             className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-primary/10 px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-md active:scale-[0.98]"
           >

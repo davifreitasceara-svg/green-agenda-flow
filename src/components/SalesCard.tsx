@@ -1,11 +1,13 @@
 import { Eye, CreditCard } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import type { Product } from "./ProductCard";
+import { useCart } from "@/contexts/CartContext";
 
 const brl = (v: number) =>
   v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-export function SalesCard({ product, onAdd }: { product: Product, onAdd: () => void }) {
+export function SalesCard({ product }: { product: Product }) {
+  const { addItem } = useCart();
   // Mock discount calculation if oldPrice exists
   const discount = product.oldPrice 
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100) 
@@ -51,7 +53,7 @@ export function SalesCard({ product, onAdd }: { product: Product, onAdd: () => v
 
         <div className="mt-4 flex items-center gap-2">
           <button
-            onClick={onAdd}
+            onClick={() => addItem(product)}
             className="flex h-10 flex-1 items-center justify-center rounded-md bg-black text-xs font-bold text-white transition-colors hover:bg-gray-900"
           >
             COMPRAR

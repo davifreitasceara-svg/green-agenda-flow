@@ -4,6 +4,7 @@ import { products } from "@/data/products";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useState, useEffect } from "react";
+import { useCart } from "@/contexts/CartContext";
 import { VideoPlayer } from "@/components/VideoPlayer";
 
 export const Route = createFileRoute("/produto/$id")({
@@ -16,7 +17,7 @@ const brl = (v: number) =>
 function ProdutoDetalhes() {
   const { id } = Route.useParams();
   const product = products.find((p) => p.id === id);
-  const [cart, setCart] = useState(0);
+  const { addItem } = useCart();
   const [added, setAdded] = useState(false);
   const [isVideoMaximized, setIsVideoMaximized] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
@@ -35,7 +36,7 @@ function ProdutoDetalhes() {
   if (!product) {
     return (
       <div className="min-h-screen flex flex-col bg-background font-sans">
-        <Header cartCount={cart} />
+        <Header />
         <main className="flex-1 flex flex-col items-center justify-center p-6 text-center">
           <h1 className="text-3xl font-display font-semibold text-primary-deep mb-4">Produto não encontrado</h1>
           <p className="text-muted-foreground mb-8">Não conseguimos encontrar a agenda que você procura.</p>
@@ -49,14 +50,14 @@ function ProdutoDetalhes() {
   }
 
   const handleAdd = () => {
-    setCart(c => c + 1);
+    addItem(product);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
 
   return (
     <div className="min-h-screen bg-background font-sans flex flex-col">
-      <Header cartCount={cart} />
+      <Header />
 
       <main className="flex-1">
         {/* Breadcrumb */}

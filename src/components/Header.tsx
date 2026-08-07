@@ -4,9 +4,11 @@ import { Search, ShoppingBag, User, Instagram, Facebook, Youtube, Lightbulb, Mes
 import { supabase } from "../lib/supabase";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "./ui/dropdown-menu";
+import { useCart } from "@/contexts/CartContext";
 
-export function Header({ cartCount }: { cartCount: number }) {
+export function Header() {
   const [user, setUser] = useState<SupabaseUser | null>(null);
+  const { totalItems, setIsCartOpen } = useCart();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -125,10 +127,13 @@ export function Header({ cartCount }: { cartCount: number }) {
               <MessageCircle className="w-5 h-5" />
             </a>
 
-            <button className="relative w-10 h-10 flex items-center justify-center transition-transform hover:scale-110 hover:rotate-6 group">
+            <button 
+              onClick={() => setIsCartOpen(true)}
+              className="relative w-10 h-10 flex items-center justify-center transition-transform hover:scale-110 hover:rotate-6 group"
+            >
               <ShoppingBag className="w-8 h-8 text-black fill-primary/20 group-hover:fill-primary" strokeWidth={1.5} />
               <span className="absolute -bottom-1 -right-1 bg-black text-primary text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border border-white shadow-sm">
-                {cartCount}
+                {totalItems}
               </span>
             </button>
           </div>

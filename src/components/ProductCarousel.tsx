@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductCard, type Product } from "./ProductCard";
 
-export function ProductCarousel({ products, onAdd }: { products: Product[], onAdd: () => void }) {
+export function ProductCarousel({ products }: { products: Product[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -34,7 +34,7 @@ export function ProductCarousel({ products, onAdd }: { products: Product[], onAd
       >
         {products.map((product) => (
           <div key={product.id} className="w-[260px] shrink-0 snap-center lg:w-[280px]">
-            <ProductCard product={product} onAdd={onAdd} />
+            <ProductCard product={product} />
           </div>
         ))}
       </div>

@@ -78,7 +78,6 @@ const benefits = [
 ];
 
 function Index() {
-  const [cart, setCart] = useState(0);
 
   const carouselImages = [
     { src: masculina2027, srcMobile: promocaoCelular, alt: "Agenda 2027 Masculina" },
@@ -107,7 +106,7 @@ function Index() {
       ></div>
 
       <div className="relative z-10">
-        <Header cartCount={cart} />
+        <Header />
         <Stories stories={stories} />
 
       <main>
@@ -166,7 +165,7 @@ function Index() {
                 </div>
                 
                 <div className="relative z-10 w-full">
-                  <ProductCarousel products={products} onAdd={() => setCart((c) => c + 1)} />
+                  <ProductCarousel products={products} />
                 </div>
               </div>
             </div>
@@ -202,7 +201,7 @@ function Index() {
               <div className="flex w-max gap-6 pb-8 pt-4 animate-marquee group-hover:[animation-play-state:paused]">
                 {[...products, ...products, ...products, ...products].map((p, i) => (
                   <div key={`${p.id}-${i}`} className="shrink-0">
-                    <SalesCard product={p} onAdd={() => setCart((c) => c + 1)} />
+                    <SalesCard product={p} />
                   </div>
                 ))}
               </div>
@@ -231,7 +230,7 @@ function Index() {
 
             <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {products.map((p) => (
-                <ProductCard key={p.id} product={p} onAdd={() => setCart((c) => c + 1)} />
+                <ProductCard key={p.id} product={p} />
               ))}
             </div>
           </div>
