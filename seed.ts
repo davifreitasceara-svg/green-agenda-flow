@@ -8,46 +8,57 @@ const VITE_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ
 const supabase = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY);
 
 const products = [
-  { id: "jesus-colecao", name: "Agenda Coleção Jesus", description: "Disponível em Bordeaux e Azul", price: 70.0, file: "jesus-bordeaux.png.jpg", tag: "Novo", rating: 5.0 },
-  { id: "delicada-1", name: "Agenda Coleção Delicada", description: "4 variantes encantadoras", price: 70.0, file: "delicada-0.jpg", tag: null, rating: 4.8 },
-  { id: "cherry-1", name: "Agenda Coleção Cherry", description: "2 variantes irresistíveis", price: 70.0, file: "cherry-0.jpg", tag: "Novo", rating: 4.9 },
-  { id: "masculina-1", name: "Agenda Coleção Masculina", description: "", price: 70.0, file: "masculina.jpg", tag: null, rating: 4.7 },
-  { id: "mel-1", name: "Agenda Coleção Mel", description: "", price: 70.0, file: "mel.jpg", tag: "Novo", rating: 4.9 },
-  { id: "fofa-1", name: "Agenda Coleção Fofa", description: "4 variantes fofíssimas", price: 70.0, file: "fofa-0.jpg", tag: "Novo", rating: 5.0 },
-  { id: "planner-1", name: "Planner 2027", description: "3 variantes para o seu planejamento", price: 50.0, file: "planner-0.jpg", tag: "Novo", rating: 4.9 },
-  { id: "sonho-1", name: "Agenda Coleção Sonho", description: "3 variantes dos sonhos", price: 70.0, file: "sonho-0.jpg", tag: "Novo", rating: 5.0 },
-  { id: "livreto-oracoes-1", name: "Livreto de Orações", description: "", price: 10.0, file: "livreto-oracoes.jpg", tag: "Novo", rating: 5.0 },
-  { id: "comercial-1", name: "Agenda Coleção Comercial", description: "4 variantes profissionais", price: 70.0, file: "comercial.jpg", tag: null, rating: 4.8 },
-  { id: "candy-1", name: "Agenda Coleção Candy", description: "2 variantes doces e coloridas", price: 70.0, file: "candy-0.jpg", tag: "Novo", rating: 4.9 }
+  { id: "jesus-colecao", name: "Agenda Coleção Jesus", description: "Disponível em Bordeaux e Azul", price: 70.0, files: ["jesus-bordeaux.png.jpg", "jesus-azul.png.jpg"], tag: "Novo", rating: 5.0 },
+  { id: "delicada-1", name: "Agenda Coleção Delicada", description: "4 variantes encantadoras", price: 70.0, files: ["delicada-0.jpg", "delicada-1.jpg", "delicada-2.jpg", "delicada-3.jpg"], tag: null, rating: 4.8 },
+  { id: "cherry-1", name: "Agenda Coleção Cherry", description: "2 variantes irresistíveis", price: 70.0, files: ["cherry-0.jpg", "cherry-1.jpg"], tag: "Novo", rating: 4.9 },
+  { id: "masculina-1", name: "Agenda Coleção Masculina", description: "", price: 70.0, files: ["masculina.jpg"], tag: null, rating: 4.7 },
+  { id: "mel-1", name: "Agenda Coleção Mel", description: "", price: 70.0, files: ["mel.jpg"], tag: "Novo", rating: 4.9 },
+  { id: "fofa-1", name: "Agenda Coleção Fofa", description: "4 variantes fofíssimas", price: 70.0, files: ["fofa-0.jpg", "fofa-1.jpg", "fofa-2.jpg", "fofa-3.jpg"], tag: "Novo", rating: 5.0 },
+  { id: "planner-1", name: "Planner 2027", description: "3 variantes para o seu planejamento", price: 50.0, files: ["planner-0.jpg", "planner-1.jpg", "planner-2.jpg"], tag: "Novo", rating: 4.9 },
+  { id: "sonho-1", name: "Agenda Coleção Sonho", description: "3 variantes dos sonhos", price: 70.0, files: ["sonho-0.jpg", "sonho-1.jpg", "sonho-2.jpg"], tag: "Novo", rating: 5.0 },
+  { id: "livreto-oracoes-1", name: "Livreto de Orações", description: "", price: 10.0, files: ["livreto-oracoes.jpg"], tag: "Novo", rating: 5.0 },
+  { id: "comercial-1", name: "Agenda Coleção Comercial", description: "4 variantes profissionais", price: 70.0, files: ["comercial.jpg", "comercial-1.jpg", "comercial-2.jpg", "comercial-3.jpg"], tag: null, rating: 4.8 },
+  { id: "candy-1", name: "Agenda Coleção Candy", description: "2 variantes doces e coloridas", price: 70.0, files: ["candy-0.jpg", "candy-1.jpg"], tag: "Novo", rating: 4.9 }
 ];
 
 async function seed() {
   console.log("Seeding started...");
   for (const p of products) {
     try {
-      // Find file
-      const filePath = path.join(process.cwd(), 'src', 'assets', p.file);
-      if (!fs.existsSync(filePath)) {
-        console.warn("File not found, skipping upload for", p.id);
-        continue;
-      }
-      const fileBuffer = fs.readFileSync(filePath);
-      const storagePath = `products/${p.file}`;
-      
-      console.log(`Uploading ${p.file}...`);
-      const { error: uploadError } = await supabase.storage.from('multicopy-assets').upload(storagePath, fileBuffer, {
-        contentType: p.file.endsWith('.png') ? 'image/png' : 'image/jpeg',
-        upsert: true
-      });
-      
-      if (uploadError) {
-        console.error("Upload error for", p.id, uploadError);
-        continue;
-      }
+      const urls: string[] = [];
+      for (const file of p.files) {
+        const filePath = path.join(process.cwd(), 'src', 'assets', file);
+        if (!fs.existsSync(filePath)) {
+          console.warn("File not found, skipping upload for", file);
+          continue;
+        }
+        const fileBuffer = fs.readFileSync(filePath);
+        const storagePath = `products/${file}`;
+        
+        console.log(`Uploading ${file}...`);
+        const { error: uploadError } = await supabase.storage.from('multicopy-assets').upload(storagePath, fileBuffer, {
+          contentType: file.endsWith('.png') ? 'image/png' : 'image/jpeg',
+          upsert: true
+        });
+        
+        if (uploadError) {
+          console.error("Upload error for", file, uploadError);
+          continue;
+        }
 
-      const { data: { publicUrl } } = supabase.storage.from('multicopy-assets').getPublicUrl(storagePath);
+        const { data: { publicUrl } } = supabase.storage.from('multicopy-assets').getPublicUrl(storagePath);
+        urls.push(publicUrl);
+      }
       
-      console.log(`Inserting ${p.id}...`);
+      if (urls.length === 0) {
+        console.warn("No urls uploaded for", p.id);
+        continue;
+      }
+      
+      const main_image_url = urls[0];
+      const extra_image_urls = urls.slice(1);
+
+      console.log(`Updating ${p.id}...`);
       const { error: dbError } = await supabase.from('products').upsert({
         id: p.id,
         name: p.name,
@@ -55,7 +66,8 @@ async function seed() {
         price: p.price,
         tag: p.tag,
         rating: p.rating,
-        main_image_url: publicUrl
+        main_image_url,
+        extra_image_urls
       });
       
       if (dbError) {
