@@ -8,15 +8,19 @@ import { useCart } from "@/contexts/CartContext";
 
 export function Header() {
   const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const { totalItems, setIsCartOpen } = useCart();
+  const ADMIN_EMAILS = ["cjwbete@gmail.com", "davifreitasceara@gmail.com"];
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
+      setIsAdmin(!!session?.user?.email && ADMIN_EMAILS.includes(session.user.email));
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
+      setIsAdmin(!!session?.user?.email && ADMIN_EMAILS.includes(session.user.email));
     });
 
     return () => subscription.unsubscribe();
@@ -92,9 +96,20 @@ export function Header() {
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48 bg-white border border-border shadow-lg rounded-xl overflow-hidden mt-1 p-1 z-[100]">
+                  {isAdmin && (
+                    <>
+                      <DropdownMenuItem asChild className="cursor-pointer text-sm font-semibold text-primary-deep rounded-lg hover:bg-primary/10 py-2">
+                        <Link to="/admin" className="flex items-center w-full">
+                          <Settings className="w-4 h-4 mr-2" />
+                          Painel Admin
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator className="bg-border my-1" />
+                    </>
+                  )}
                   <DropdownMenuItem className="cursor-pointer text-sm font-semibold rounded-lg hover:bg-primary/10 py-2">
-                    <Settings className="w-4 h-4 mr-2" />
-                    Configurações
+                    <User className="w-4 h-4 mr-2" />
+                    Minha Conta
                   </DropdownMenuItem>
                   <DropdownMenuSeparator className="bg-border my-1" />
                   <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-sm font-semibold text-red-600 rounded-lg hover:bg-red-50 py-2">
