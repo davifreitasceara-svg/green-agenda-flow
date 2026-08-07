@@ -140,7 +140,7 @@ function Index() {
         </section>
 
         {/* === NOVOS LANÇAMENTOS (CONHEÇA NOSSA PRODUÇÃO) === */}
-        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <section id="novidades" className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
           <div className="flex flex-col items-center justify-center mb-10 text-center">
             <div className="flex items-center justify-center w-20 h-20 bg-black rounded-full border-4 border-primary shadow-sm mb-4">
               <Lightbulb className="w-10 h-10 text-primary" />

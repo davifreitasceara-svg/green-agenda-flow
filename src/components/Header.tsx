@@ -145,37 +145,37 @@ export function Header() {
         <div className="mx-auto max-w-7xl overflow-x-auto scrollbar-hide">
           <ul className="flex items-center min-w-max">
             <li className="flex-1 bg-primary">
-              <Link to="/" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-bold text-black hover:bg-primary/80 transition-colors h-full">
+              <Link to="/" hash="novidades" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-bold text-black hover:bg-primary/80 transition-colors h-full">
                 <Gift className="w-4 h-4 text-black" strokeWidth={1.5} /> Novidades
               </Link>
             </li>
             <li className="flex-1 bg-gray-900">
-              <Link to="/" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-medium text-white hover:bg-gray-800 transition-colors h-full">
+              <Link to="/" hash="produtos" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-medium text-white hover:bg-gray-800 transition-colors h-full">
                 <Grid className="w-4 h-4 text-primary" strokeWidth={1.5} /> Ver Todos
               </Link>
             </li>
             <li className="flex-1 bg-black">
-              <Link to="/" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-medium text-white hover:text-primary transition-colors h-full">
+              <Link to="/" hash="produtos" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-medium text-white hover:text-primary transition-colors h-full">
                 <Book className="w-4 h-4" strokeWidth={1.5} /> Coleção de Jesus
               </Link>
             </li>
             <li className="flex-1 bg-black border-l border-gray-900">
-              <Link to="/" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-medium text-white hover:text-primary transition-colors h-full">
+              <Link to="/" hash="produtos" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-medium text-white hover:text-primary transition-colors h-full">
                 <Sparkles className="w-4 h-4" strokeWidth={1.5} /> Coleção Delicada
               </Link>
             </li>
             <li className="flex-1 bg-black border-l border-gray-900">
-              <Link to="/" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-medium text-white hover:text-primary transition-colors h-full">
+              <Link to="/" hash="produtos" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-medium text-white hover:text-primary transition-colors h-full">
                 <Gift className="w-4 h-4" strokeWidth={1.5} /> Coleção Cherry
               </Link>
             </li>
             <li className="flex-1 bg-black border-l border-gray-900">
-              <Link to="/" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-medium text-white hover:text-primary transition-colors h-full">
+              <Link to="/" hash="produtos" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-medium text-white hover:text-primary transition-colors h-full">
                 <User className="w-4 h-4" strokeWidth={1.5} /> Coleção Masculina
               </Link>
             </li>
             <li className="flex-1 bg-black border-l border-gray-900">
-              <Link to="/" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-medium text-white hover:text-primary transition-colors h-full">
+              <Link to="/" hash="produtos" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-medium text-white hover:text-primary transition-colors h-full">
                 <Lightbulb className="w-4 h-4" strokeWidth={1.5} /> Coleção Mel
               </Link>
             </li>
