@@ -21,6 +21,7 @@ function ProdutoDetalhes() {
   const [added, setAdded] = useState(false);
   const [isVideoMaximized, setIsVideoMaximized] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
+  const [selectedSize, setSelectedSize] = useState("A5");
 
   const allImages = product?.images && product.images.length > 1 ? product.images : product ? [product.image] : [];
 
@@ -50,7 +51,7 @@ function ProdutoDetalhes() {
   }
 
   const handleAdd = () => {
-    addItem(product);
+    addItem(product, 1, selectedSize);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
@@ -152,6 +153,27 @@ function ProdutoDetalhes() {
                 <p className="mt-1 text-sm font-semibold text-primary">
                   Em até 3x de {brl(product.price / 3)} sem juros no cartão
                 </p>
+              </div>
+
+              <div className="mt-8 space-y-3">
+                <label className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                  Escolha o Tamanho
+                </label>
+                <div className="flex gap-3">
+                  {["A4", "A5", "A6"].map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`flex h-12 flex-1 items-center justify-center rounded-xl border-2 font-bold transition-all ${
+                        selectedSize === size
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-border bg-surface text-muted-foreground hover:border-primary/50"
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               <div className="mt-10 flex flex-col gap-4">
