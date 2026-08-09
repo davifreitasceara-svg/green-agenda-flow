@@ -10,6 +10,8 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
   const [preview, setPreview] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -19,6 +21,8 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
       setFile(null);
       setPreview(null);
       setSuccess(false);
+      setStartTime("");
+      setEndTime("");
     }
   }, [isOpen]);
 
@@ -47,11 +51,18 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
       if (uploadError) throw uploadError;
 
       const { data: { publicUrl } } = supabase.storage.from('multicopy-assets').getPublicUrl(filePath);
+      
+      let finalUrl = publicUrl;
+      if (file?.type.startsWith("video/")) {
+        if (startTime || endTime) {
+          finalUrl = `${publicUrl}#t=${startTime || 0}${endTime ? `,${endTime}` : ''}`;
+        }
+      }
 
       const { error: dbError } = await supabase.from("stories").insert([{
         label,
         caption,
-        image_url: publicUrl
+        image_url: finalUrl
       }]);
 
       if (dbError) throw dbError;
@@ -130,6 +141,38 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                   className="w-full border border-gray-200 bg-gray-50 px-3 py-2 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none h-20" 
                 />
               </div>
+
+              {/* If Video: Trim Options */}
+              {file?.type.startsWith("video/") && (
+                <div className="grid grid-cols-2 gap-3 mt-1">
+                  <div>
+                    <label className="flex items-center gap-1.5 text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
+                      Início (seg)
+                    </label>
+                    <input 
+                      type="number" 
+                      min="0"
+                      placeholder="Ex: 0" 
+                      value={startTime} 
+                      onChange={e => setStartTime(e.target.value)} 
+                      className="w-full border border-gray-200 bg-gray-50 px-3 py-2 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" 
+                    />
+                  </div>
+                  <div>
+                    <label className="flex items-center gap-1.5 text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
+                      Fim (seg)
+                    </label>
+                    <input 
+                      type="number" 
+                      min="0"
+                      placeholder="Ex: 15" 
+                      value={endTime} 
+                      onChange={e => setEndTime(e.target.value)} 
+                      className="w-full border border-gray-200 bg-gray-50 px-3 py-2 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" 
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Right: Image Preview */}
