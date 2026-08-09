@@ -87,7 +87,7 @@ export function Stories({ stories }: { stories: Story[] }) {
                 style={{ background: "var(--gradient-story)" }}
               >
                 <span className="grid h-full w-full place-items-center overflow-hidden rounded-full border-2 border-background">
-                  {story.image.match(/\.(mp4|webm|mov|ogg)$/i) ? (
+                  {story.image.match(/\.(mp4|webm|mov|ogg)(#.*)?$/i) ? (
                     <video src={story.image} className="h-full w-full object-cover" muted playsInline />
                   ) : (
                     <img
@@ -166,14 +166,37 @@ export function Stories({ stories }: { stories: Story[] }) {
             <div className="absolute inset-y-12 left-0 w-1/2 z-20 cursor-pointer" onClick={handlePrev} />
             <div className="absolute inset-y-12 right-0 w-1/2 z-20 cursor-pointer" onClick={handleNext} />
 
-            {active.image.match(/\.(mp4|webm|mov|ogg)$/i) ? (
+            {active.image.match(/\.(mp4|webm|mov|ogg)(#.*)?$/i) ? (
               <video
                 src={active.image}
                 className="aspect-[9/16] w-full object-cover pointer-events-none"
                 autoPlay
                 muted
-                loop
                 playsInline
+                loop={!active.image.includes("#t=")}
+                onTimeUpdate={(e) => {
+                  if (active.image.includes("#t=")) {
+                    const video = e.currentTarget;
+                    const match = active.image.match(/#t=([\d.]+)(?:,([\d.]+))?/);
+                    if (match) {
+                      const start = parseFloat(match[1]) || 0;
+                      const end = match[2] ? parseFloat(match[2]) : video.duration;
+                      if (video.currentTime >= end) {
+                        video.currentTime = start;
+                        video.play().catch(() => {});
+                      }
+                    }
+                  }
+                }}
+                onLoadedMetadata={(e) => {
+                  if (active.image.includes("#t=")) {
+                    const video = e.currentTarget;
+                    const match = active.image.match(/#t=([\d.]+)/);
+                    if (match) {
+                      video.currentTime = parseFloat(match[1]);
+                    }
+                  }
+                }}
               />
             ) : (
               <img
