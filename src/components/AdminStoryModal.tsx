@@ -135,7 +135,7 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
             {/* Right: Image Preview */}
             <div className="flex flex-col gap-2">
               <label className="flex items-center gap-1.5 text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
-                <Image className="w-3 h-3" /> Foto (9:16)
+                <Image className="w-3 h-3" /> Mídia (Foto/Vídeo) 9:16
               </label>
               <button
                 type="button"
@@ -144,7 +144,11 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
               >
                 {preview ? (
                   <>
-                    <img src={preview} alt="Preview" className="w-full h-full object-cover" />
+                    {file?.type.startsWith("video/") ? (
+                      <video src={preview} className="w-full h-full object-cover" autoPlay muted loop />
+                    ) : (
+                      <img src={preview} alt="Preview" className="w-full h-full object-cover" />
+                    )}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <Upload className="w-6 h-6 text-white" />
                     </div>
@@ -159,7 +163,7 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
               <input 
                 ref={fileRef}
                 type="file" 
-                accept="image/*" 
+                accept="image/*,video/*" 
                 onChange={e => setFile(e.target.files?.[0] || null)} 
                 className="hidden" 
                 required

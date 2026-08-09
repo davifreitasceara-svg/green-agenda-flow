@@ -87,12 +87,16 @@ export function Stories({ stories }: { stories: Story[] }) {
                 style={{ background: "var(--gradient-story)" }}
               >
                 <span className="grid h-full w-full place-items-center overflow-hidden rounded-full border-2 border-background">
-                  <img
-                    src={story.image}
-                    alt={story.label}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                  />
+                  {story.image.match(/\.(mp4|webm|mov|ogg)$/i) ? (
+                    <video src={story.image} className="h-full w-full object-cover" muted playsInline />
+                  ) : (
+                    <img
+                      src={story.image}
+                      alt={story.label}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                  )}
                 </span>
               </span>
               <span className="w-full truncate text-center text-[11px] font-medium text-foreground">
@@ -162,11 +166,22 @@ export function Stories({ stories }: { stories: Story[] }) {
             <div className="absolute inset-y-12 left-0 w-1/2 z-20 cursor-pointer" onClick={handlePrev} />
             <div className="absolute inset-y-12 right-0 w-1/2 z-20 cursor-pointer" onClick={handleNext} />
 
-            <img
-              src={active.image}
-              alt={active.caption}
-              className="aspect-[9/16] w-full object-cover pointer-events-none"
-            />
+            {active.image.match(/\.(mp4|webm|mov|ogg)$/i) ? (
+              <video
+                src={active.image}
+                className="aspect-[9/16] w-full object-cover pointer-events-none"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+            ) : (
+              <img
+                src={active.image}
+                alt={active.caption}
+                className="aspect-[9/16] w-full object-cover pointer-events-none"
+              />
+            )}
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-foreground/85 to-transparent p-5 pt-14 pointer-events-none z-10">
               <p className="text-sm font-semibold text-background drop-shadow-md">{active.label}</p>
               <p className="mt-1 text-sm text-background/90 drop-shadow-md">{active.caption}</p>
