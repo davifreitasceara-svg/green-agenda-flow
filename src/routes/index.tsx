@@ -29,8 +29,6 @@ import personalizada from "@/assets/agenda-personalizada.jpg";
 import pocket from "@/assets/agenda-pocket.jpg";
 import academica from "@/assets/agenda-academica.jpg";
 import luxo from "@/assets/agenda-luxo.jpg";
-import storyProducao from "@/assets/story-producao.jpg";
-import storyPromo from "@/assets/story-promo.jpg";
 import bannerColecoes from "@/assets/banner-colecoes.png";
 import bannerMiolo from "@/assets/banner-miolo.png";
 import colecaoJesus from "@/assets/colecao-jesus.png";
@@ -65,13 +63,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const stories: Story[] = [
-  { id: "1", label: "Produção", image: storyProducao, caption: "Nossa impressora rodando os planners 2027 hoje." },
-  { id: "2", label: "Promo do dia", image: storyPromo, caption: "20% OFF em planners até as 18h. Cupom PLANNER20." },
-  { id: "3", label: "Novidades", image: planner2027, caption: "Chegou a capa esmeralda com wire-o metálico." },
-  { id: "4", label: "Bastidores", image: personalizada, caption: "Hot stamping dourado feito a mão, nome por nome." },
-  { id: "5", label: "Clientes", image: luxo, caption: "500 agendas entregues para a equipe da Vetor Contabilidade." },
-];
+
 
 // Produtos agora vêm de src/data/products.ts
 
@@ -123,7 +115,7 @@ function Index() {
   }, []);
 
   const displayProducts = dbProducts.length > 0 ? dbProducts : products;
-  const displayStories = dbStories.length > 0 ? dbStories : stories;
+  const displayStories = dbStories;
 
   const carouselImages = [
     { src: masculina2027, srcMobile: promocaoCelular, alt: "Agenda 2027 Masculina" },
