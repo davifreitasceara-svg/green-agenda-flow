@@ -12,7 +12,9 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
   const [success, setSuccess] = useState(false);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [duration, setDuration] = useState(0);
   const fileRef = useRef<HTMLInputElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -23,6 +25,7 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
       setSuccess(false);
       setStartTime("");
       setEndTime("");
+      setDuration(0);
     }
   }, [isOpen]);
 
@@ -144,32 +147,53 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
 
               {/* If Video: Trim Options */}
               {file?.type.startsWith("video/") && (
-                <div className="grid grid-cols-2 gap-3 mt-1">
-                  <div>
-                    <label className="flex items-center gap-1.5 text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
-                      Início (seg)
-                    </label>
+                <div className="flex flex-col gap-3 mt-1 p-4 bg-gray-50 border border-gray-200 rounded-xl">
+                  <label className="flex items-center gap-1.5 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                    ⏱️ Corte de Vídeo
+                  </label>
+                  
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-bold text-gray-600 w-10">Início</span>
                     <input 
-                      type="number" 
-                      min="0"
-                      placeholder="Ex: 0" 
-                      value={startTime} 
-                      onChange={e => setStartTime(e.target.value)} 
-                      className="w-full border border-gray-200 bg-gray-50 px-3 py-2 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" 
+                      type="range" 
+                      min="0" 
+                      max={duration || 100} 
+                      step="0.1"
+                      value={startTime || 0} 
+                      onChange={e => {
+                        let val = parseFloat(e.target.value);
+                        let end = parseFloat(endTime) || duration;
+                        if (val >= end) val = Math.max(0, end - 0.5);
+                        setStartTime(val.toFixed(1));
+                        if (videoRef.current) {
+                          videoRef.current.currentTime = val;
+                        }
+                      }}
+                      className="flex-1 accent-primary cursor-grab active:cursor-grabbing"
                     />
+                    <span className="text-xs w-10 text-right font-mono bg-white px-1.5 py-0.5 rounded border">{startTime || "0.0"}s</span>
                   </div>
-                  <div>
-                    <label className="flex items-center gap-1.5 text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
-                      Fim (seg)
-                    </label>
+
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-bold text-gray-600 w-10">Fim</span>
                     <input 
-                      type="number" 
-                      min="0"
-                      placeholder="Ex: 15" 
-                      value={endTime} 
-                      onChange={e => setEndTime(e.target.value)} 
-                      className="w-full border border-gray-200 bg-gray-50 px-3 py-2 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" 
+                      type="range" 
+                      min="0" 
+                      max={duration || 100} 
+                      step="0.1"
+                      value={endTime || duration || 100} 
+                      onChange={e => {
+                        let val = parseFloat(e.target.value);
+                        let start = parseFloat(startTime) || 0;
+                        if (val <= start) val = Math.min(duration, start + 0.5);
+                        setEndTime(val.toFixed(1));
+                        if (videoRef.current) {
+                          videoRef.current.currentTime = val - 0.5;
+                        }
+                      }}
+                      className="flex-1 accent-primary cursor-grab active:cursor-grabbing"
                     />
+                    <span className="text-xs w-10 text-right font-mono bg-white px-1.5 py-0.5 rounded border">{endTime || duration.toFixed(1) || "0.0"}s</span>
                   </div>
                 </div>
               )}
@@ -188,7 +212,29 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                 {preview ? (
                   <>
                     {file?.type.startsWith("video/") ? (
-                      <video src={preview} className="w-full h-full object-cover" autoPlay muted loop />
+                      <video 
+                        ref={videoRef}
+                        src={preview} 
+                        className="w-full h-full object-cover" 
+                        autoPlay 
+                        muted 
+                        playsInline
+                        onLoadedMetadata={(e) => {
+                          const d = e.currentTarget.duration;
+                          setDuration(d);
+                          if (!startTime) setStartTime("0.0");
+                          if (!endTime) setEndTime(d.toFixed(1));
+                        }}
+                        onTimeUpdate={(e) => {
+                          const v = e.currentTarget;
+                          const s = parseFloat(startTime) || 0;
+                          const end_ = parseFloat(endTime) || duration;
+                          if (v.currentTime >= end_) {
+                            v.currentTime = s;
+                            v.play().catch(()=>{});
+                          }
+                        }}
+                      />
                     ) : (
                       <img src={preview} alt="Preview" className="w-full h-full object-cover" />
                     )}
