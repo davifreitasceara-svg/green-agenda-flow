@@ -5,6 +5,7 @@ import { Link } from "@tanstack/react-router";
 import { Truck, Sparkles, PenTool, ShieldCheck, ArrowRight, Star, ShoppingBag, Instagram, Lightbulb, Briefcase } from "lucide-react";
 
 import arteColecao from "@/assets/arte-colecao.png";
+import logo from "@/assets/logo.png";
 import { products } from "@/data/products";
 
 import { Header } from "@/components/Header";
@@ -185,8 +186,8 @@ function Index() {
         {/* === NOVOS LANÇAMENTOS (CONHEÇA NOSSA PRODUÇÃO) === */}
         <section id="novidades" className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
           <div className="flex flex-col items-center justify-center mb-10 text-center">
-            <div className="flex items-center justify-center w-20 h-20 bg-black rounded-full border-4 border-primary shadow-sm mb-4">
-              <Lightbulb className="w-10 h-10 text-primary" />
+            <div className="flex items-center justify-center w-20 h-20 bg-black rounded-full border-4 border-primary shadow-sm mb-4 p-2">
+              <img src={logo} alt="Multicopy" className="w-full h-full object-contain" />
             </div>
             <h2 className="text-5xl md:text-7xl text-primary tracking-wide" style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}>
               novos lançamentos
