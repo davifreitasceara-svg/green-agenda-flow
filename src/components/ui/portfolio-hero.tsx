@@ -300,22 +300,26 @@ export default function PortfolioHero() {
           </p>
           <p>
             Hoje, aplico todo esse <i>know-how</i> de três décadas para garantir que sua produção nunca pare. 
-            Meu compromisso é com a qualidade do serviço, a durabilidade das peças e a transparência em cada diagnóstico.
+            Como <strong>sócio da Multicopy</strong>, meu compromisso é com a qualidade do serviço, a durabilidade das peças e a transparência em cada diagnóstico.
           </p>
         </div>
         
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
-            <h3 className="text-4xl font-black mb-2" style={{ color: primaryColor }}>30+</h3>
-            <p className="font-semibold text-lg" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Anos de Carreira</p>
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-center" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+            <h3 className="text-3xl md:text-4xl font-black mb-2" style={{ color: primaryColor }}>30+</h3>
+            <p className="font-semibold text-base md:text-lg leading-tight" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Anos de Carreira</p>
           </div>
-          <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
-            <h3 className="text-4xl font-black mb-2" style={{ color: primaryColor }}>Digiloc</h3>
-            <p className="font-semibold text-lg" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Ex-Técnico Especialista</p>
+          <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-center" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+            <h3 className="text-3xl md:text-4xl font-black mb-2" style={{ color: primaryColor }}>Digiloc</h3>
+            <p className="font-semibold text-base md:text-lg leading-tight" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Ex-Técnico Especialista</p>
           </div>
-          <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
-            <h3 className="text-4xl font-black mb-2" style={{ color: primaryColor }}>1000+</h3>
-            <p className="font-semibold text-lg" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Máquinas Reparadas</p>
+          <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-center" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+            <h3 className="text-3xl md:text-4xl font-black mb-2" style={{ color: primaryColor }}>Sócio</h3>
+            <p className="font-semibold text-base md:text-lg leading-tight" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>da Multicopy Gráfica</p>
+          </div>
+          <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-center" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+            <h3 className="text-3xl md:text-4xl font-black mb-2" style={{ color: primaryColor }}>500+</h3>
+            <p className="font-semibold text-base md:text-lg leading-tight" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Máquinas Reparadas</p>
           </div>
         </div>
       </section>
