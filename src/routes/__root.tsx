@@ -135,6 +135,9 @@ import { supabase } from "@/lib/supabase";
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const router = useRouter();
+  const location = useRouter().state.location; // fallback if useLocation is not imported
+  // Or better, we can just use router.state.location.pathname
+  const isFredericoPage = router.state.location.pathname.startsWith('/frederico');
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
@@ -153,7 +156,7 @@ function RootComponent() {
         <Outlet />
         <Toaster position="top-center" richColors />
         <CartSidebar />
-        <FloatingVideo />
+        {!isFredericoPage && <FloatingVideo />}
       </CartProvider>
     </QueryClientProvider>
   );
