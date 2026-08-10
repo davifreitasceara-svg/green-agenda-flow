@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import fredericoImg from "@/assets/frederico-francisco.jpg";
-import logoImg from "@/assets/logo.png";
+import logoImg from "@/assets/logo-animada.png";
 
 // Inline Button component
 const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
