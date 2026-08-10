@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <RuixenGradientFooter 
       className="relative bg-black text-white pt-20 font-sans mt-24 border-t-4 border-primary"
-      gradientHeight="30vh"
+      gradientHeight="40vh"
     >
       {/* Top Logo Badge */}
       <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center justify-center w-24 h-24 bg-white rounded-full border-4 border-primary shadow-sm z-20 p-2 overflow-hidden">
