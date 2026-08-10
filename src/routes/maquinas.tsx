@@ -2,23 +2,22 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { 
-  Smartphone, 
-  Cpu, 
-  BatteryCharging, 
+  Printer, 
+  Settings, 
   ShieldCheck, 
   Clock, 
-  Zap, 
-  Settings2, 
   Wrench,
   CheckCircle,
-  ArrowRight
+  ArrowRight,
+  PenTool,
+  Droplet
 } from "lucide-react";
 
 export const Route = createFileRoute("/maquinas")({
   head: () => ({
     meta: [
-      { title: "Conserto de Celulares & Máquinas — Multicopy Gráfica" },
-      { name: "description", content: "Assistência técnica especializada em smartphones, tablets e equipamentos com peças originais e laboratório avançado." },
+      { title: "Conserto de Impressoras & Máquinas Gráficas — Multicopy" },
+      { name: "description", content: "Assistência técnica especializada em impressoras, multifuncionais e plotters com Frederico Francisco." },
     ],
   }),
   component: Maquinas,
@@ -29,110 +28,120 @@ function Maquinas() {
     <div className="min-h-screen bg-zinc-50 font-sans relative overflow-hidden flex flex-col">
       <Header />
       <main className="flex-1">
-        {/* HERO - DARK & MODERN */}
-        <section className="relative overflow-hidden bg-zinc-950 pt-24 pb-32 sm:pt-40 sm:pb-48 text-center px-4">
-          {/* Glowing orbs */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 blur-[150px] rounded-full pointer-events-none"></div>
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+        {/* HERO - PROFESSIONAL & CLEAN */}
+        <section className="relative overflow-hidden bg-white pt-20 pb-32 sm:pt-32 sm:pb-40 border-b border-border">
+          {/* Subtle background element */}
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
           
-          {/* Tech Grid Pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+          <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-12">
+             <div className="flex-1 text-center lg:text-left">
+               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-6 uppercase tracking-widest">
+                 <Wrench className="h-4 w-4" />
+                 Especialista Frederico Francisco
+               </div>
 
-          <div className="relative z-10 max-w-5xl mx-auto">
-             <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-2xl bg-zinc-900 border border-zinc-800 shadow-[0_0_50px_rgba(16,185,129,0.3)] group">
-               <Smartphone className="h-12 w-12 text-primary group-hover:scale-110 transition-transform duration-500" strokeWidth={1.5} />
+               <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-zinc-950 mb-6 leading-tight">
+                  Assistência Técnica <br />
+                  <span className="text-primary">Especializada</span>
+               </h1>
+               
+               <p className="text-lg md:text-xl text-zinc-600 mb-8 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
+                 O seu equipamento gráfico parou? Com anos de experiência, 
+                 <strong className="text-zinc-900 font-bold"> Frederico Francisco </strong> 
+                 garante o reparo rápido e seguro de impressoras, plotters e multifuncionais para sua produção não parar.
+               </p>
+               
+               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                 <a href="https://wa.me/5585989059679" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                    <button className="w-full flex items-center justify-center gap-2 bg-primary text-black font-bold text-lg px-8 h-14 rounded-xl hover:bg-emerald-400 hover:-translate-y-1 transition-all shadow-[0_10px_20px_rgba(16,185,129,0.2)]">
+                      Falar com Frederico
+                      <ArrowRight className="h-5 w-5" />
+                    </button>
+                 </a>
+                 <a href="#servicos" className="w-full sm:w-auto">
+                    <button className="w-full flex items-center justify-center gap-2 bg-white text-zinc-900 font-bold text-lg px-8 h-14 rounded-xl border-2 border-zinc-200 hover:border-zinc-300 transition-all">
+                      Conhecer Serviços
+                    </button>
+                 </a>
+               </div>
              </div>
              
-             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-8 uppercase tracking-widest backdrop-blur-md">
-               <Zap className="h-4 w-4 fill-primary" />
-               Laboratório Avançado
-             </div>
-
-             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-6 leading-[1.1]">
-                Assistência Técnica <br className="hidden md:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-400 to-teal-400">
-                  Especializada
-                </span>
-             </h1>
-             <p className="text-lg sm:text-xl text-zinc-400 mb-10 max-w-2xl mx-auto font-medium">
-               Especialistas em reparo de placas, troca de telas e baterias de smartphones e equipamentos. Tecnologia de ponta para trazer seu aparelho de volta à vida.
-             </p>
-             
-             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-               <a href="https://wa.me/5585989059679" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-                  <button className="w-full flex items-center justify-center gap-2 bg-primary text-black font-bold text-lg px-8 h-14 rounded-xl hover:bg-emerald-400 hover:scale-105 transition-all shadow-[0_0_30px_rgba(16,185,129,0.4)]">
-                    Falar com Técnico
-                    <ArrowRight className="h-5 w-5" />
-                  </button>
-               </a>
-               <a href="#servicos" className="w-full sm:w-auto">
-                  <button className="w-full flex items-center justify-center gap-2 bg-zinc-900 text-white font-bold text-lg px-8 h-14 rounded-xl border border-zinc-800 hover:bg-zinc-800 transition-all">
-                    Ver Serviços
-                  </button>
-               </a>
+             {/* Hero Image / Graphic Placeholder */}
+             <div className="flex-1 w-full max-w-md lg:max-w-none relative hidden md:block">
+               <div className="aspect-square bg-surface border border-border rounded-3xl p-8 relative shadow-2xl overflow-hidden flex items-center justify-center">
+                 <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(16,185,129,0.05)_50%,transparent_75%)] bg-[size:250px_250px]"></div>
+                 <Printer className="w-48 h-48 text-primary drop-shadow-xl z-10" strokeWidth={1} />
+               </div>
+               
+               {/* Floating badges */}
+               <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-zinc-100 flex items-center gap-4 animate-bounce hover:pause" style={{ animationDuration: '3s' }}>
+                 <div className="bg-primary/20 p-2 rounded-full">
+                   <ShieldCheck className="h-6 w-6 text-primary" />
+                 </div>
+                 <div>
+                   <p className="text-xs text-zinc-500 font-semibold uppercase">Garantia de Serviço</p>
+                   <p className="font-bold text-zinc-900">100% Confiável</p>
+                 </div>
+               </div>
              </div>
           </div>
         </section>
 
-        {/* STATS & TRUST - Floating over the hero boundary */}
-        <section className="relative z-20 -mt-16 max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 p-4 rounded-3xl shadow-2xl">
-            <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-800/50 transition-colors">
-              <div className="bg-primary/20 p-3 rounded-xl flex-shrink-0">
-                <Clock className="h-8 w-8 text-primary" strokeWidth={1.5} />
-              </div>
-              <div>
-                <h3 className="text-white font-bold text-lg">Reparo Rápido</h3>
-                <p className="text-zinc-400 text-sm">Serviços em até 24h</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-800/50 transition-colors">
-              <div className="bg-primary/20 p-3 rounded-xl flex-shrink-0">
-                <ShieldCheck className="h-8 w-8 text-primary" strokeWidth={1.5} />
-              </div>
-              <div>
-                <h3 className="text-white font-bold text-lg">Garantia de 90 dias</h3>
-                <p className="text-zinc-400 text-sm">Em todas as peças</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-800/50 transition-colors">
-              <div className="bg-primary/20 p-3 rounded-xl flex-shrink-0">
-                <Cpu className="h-8 w-8 text-primary" strokeWidth={1.5} />
-              </div>
-              <div>
-                <h3 className="text-white font-bold text-lg">Peças Originais</h3>
-                <p className="text-zinc-400 text-sm">Qualidade comprovada</p>
-              </div>
-            </div>
+        {/* TRUST / BENEFITS */}
+        <section className="py-20 bg-zinc-50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+               <div className="bg-white p-8 rounded-3xl border border-zinc-100 shadow-sm hover:shadow-md transition-shadow">
+                 <Clock className="h-10 w-10 text-primary mb-6" strokeWidth={1.5} />
+                 <h3 className="text-xl font-bold text-zinc-900 mb-3">Atendimento Ágil</h3>
+                 <p className="text-zinc-600 leading-relaxed">
+                   Sabemos que equipamento parado é prejuízo. Oferecemos diagnósticos precisos e manutenções no menor tempo possível.
+                 </p>
+               </div>
+               <div className="bg-white p-8 rounded-3xl border border-zinc-100 shadow-sm hover:shadow-md transition-shadow">
+                 <ShieldCheck className="h-10 w-10 text-primary mb-6" strokeWidth={1.5} />
+                 <h3 className="text-xl font-bold text-zinc-900 mb-3">Peças de Qualidade</h3>
+                 <p className="text-zinc-600 leading-relaxed">
+                   Trabalhamos com fornecedores confiáveis para reposição de componentes mecânicos e eletrônicos da sua máquina.
+                 </p>
+               </div>
+               <div className="bg-white p-8 rounded-3xl border border-zinc-100 shadow-sm hover:shadow-md transition-shadow">
+                 <PenTool className="h-10 w-10 text-primary mb-6" strokeWidth={1.5} />
+                 <h3 className="text-xl font-bold text-zinc-900 mb-3">Expertise Técnica</h3>
+                 <p className="text-zinc-600 leading-relaxed">
+                   Anos de dedicação de Frederico Francisco ao mercado gráfico, solucionando desde defeitos simples até falhas complexas.
+                 </p>
+               </div>
+             </div>
           </div>
         </section>
 
         {/* SERVICES GRID */}
-        <section id="servicos" className="py-24 bg-zinc-50 relative">
+        <section id="servicos" className="py-24 bg-white border-t border-zinc-100 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-black text-zinc-950 tracking-tight uppercase">
-                O que nós <span className="text-primary">consertamos</span>
+            <div className="text-center mb-16 max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-black text-zinc-950 tracking-tight">
+                Principais Serviços
               </h2>
-              <p className="text-zinc-500 mt-4 max-w-2xl mx-auto text-lg">
-                Estrutura de laboratório completa com microscópios estéreo e estações de solda BGA para reparos a nível de componente.
+              <p className="text-zinc-500 mt-6 text-lg">
+                Assistência completa para impressoras corporativas, plotters de impressão e recorte, e equipamentos de acabamento gráfico.
               </p>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { icon: Smartphone, title: "Troca de Tela", desc: "Displays originais e Premium para iPhone e linha Samsung Galaxy. Serviço com vedação à prova d'água." },
-                { icon: BatteryCharging, title: "Baterias", desc: "Substituição de baterias viciadas por células novas, 100% de saúde e capacidade original." },
-                { icon: Cpu, title: "Reparo em Placa", desc: "Microsolda, reballing, reparo de Face ID, codec de áudio e curtos na placa principal." },
-                { icon: Wrench, title: "Máquinas Gráficas", desc: "Manutenção em plotters, impressoras de grande formato e equipamentos de corte automáticos." },
-                { icon: Zap, title: "Conectores", desc: "Troca de conectores de carga (Lightning e USB-C), botões power e volume." },
-                { icon: Settings2, title: "Software & Dados", desc: "Recuperação de sistema, backup avançado, remoção de loop infinito e bugs de software." },
+                { icon: Droplet, title: "Limpeza de Cabeça de Impressão", desc: "Desentupimento e recuperação de cabeças de impressão, garantindo a máxima qualidade nas cores." },
+                { icon: Settings, title: "Manutenção Preventiva", desc: "Limpeza interna, lubrificação de engrenagens, ajustes de correias e revisão geral para evitar quebras." },
+                { icon: Wrench, title: "Reparo Mecânico", desc: "Troca de roletes, tracionadores, correias, e engrenagens desgastadas pelo tempo de uso." },
+                { icon: Printer, title: "Manutenção em Plotters", desc: "Ajuste e calibração de máquinas de grande formato, resolução de erros de painel e falhas." },
+                { icon: CheckCircle, title: "Instalação e Configuração", desc: "Setup inicial de equipamentos novos no seu laboratório gráfico e configuração em rede." },
+                { icon: PenTool, title: "Acabamentos Gráficos", desc: "Conserto de encadernadoras, guilhotinas elétricas, laminadoras e vincadeiras." },
               ].map((s, i) => (
-                <div key={i} className="bg-white border border-zinc-200 p-8 rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
-                  <div className="h-16 w-16 bg-zinc-50 rounded-2xl flex items-center justify-center mb-6 border border-zinc-100 group-hover:bg-primary transition-colors">
-                    <s.icon className="h-8 w-8 text-zinc-950" strokeWidth={1.5} />
+                <div key={i} className="bg-zinc-50 border border-zinc-200 p-8 rounded-3xl hover:bg-white hover:border-primary/30 transition-all duration-300 group">
+                  <div className="h-14 w-14 bg-white rounded-2xl flex items-center justify-center mb-6 border border-zinc-200 group-hover:shadow-md transition-all">
+                    <s.icon className="h-7 w-7 text-primary" strokeWidth={1.5} />
                   </div>
-                  <h3 className="text-2xl font-black mb-3 text-zinc-950">{s.title}</h3>
+                  <h3 className="text-xl font-black mb-3 text-zinc-950">{s.title}</h3>
                   <p className="text-zinc-600 leading-relaxed font-medium">{s.desc}</p>
                 </div>
               ))}
@@ -140,40 +149,41 @@ function Maquinas() {
           </div>
         </section>
 
-        {/* BANNER CTA */}
-        <section className="py-20 bg-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="bg-zinc-950 rounded-[3rem] p-10 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10 shadow-2xl">
-               {/* Abstract Shapes */}
-               <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
-               <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-teal-500/20 rounded-full blur-[100px] -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
+        {/* CTA BANNER */}
+        <section className="py-20 bg-zinc-50">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="bg-zinc-950 rounded-[3rem] p-10 md:p-14 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10 shadow-2xl">
+               <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/20 rounded-full blur-[80px] translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
                
                <div className="relative z-10 max-w-xl">
-                 <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-                   Faça um orçamento gratuito pelo WhatsApp
+                 <h2 className="text-3xl md:text-4xl font-black text-white mb-6 leading-tight">
+                   Agende uma avaliação do seu equipamento
                  </h2>
                  <p className="text-zinc-400 text-lg mb-8">
-                   Nosso time técnico está pronto para diagnosticar o seu aparelho. Envie uma mensagem e receba seu orçamento em minutos.
+                   Entre em contato pelo WhatsApp. Fale diretamente com o <strong className="text-white">Frederico Francisco</strong> e tire suas dúvidas sobre o conserto da sua máquina.
                  </p>
-                 <div className="space-y-4">
+                 <div className="space-y-3">
                    <div className="flex items-center gap-3 text-white">
-                     <CheckCircle className="text-primary h-6 w-6" />
-                     <span className="font-semibold text-lg">Sem compromisso</span>
+                     <CheckCircle className="text-primary h-6 w-6 shrink-0" />
+                     <span className="font-semibold text-lg">Orçamento transparente</span>
                    </div>
                    <div className="flex items-center gap-3 text-white">
-                     <CheckCircle className="text-primary h-6 w-6" />
-                     <span className="font-semibold text-lg">Atendimento humanizado</span>
+                     <CheckCircle className="text-primary h-6 w-6 shrink-0" />
+                     <span className="font-semibold text-lg">Solução direto ao ponto</span>
                    </div>
                  </div>
                </div>
                
-               <div className="relative z-10 w-full md:w-auto shrink-0 mt-6 md:mt-0">
-                 <a href="https://wa.me/5585989059679" target="_blank" rel="noopener noreferrer">
-                   <button className="w-full md:w-auto bg-primary hover:bg-emerald-400 text-black font-black text-xl px-10 py-6 rounded-2xl shadow-[0_0_40px_rgba(16,185,129,0.3)] hover:scale-105 hover:shadow-[0_0_60px_rgba(16,185,129,0.5)] transition-all flex items-center justify-center gap-3">
-                     Mandar Mensagem
-                     <ArrowRight className="h-6 w-6" />
-                   </button>
-                 </a>
+               <div className="relative z-10 w-full md:w-auto shrink-0 text-center">
+                 <div className="bg-white/10 p-4 rounded-3xl border border-white/10 backdrop-blur-sm">
+                   <a href="https://wa.me/5585989059679" target="_blank" rel="noopener noreferrer">
+                     <button className="w-full md:w-auto bg-primary hover:bg-emerald-400 text-black font-black text-lg px-8 py-5 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-3">
+                       Falar no WhatsApp
+                       <ArrowRight className="h-6 w-6" />
+                     </button>
+                   </a>
+                   <p className="text-zinc-400 mt-4 text-sm font-medium">Atendimento em horário comercial</p>
+                 </div>
                </div>
             </div>
           </div>
