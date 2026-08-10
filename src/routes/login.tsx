@@ -23,10 +23,11 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Redireciona automaticamente caso o usuário seja autenticado (ex: clicou no link do e-mail)
+  // Redireciona automaticamente caso o usuário seja autenticado
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
+      // Se for recuperação de senha, NÃO redireciona para a home, o __root interceptará
+      if (session && event !== 'PASSWORD_RECOVERY') {
         navigate({ to: "/" });
       }
     });

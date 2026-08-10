@@ -130,9 +130,21 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 import { FloatingVideo } from "@/components/FloatingVideo";
+import { supabase } from "@/lib/supabase";
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'PASSWORD_RECOVERY') {
+        router.navigate({ to: '/reset-password' });
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [router]);
 
   return (
     <QueryClientProvider client={queryClient}>
