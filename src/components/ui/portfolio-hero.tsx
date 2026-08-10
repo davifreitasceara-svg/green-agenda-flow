@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import fredericoImg from "@/assets/frederico-francisco.jpg";
+import logoImg from "@/assets/logo.png";
 
 // Inline Button component
 const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
@@ -193,9 +194,9 @@ export default function PortfolioHero() {
             )}
           </div>
 
-          {/* Signature */}
-          <div className="text-4xl" style={{ color: primaryColor, fontFamily: "'Brush Script MT', 'Lucida Handwriting', cursive" }}>
-            F
+          {/* Multicopy Logo */}
+          <div className="flex items-center justify-center">
+            <img src={logoImg} alt="Multicopy Logo" className="h-10 md:h-12 object-contain" />
           </div>
 
           {/* Theme Toggle */}
