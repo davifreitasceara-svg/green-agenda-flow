@@ -194,14 +194,15 @@ export default function PortfolioHero() {
           </div>
 
           {/* Multicopy Logo Video */}
-          <div className="flex items-center justify-center rounded-full overflow-hidden mix-blend-multiply dark:mix-blend-normal">
+          <div className="flex items-center justify-center rounded-full overflow-hidden" style={{ mixBlendMode: isDark ? "normal" : "multiply" }}>
             <video 
               src="/logo-animada.mp4" 
               autoPlay 
               loop 
               muted 
               playsInline 
-              className="h-12 md:h-16 object-cover pointer-events-none" 
+              className="h-12 md:h-16 object-cover pointer-events-none"
+              style={{ filter: isDark ? "none" : "brightness(1.15) contrast(1.15)" }}
             />
           </div>
 
