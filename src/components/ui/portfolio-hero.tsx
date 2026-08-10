@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import fredericoImg from "@/assets/frederico-francisco.jpg";
-import logoImg from "@/assets/logo-animada.png";
 
 // Inline Button component
 const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
@@ -194,9 +193,16 @@ export default function PortfolioHero() {
             )}
           </div>
 
-          {/* Multicopy Logo */}
-          <div className="flex items-center justify-center">
-            <img src={logoImg} alt="Multicopy Logo" className="h-10 md:h-12 object-contain" />
+          {/* Multicopy Logo Video */}
+          <div className="flex items-center justify-center rounded-full overflow-hidden mix-blend-multiply dark:mix-blend-normal">
+            <video 
+              src="/logo-animada.mp4" 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+              className="h-12 md:h-16 object-cover pointer-events-none" 
+            />
           </div>
 
           {/* Theme Toggle */}
