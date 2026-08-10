@@ -171,6 +171,11 @@ export function Header() {
                 <Lightbulb className="w-4 h-4" strokeWidth={1.5} /> Coleção Mel
               </Link>
             </li>
+            <li className="flex-1 bg-black border-l border-gray-900">
+              <Link to="/maquinas" className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 py-3 text-[12px] font-bold text-primary hover:text-white transition-colors h-full whitespace-nowrap">
+                <Settings className="w-4 h-4" strokeWidth={1.5} /> Assistência
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>
@@ -180,6 +185,7 @@ export function Header() {
         <div className="mx-auto max-w-7xl flex items-center px-6 py-2.5 gap-8 overflow-x-auto scrollbar-hide text-[11px] font-bold text-gray-500 uppercase tracking-widest">
            <a href="#" className="hover:text-primary transition-colors whitespace-nowrap pl-4">DATADO 2026</a>
            <a href="#" className="hover:text-primary transition-colors whitespace-nowrap">PERMANENTES</a>
+           <Link to="/maquinas" className="hover:text-primary transition-colors whitespace-nowrap text-primary ml-auto">ASSISTÊNCIA TÉCNICA</Link>
         </div>
       </div>
     </header>
