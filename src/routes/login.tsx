@@ -105,14 +105,27 @@ function Login() {
       </div>
 
       <Card className="w-full max-w-md mx-auto shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl border-border/50 bg-white/80 backdrop-blur-xl relative z-10">
-        <CardHeader className="space-y-3 text-center pt-10">
-          <div className="mx-auto flex items-center justify-center mb-4">
+        <CardHeader className="space-y-3 text-center pt-10 pb-2">
+          <div className="mx-auto flex items-center justify-center mb-2">
             <img src={logo} alt="Multicopy" className="h-16 w-auto object-contain" />
           </div>
-          <CardTitle className="text-3xl font-display font-bold text-primary-deep tracking-tight">
-            Bem-vindo à Multicopy
-          </CardTitle>
-          <CardDescription className="text-base text-muted-foreground px-4">
+          
+          <div className="flex items-center justify-center gap-4 py-2">
+            <div 
+              className="flex items-center justify-center w-[65px] h-[65px] bg-primary text-white shadow-md"
+              style={{ borderRadius: '50% 50% 50% 5px' }}
+            >
+              <span className="text-3xl mt-1" style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}>oie</span>
+            </div>
+            <div className="text-left">
+              <h1 className="text-[1.6rem] font-bold text-gray-800 leading-tight tracking-tight">
+                Seja muito<br/>
+                bem-vindo à Multicopy!
+              </h1>
+            </div>
+          </div>
+
+          <CardDescription className="text-base text-muted-foreground px-4 mt-2">
             Acesse sua conta para continuar sua jornada criativa.
           </CardDescription>
         </CardHeader>
