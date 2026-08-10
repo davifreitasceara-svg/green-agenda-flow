@@ -81,13 +81,13 @@ export function Header() {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger className="outline-none">
-                  <div className="hidden sm:flex items-center gap-2 bg-primary/10 pr-4 pl-1 py-1 rounded-full border border-primary/20 hover:bg-primary/20 transition-all shadow-sm hover:shadow-md cursor-pointer group">
+                  <div className="flex items-center gap-2 bg-primary/10 sm:pr-4 pr-1 pl-1 py-1 rounded-full border border-primary/20 hover:bg-primary/20 transition-all shadow-sm hover:shadow-md cursor-pointer group">
                     <img 
                       src={user.user_metadata?.avatar_url || "https://ui-avatars.com/api/?name=" + (user.user_metadata?.full_name || "User")} 
                       alt="Avatar" 
-                      className="w-8 h-8 rounded-full border border-primary/30 object-cover group-hover:scale-105 transition-transform" 
+                      className="w-10 h-10 sm:w-8 sm:h-8 rounded-full border border-primary/30 object-cover group-hover:scale-105 transition-transform" 
                     />
-                    <div className="text-[10px] font-bold text-black leading-tight text-left">
+                    <div className="hidden sm:block text-[10px] font-bold text-black leading-tight text-left">
                       olá, {user.user_metadata?.full_name?.split(" ")[0] || "Usuário"}<br/><span className="font-medium text-gray-500">minha conta</span>
                     </div>
                   </div>
@@ -105,11 +105,11 @@ export function Header() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Link to="/login" className="hidden sm:flex items-center gap-2 bg-primary/10 pr-4 pl-1 py-1 rounded-full border border-primary/20 hover:bg-primary/20 transition-all shadow-sm hover:shadow-md group">
-                <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center group-hover:scale-105 transition-transform group-hover:bg-primary group-hover:text-black">
-                  <User className="w-4 h-4" />
+              <Link to="/login" className="flex items-center gap-2 bg-primary/10 sm:pr-4 pr-1 pl-1 py-1 rounded-full border border-primary/20 hover:bg-primary/20 transition-all shadow-sm hover:shadow-md group">
+                <div className="w-10 h-10 sm:w-8 sm:h-8 rounded-full bg-black text-white flex items-center justify-center group-hover:scale-105 transition-transform group-hover:bg-primary group-hover:text-black">
+                  <User className="w-5 h-5 sm:w-4 sm:h-4" />
                 </div>
-                <div className="text-[10px] font-bold text-black leading-tight text-left">
+                <div className="hidden sm:block text-[10px] font-bold text-black leading-tight text-left">
                   iniciar sessão<br/><span className="font-medium text-gray-500">ou</span> criar uma conta
                 </div>
               </Link>
