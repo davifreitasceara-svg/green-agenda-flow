@@ -143,6 +143,19 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                   onChange={e => setCaption(e.target.value)} 
                   className="w-full border border-gray-200 bg-gray-50 px-3 py-2 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none h-20" 
                 />
+                {/* Emojis Rápidos */}
+                <div className="flex gap-1.5 mt-1.5">
+                  {["✨", "🔥", "🚀", "📸", "🎉", "📦", "🤩", "❤️"].map((emoji) => (
+                    <button
+                      key={emoji}
+                      type="button"
+                      onClick={() => setCaption(prev => prev + emoji)}
+                      className="w-7 h-7 flex items-center justify-center rounded-md bg-gray-100 hover:bg-gray-200 text-sm transition-colors border border-gray-200"
+                    >
+                      {emoji}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               {/* If Video: Trim Options */}
