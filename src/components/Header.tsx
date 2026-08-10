@@ -46,10 +46,13 @@ export function Header() {
           {/* LEFT: Logo & Welcome */}
           <div className="flex items-center gap-4 md:gap-6">
             <Link to="/" className="flex items-center group">
-              <img 
-                src={logo} 
-                alt="Multicopy" 
-                className="h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-105" 
+              <video 
+                src="/logo-animada.mp4" 
+                autoPlay 
+                muted 
+                playsInline 
+                className="h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-105 pointer-events-none" 
+                style={{ mixBlendMode: "multiply", filter: "brightness(1.3) contrast(1.3)" }}
               />
             </Link>
 
