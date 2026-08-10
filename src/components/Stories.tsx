@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Plus, X, Trash2 } from "lucide-react";
+import { Plus, X, Trash2, Sparkles, Tv } from "lucide-react";
 import { useAdmin } from "@/hooks/useAdmin";
 import { AdminStoryModal } from "./AdminStoryModal";
 import { supabase } from "../lib/supabase";
@@ -79,9 +79,19 @@ export function Stories({ stories }: { stories: Story[] }) {
   return (
     <section aria-label="Atualizações da loja" className="border-b border-border bg-background pt-6 pb-2">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <h2 className="text-3xl md:text-4xl text-primary tracking-wide mb-4 text-center md:text-left" style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}>
-          fique por dentro de tudo ao vivo
-        </h2>
+        <div className="flex flex-wrap items-center gap-3 mb-6 justify-center md:justify-start group cursor-default">
+          <h2 
+            className="text-4xl md:text-5xl tracking-wide bg-gradient-to-r from-primary via-green-500 to-primary-deep bg-clip-text text-transparent drop-shadow-sm flex items-center transition-transform duration-500 group-hover:scale-105" 
+            style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}
+          >
+            <Sparkles className="w-6 h-6 text-yellow-400 animate-pulse mr-2" />
+            fique por dentro de tudo
+          </h2>
+          <span className="flex items-center gap-1.5 bg-red-500 text-white px-3 py-1.5 rounded-full text-[11px] font-black font-sans tracking-widest uppercase shadow-md transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+            ao vivo
+          </span>
+        </div>
         <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {isAdmin && (
             <button onClick={() => setIsModalOpen(true)} className="flex w-[76px] shrink-0 snap-start flex-col items-center gap-2">
