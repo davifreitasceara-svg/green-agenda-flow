@@ -127,6 +127,7 @@ export function Stories({ stories }: { stories: Story[] }) {
           onClick={() => setOpenIndex(null)}
         >
           <div
+            key={active.id}
             className="relative w-full max-w-sm overflow-hidden rounded-2xl bg-primary-deep touch-none select-none"
             onClick={(e) => e.stopPropagation()}
             onPointerDown={handlePointerDown}
@@ -206,10 +207,11 @@ export function Stories({ stories }: { stories: Story[] }) {
                   }
 
                   if (video.currentTime >= end && end > 0) {
-                    if (!isPaused) {
+                    if (!video.paused && !isPaused) {
+                      video.pause();
                       setProgress(100);
                       setOpenIndex((i) => (i !== null && i < stories.length - 1 ? i + 1 : null));
-                    } else {
+                    } else if (isPaused) {
                       video.currentTime = end;
                       video.pause();
                     }
