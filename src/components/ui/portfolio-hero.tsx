@@ -198,7 +198,6 @@ export default function PortfolioHero() {
             <video 
               src="/logo-animada.mp4" 
               autoPlay 
-              loop 
               muted 
               playsInline 
               className="h-14 md:h-20 object-cover pointer-events-none"
