@@ -9,6 +9,7 @@ import logo from "@/assets/logo.png";
 import { products } from "@/data/products";
 
 import { Header } from "@/components/Header";
+import { SmokyButton } from "@/components/ui/smoky-button";
 import { Stories, type Story } from "@/components/Stories";
 import { ProductCard, type Product } from "@/components/ProductCard";
 import { SalesCard } from "@/components/SalesCard";
@@ -344,12 +345,11 @@ function Index() {
                 miolo customizado e embalagem individual. Receba um orçamento em até 24 horas.
               </p>
               
-              <a
-                href="/"
-                className="group/btn mt-10 flex items-center gap-3 rounded-full bg-white px-8 py-4 text-base font-bold text-primary-deep shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(255,255,255,0.4)]"
-              >
-                Solicitar Orçamento Exclusivo 
-                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+              <a href="https://wa.me/5585989059679" target="_blank" rel="noopener noreferrer">
+                <SmokyButton className="mt-10 group/btn shadow-[0_10px_30px_rgba(255,255,255,0.2)] hover:shadow-[0_15px_40px_rgba(255,255,255,0.4)] border border-white/20">
+                  Solicitar Orçamento Exclusivo 
+                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                </SmokyButton>
               </a>
             </div>
           </div>
