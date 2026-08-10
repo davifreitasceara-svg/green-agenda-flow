@@ -58,7 +58,7 @@ function Login() {
         if (signUpError) {
           setError(signUpError.message);
         } else {
-          setSuccess("Conta criada com sucesso! Verifique seu e-mail para confirmar.");
+          setSuccess("Uhuu conta criada! Logue e entre no nosso mundo.");
           setIsSignUp(false); // Voltar pro login
         }
       } else {
