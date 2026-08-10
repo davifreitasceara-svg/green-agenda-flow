@@ -25,8 +25,7 @@ export function Stories({ stories }: { stories: Story[] }) {
 
   useEffect(() => {
     if (openIndex === null || isPaused) return;
-    
-    const isVideo = active?.image.match(/\.(mp4|webm|mov|ogg)(#.*)?$/i);
+    const isVideo = active?.image?.match(/\.(mp4|webm|mov|ogg)(#.*)?$/i);
     if (isVideo) return; // Videos handle their own progress and advancing
 
     const interval = setInterval(() => {
@@ -99,7 +98,7 @@ export function Stories({ stories }: { stories: Story[] }) {
                 style={{ background: "var(--gradient-story)" }}
               >
                 <span className="grid h-full w-full place-items-center overflow-hidden rounded-full border-2 border-background">
-                  {story.image.match(/\.(mp4|webm|mov|ogg)(#.*)?$/i) ? (
+                  {story.image?.match(/\.(mp4|webm|mov|ogg)(#.*)?$/i) ? (
                     <video src={story.image} className="h-full w-full object-cover" muted playsInline />
                   ) : (
                     <img
@@ -179,7 +178,7 @@ export function Stories({ stories }: { stories: Story[] }) {
             <div className="absolute inset-y-12 left-0 w-1/2 z-20 cursor-pointer" onClick={handlePrev} />
             <div className="absolute inset-y-12 right-0 w-1/2 z-20 cursor-pointer" onClick={handleNext} />
 
-            {active.image.match(/\.(mp4|webm|mov|ogg)(#.*)?$/i) ? (
+            {active.image?.match(/\.(mp4|webm|mov|ogg)(#.*)?$/i) ? (
               <video
                 id="active-story-video"
                 src={active.image}
@@ -192,8 +191,8 @@ export function Stories({ stories }: { stories: Story[] }) {
                   let start = 0;
                   let end = video.duration || 0;
                   
-                  if (active.image.includes("#t=")) {
-                    const match = active.image.match(/#t=([\d.]+)(?:,([\d.]+))?/);
+                  if (active.image?.includes("#t=")) {
+                    const match = active.image?.match(/#t=([\d.]+)(?:,([\d.]+))?/);
                     if (match) {
                       start = parseFloat(match[1]) || 0;
                       end = match[2] ? parseFloat(match[2]) : (video.duration || 0);
@@ -218,9 +217,9 @@ export function Stories({ stories }: { stories: Story[] }) {
                   }
                 }}
                 onLoadedMetadata={(e) => {
-                  if (active.image.includes("#t=")) {
+                  if (active.image?.includes("#t=")) {
                     const video = e.currentTarget;
-                    const match = active.image.match(/#t=([\d.]+)/);
+                    const match = active.image?.match(/#t=([\d.]+)/);
                     if (match) {
                       video.currentTime = parseFloat(match[1]);
                     }
