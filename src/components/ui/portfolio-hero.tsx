@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
+import fredericoImg from "@/assets/frederico-francisco.jpg";
 
 // Inline Button component
 const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
@@ -246,8 +247,8 @@ export default function PortfolioHero() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
               <div className="w-[80px] h-[120px] sm:w-[110px] sm:h-[160px] md:w-[140px] md:h-[200px] lg:w-[160px] lg:h-[230px] rounded-full overflow-hidden shadow-2xl transition-transform duration-300 hover:scale-110 cursor-pointer border-4 border-white dark:border-zinc-800">
                 <img
-                  src="https://i.postimg.cc/y8DnKLyK/albert-dera-ILip77-Sbm-OE-unsplash.jpg"
-                  alt="Perfil"
+                  src={fredericoImg}
+                  alt="Perfil do Frederico Francisco"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -272,12 +273,52 @@ export default function PortfolioHero() {
         {/* Scroll Indicator */}
         <button
           type="button"
-          className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 transition-colors duration-300"
+          onClick={() => {
+            document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 transition-colors duration-300 animate-bounce"
           aria-label="Scroll down"
         >
           <ChevronDown className="w-5 h-5 md:w-8 md:h-8 transition-colors duration-300" style={{ color: primaryColor }} />
         </button>
       </main>
+
+      {/* Bio / Portfolio Section */}
+      <section id="sobre" className="min-h-screen py-24 px-6 max-w-5xl mx-auto flex flex-col justify-center">
+        <h2 className="text-4xl md:text-5xl font-black mb-10" style={{ color: primaryColor }}>
+          Trajetória & Portfólio
+        </h2>
+        <div className="space-y-6 text-lg md:text-xl font-medium leading-relaxed" style={{ color: isDark ? "#d4d4d8" : "#3f3f46" }}>
+          <p>
+            Com mais de <strong>30 anos de carreira</strong> dedicados à manutenção e suporte técnico de excelência, 
+            construí minha base resolvendo problemas reais de empresas do setor gráfico e de tecnologia.
+          </p>
+          <p>
+            Sou <strong>ex-técnico da Digiloc</strong>, onde adquiri profundo conhecimento prático e teórico, lidando com 
+            os mais variados tipos de máquinas, impressoras de grande formato, plotters e equipamentos corporativos. 
+            Essa experiência me permitiu dominar desde a mecânica de precisão até a calibração de softwares e placas lógicas.
+          </p>
+          <p>
+            Hoje, aplico todo esse <i>know-how</i> de três décadas para garantir que sua produção nunca pare. 
+            Meu compromisso é com a qualidade do serviço, a durabilidade das peças e a transparência em cada diagnóstico.
+          </p>
+        </div>
+        
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+            <h3 className="text-4xl font-black mb-2" style={{ color: primaryColor }}>30+</h3>
+            <p className="font-semibold text-lg" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Anos de Carreira</p>
+          </div>
+          <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+            <h3 className="text-4xl font-black mb-2" style={{ color: primaryColor }}>Digiloc</h3>
+            <p className="font-semibold text-lg" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Ex-Técnico Especialista</p>
+          </div>
+          <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+            <h3 className="text-4xl font-black mb-2" style={{ color: primaryColor }}>1000+</h3>
+            <p className="font-semibold text-lg" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Máquinas Reparadas</p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
