@@ -7,7 +7,7 @@ import { PhoneMockup } from "@/components/ui/phone-mockup";
 export function Footer() {
   return (
     <RuixenGradientFooter 
-      className="relative bg-black text-white pt-20 font-sans mt-24 border-t-4 border-primary overflow-hidden"
+      className="relative bg-black text-white pt-20 font-sans mt-24 border-t-4 border-primary"
       gradientHeight="30vh"
     >
       {/* Top Logo Badge */}
