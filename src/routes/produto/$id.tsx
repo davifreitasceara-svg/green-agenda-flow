@@ -211,7 +211,7 @@ function ProdutoDetalhes() {
                   Escolha o Tamanho
                 </label>
                 <div className="flex gap-3">
-                  {["A5", "A6"].map((size) => (
+                  {(product.id.includes('livreto-oracoes') ? ["A5"] : ["A5", "A6"]).map((size) => (
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
