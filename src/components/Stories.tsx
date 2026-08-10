@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Plus, X, Trash2 } from "lucide-react";
 import { useAdmin } from "@/hooks/useAdmin";
 import { AdminStoryModal } from "./AdminStoryModal";
@@ -17,10 +17,14 @@ export function Stories({ stories }: { stories: Story[] }) {
   const [isPaused, setIsPaused] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isAdmin } = useAdmin();
+  const isAdvancingRef = useRef(false);
+
+  const active = openIndex !== null ? stories[openIndex] : null;
 
   useEffect(() => {
     if (openIndex === null) return;
     setProgress(0);
+    isAdvancingRef.current = false;
   }, [openIndex]);
 
   useEffect(() => {
@@ -71,8 +75,6 @@ export function Stories({ stories }: { stories: Story[] }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
-
-  const active = openIndex !== null ? stories[openIndex] : null;
 
   return (
     <section aria-label="Atualizações da loja" className="border-b border-border bg-background">
@@ -194,7 +196,7 @@ export function Stories({ stories }: { stories: Story[] }) {
                   if (active.image?.includes("#t=")) {
                     const match = active.image?.match(/#t=([\d.]+)(?:,([\d.]+))?/);
                     if (match) {
-                      start = parseFloat(match[1]) || 0;
+                      start = parseFloat(match[1] || "0") || 0;
                       end = match[2] ? parseFloat(match[2]) : (video.duration || 0);
                     }
                   }
@@ -206,7 +208,8 @@ export function Stories({ stories }: { stories: Story[] }) {
                   }
 
                   if (video.currentTime >= end && end > 0) {
-                    if (!video.paused && !isPaused) {
+                    if (!isPaused && !isAdvancingRef.current) {
+                      isAdvancingRef.current = true;
                       video.pause();
                       setProgress(100);
                       setOpenIndex((i) => (i !== null && i < stories.length - 1 ? i + 1 : null));
@@ -221,7 +224,7 @@ export function Stories({ stories }: { stories: Story[] }) {
                     const video = e.currentTarget;
                     const match = active.image?.match(/#t=([\d.]+)/);
                     if (match) {
-                      video.currentTime = parseFloat(match[1]);
+                      video.currentTime = parseFloat(match[1] || "0");
                     }
                   }
                 }}
