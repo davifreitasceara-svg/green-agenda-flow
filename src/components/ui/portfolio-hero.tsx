@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import fredericoImg from "@/assets/frederico-francisco.jpg";
+import maquina1 from "@/assets/maquina-1.png";
+import maquina2 from "@/assets/maquina-2.png";
+import maquina3 from "@/assets/maquina-3.png";
+import maquina4 from "@/assets/maquina-4.png";
+import maquina5 from "@/assets/maquina-5.png";
 
 // Inline Button component
 const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
@@ -330,6 +335,59 @@ export default function PortfolioHero() {
           <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-center" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
             <h3 className="text-3xl md:text-4xl font-black mb-2" style={{ color: primaryColor }}>500+</h3>
             <p className="font-semibold text-base md:text-lg leading-tight" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Máquinas Reparadas</p>
+          </div>
+        </div>
+
+        <div className="mt-20 pt-16 border-t" style={{ borderColor: isDark ? "#27272a" : "#e4e4e7" }}>
+          <h3 className="text-3xl font-black mb-8" style={{ color: primaryColor }}>
+            Cursos & Especializações
+          </h3>
+          <ul className="space-y-5">
+            <li className="flex items-center gap-4 p-4 rounded-xl border transition-all duration-300 hover:shadow-md" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+              <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: primaryColor }} />
+              <span className="text-lg md:text-xl font-semibold" style={{ color: isDark ? "#d4d4d8" : "#3f3f46" }}>
+                Especialização Técnica em Impressoras Ricoh
+              </span>
+            </li>
+            <li className="flex items-center gap-4 p-4 rounded-xl border transition-all duration-300 hover:shadow-md" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+              <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: primaryColor }} />
+              <span className="text-lg md:text-xl font-semibold" style={{ color: isDark ? "#d4d4d8" : "#3f3f46" }}>
+                Especialização Técnica em Equipamentos Brother
+              </span>
+            </li>
+            <li className="flex items-center gap-4 p-4 rounded-xl border transition-all duration-300 hover:shadow-md" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+              <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: primaryColor }} />
+              <span className="text-lg md:text-xl font-semibold" style={{ color: isDark ? "#d4d4d8" : "#3f3f46" }}>
+                Curso Avançado de Redes de Computadores
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="mt-20 pt-16 border-t" style={{ borderColor: isDark ? "#27272a" : "#e4e4e7" }}>
+          <h3 className="text-3xl font-black mb-6 text-center" style={{ color: primaryColor }}>
+            Marcas & Máquinas Atendidas
+          </h3>
+          <p className="text-center text-lg md:text-xl font-medium mb-12 max-w-3xl mx-auto" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>
+            Especialista em manutenção avançada de equipamentos corporativos, abrangendo as principais marcas do mercado gráfico e corporativo.
+          </p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 items-stretch justify-items-center">
+            <div className="flex items-center justify-center p-6 rounded-2xl transition-transform duration-300 hover:scale-105 shadow-sm border border-zinc-200 w-full bg-white">
+              <img src={maquina1} alt="Samsung" className="max-h-[120px] max-w-full object-contain mix-blend-multiply" />
+            </div>
+            <div className="flex items-center justify-center p-6 rounded-2xl transition-transform duration-300 hover:scale-105 shadow-sm border border-zinc-200 w-full bg-white">
+              <img src={maquina2} alt="Ricoh" className="max-h-[120px] max-w-full object-contain mix-blend-multiply" />
+            </div>
+            <div className="flex items-center justify-center p-6 rounded-2xl transition-transform duration-300 hover:scale-105 shadow-sm border border-zinc-200 w-full bg-white">
+              <img src={maquina3} alt="Minolta" className="max-h-[120px] max-w-full object-contain mix-blend-multiply" />
+            </div>
+            <div className="flex items-center justify-center p-6 rounded-2xl transition-transform duration-300 hover:scale-105 shadow-sm border border-zinc-200 w-full bg-white">
+              <img src={maquina4} alt="Lexmark" className="max-h-[120px] max-w-full object-contain mix-blend-multiply" />
+            </div>
+            <div className="flex items-center justify-center p-6 rounded-2xl transition-transform duration-300 hover:scale-105 shadow-sm border border-zinc-200 w-full bg-white col-span-2 md:col-span-1">
+              <img src={maquina5} alt="Epson" className="max-h-[120px] max-w-full object-contain mix-blend-multiply" />
+            </div>
           </div>
         </div>
       </section>
