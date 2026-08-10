@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Sparkles, Loader2, AlertCircle } from "lucide-react";
+import { Loader2, AlertCircle } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import logo from "@/assets/logo.png";
 
 export const Route = createFileRoute('/login')({
   component: Login,
@@ -105,11 +106,11 @@ function Login() {
 
       <Card className="w-full max-w-md mx-auto shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl border-border/50 bg-white/80 backdrop-blur-xl relative z-10">
         <CardHeader className="space-y-3 text-center pt-10">
-          <div className="mx-auto bg-primary/10 w-14 h-14 rounded-full flex items-center justify-center mb-2 shadow-inner">
-            <Sparkles className="w-7 h-7 text-primary" />
+          <div className="mx-auto flex items-center justify-center mb-4">
+            <img src={logo} alt="Multicopy" className="h-16 w-auto object-contain" />
           </div>
           <CardTitle className="text-3xl font-display font-bold text-primary-deep tracking-tight">
-            Bem-vindo
+            Bem-vindo à Multicopy
           </CardTitle>
           <CardDescription className="text-base text-muted-foreground px-4">
             Acesse sua conta para continuar sua jornada criativa.
