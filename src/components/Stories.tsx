@@ -77,8 +77,11 @@ export function Stories({ stories }: { stories: Story[] }) {
   }, []);
 
   return (
-    <section aria-label="Atualizações da loja" className="border-b border-border bg-background">
-      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
+    <section aria-label="Atualizações da loja" className="border-b border-border bg-background pt-6 pb-2">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <h2 className="text-3xl md:text-4xl text-primary tracking-wide mb-4 text-center md:text-left" style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}>
+          fique por dentro de tudo ao vivo
+        </h2>
         <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {isAdmin && (
             <button onClick={() => setIsModalOpen(true)} className="flex w-[76px] shrink-0 snap-start flex-col items-center gap-2">
