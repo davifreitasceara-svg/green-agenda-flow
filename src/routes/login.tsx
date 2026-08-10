@@ -96,14 +96,14 @@ function Login() {
   };
 
   return (
-    <div className="min-h-[100dvh] flex items-center justify-center bg-surface px-4 py-12 sm:px-6 lg:px-8 relative">
+    <div className="min-h-[100dvh] flex flex-col bg-surface px-4 py-8 sm:px-6 lg:px-8 relative">
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-primary-hover/10 rounded-full blur-3xl"></div>
       </div>
 
-      <Card className="w-full max-w-md shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl border-border/50 bg-white/80 backdrop-blur-xl relative z-10">
+      <Card className="w-full max-w-md m-auto shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl border-border/50 bg-white/80 backdrop-blur-xl relative z-10">
         <CardHeader className="space-y-3 text-center pt-10">
           <div className="mx-auto bg-primary/10 w-14 h-14 rounded-full flex items-center justify-center mb-2 shadow-inner">
             <Sparkles className="w-7 h-7 text-primary" />
