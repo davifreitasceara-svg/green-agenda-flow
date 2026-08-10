@@ -291,9 +291,9 @@ const createSmokeRenderer = (
 };
 
 export const DEFAULT_SMOKE_COLORS: SmokeColors = {
-  primary: "#007F4F",    // Verde Multicopy
+  primary: "#10B981",    // Verde vivo (Emerald 500)
   secondary: "#FFFFFF",  // Branco
-  shadow: "#000000",     // Preto
+  shadow: "#065F46",     // Verde escuro (Emerald 800)
 };
 
 export const SmokyButton = forwardRef<HTMLButtonElement, SmokyButtonProps>(
@@ -350,7 +350,7 @@ export const SmokyButton = forwardRef<HTMLButtonElement, SmokyButtonProps>(
         {...props}
         ref={ref}
         type={type}
-        className={`relative overflow-hidden inline-flex items-center justify-start rounded-full bg-white text-black px-8 py-4 text-base font-bold transition-all duration-300 hover:scale-105 active:scale-95 shadow-md ${className}`.trim()}
+        className={`relative overflow-hidden inline-flex items-center justify-start rounded-full bg-white text-primary-deep px-8 py-4 text-base font-bold transition-all duration-300 hover:scale-105 active:scale-95 shadow-md ${className}`.trim()}
       >
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-90" aria-hidden="true" />
         <span className="relative z-10 flex flex-col items-start justify-center">
