@@ -99,8 +99,13 @@ function Index() {
         setDbProducts(mappedProducts);
       }
 
-      // Load Stories
-      const { data: sData } = await supabase.from('stories').select('*').order('created_at', { ascending: false });
+      // Load Stories (Only last 24 hours)
+      const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+      const { data: sData } = await supabase
+        .from('stories')
+        .select('*')
+        .gte('created_at', yesterday)
+        .order('created_at', { ascending: false });
       if (sData && sData.length > 0) {
         const mappedStories = sData.map((s: any) => ({
           id: s.id,
