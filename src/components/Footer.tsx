@@ -1,18 +1,21 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Clock } from "lucide-react";
 import logo from "@/assets/logo.png";
-
+import { RuixenGradientFooter } from "@/components/ui/ruixen-gradient-footer";
 import { PhoneMockup } from "@/components/ui/phone-mockup";
 
 export function Footer() {
   return (
-    <footer className="relative bg-black text-white pt-20 pb-16 font-sans mt-24 border-t-4 border-primary">
+    <RuixenGradientFooter 
+      className="relative bg-black text-white pt-20 font-sans mt-24 border-t-4 border-primary overflow-hidden"
+      gradientHeight="30vh"
+    >
       {/* Top Logo Badge */}
-      <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center justify-center w-24 h-24 bg-white rounded-full border-4 border-primary shadow-sm z-10 p-2 overflow-hidden">
+      <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center justify-center w-24 h-24 bg-white rounded-full border-4 border-primary shadow-sm z-20 p-2 overflow-hidden">
         <img src={logo} alt="Multicopy" className="w-full h-full object-contain" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-6 relative z-10 bg-black pb-16">
         {/* Newsletter Section */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mb-16 border-b border-white/10 pb-12">
           
@@ -132,6 +135,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </RuixenGradientFooter>
   );
 }
