@@ -229,7 +229,7 @@ export function AdminStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                           const v = e.currentTarget;
                           const s = parseFloat(startTime) || 0;
                           const end_ = parseFloat(endTime) || duration;
-                          if (v.currentTime >= end_) {
+                          if (end_ > 0 && v.currentTime >= end_) {
                             v.currentTime = s;
                             v.play().catch(()=>{});
                           }
