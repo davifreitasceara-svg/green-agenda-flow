@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, AlertCircle } from "lucide-react";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
+import { Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import logo from "@/assets/logo.png";
 
@@ -16,75 +16,96 @@ function Login() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [isSignUp, setIsSignUp] = useState(false);
+  
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setSuccess(null);
     setIsLoading(true);
 
     try {
-      const { error: authError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (authError) {
-        if (authError.message === "Invalid login credentials") {
-          setError("E-mail ou senha incorretos. Tente novamente.");
-        } else if (authError.message === "Email not confirmed") {
-          setError("Confirme seu e-mail antes de entrar.");
-        } else {
-          setError(authError.message);
+      if (isSignUp) {
+        if (password.length < 6) {
+          setError("A senha deve ter no mínimo 6 caracteres.");
+          setIsLoading(false);
+          return;
         }
-        setIsLoading(false);
-        return;
-      }
 
-      navigate({ to: "/" });
+        const { error: signUpError } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { full_name: name },
+          },
+        });
+
+        if (signUpError) {
+          setError(signUpError.message);
+        } else {
+          setSuccess("Conta criada com sucesso! Verifique seu e-mail para confirmar.");
+          setIsSignUp(false); // Voltar pro login
+        }
+      } else {
+        const { error: authError } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (authError) {
+          if (authError.message === "Invalid login credentials") {
+            setError("E-mail ou senha incorretos. Tente novamente.");
+          } else if (authError.message === "Email not confirmed") {
+            setError("Confirme seu e-mail antes de entrar.");
+          } else {
+            setError(authError.message);
+          }
+        } else {
+          navigate({ to: "/" });
+        }
+      }
     } catch {
       setError("Erro ao conectar. Verifique sua conexão e tente novamente.");
+    } finally {
       setIsLoading(false);
     }
   };
 
-  const handleSignUp = async () => {
-    if (!email || !password) {
-      setError("Preencha o e-mail e a senha para se cadastrar.");
-      return;
-    }
-    if (password.length < 6) {
-      setError("A senha deve ter no mínimo 6 caracteres.");
-      return;
-    }
-
+  const handleForgotPassword = async (e: React.MouseEvent) => {
+    e.preventDefault();
     setError(null);
+    setSuccess(null);
+    
+    if (!email) {
+      setError("Por favor, preencha seu e-mail primeiro para que possamos enviar o link de recuperação.");
+      return;
+    }
+    
     setIsLoading(true);
-
     try {
-      const { error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + '/reset-password',
       });
-
-      if (signUpError) {
-        setError(signUpError.message);
-        setIsLoading(false);
-        return;
+      if (resetError) {
+        setError(resetError.message);
+      } else {
+        setSuccess("Link de recuperação enviado! Verifique a caixa de entrada do seu e-mail.");
       }
-
-      setError(null);
-      setIsLoading(false);
-      alert("Conta criada com sucesso! Verifique seu e-mail para confirmar o cadastro.");
     } catch {
-      setError("Erro ao criar conta. Tente novamente.");
+      setError("Erro ao conectar. Tente novamente.");
+    } finally {
       setIsLoading(false);
     }
   };
 
   const handleGoogleLogin = async () => {
     setError(null);
+    setSuccess(null);
     const { error: googleError } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -126,7 +147,7 @@ function Login() {
           </div>
 
           <CardDescription className="text-base text-muted-foreground px-4 mt-2">
-            Acesse sua conta para continuar sua jornada criativa.
+            {isSignUp ? "Crie sua conta preenchendo os dados abaixo." : "Acesse sua conta para continuar sua jornada criativa."}
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-6 pb-8 px-8">
@@ -135,6 +156,30 @@ function Login() {
               <div className="flex items-center gap-2 bg-red-50 text-red-700 text-sm font-medium px-4 py-3 rounded-xl border border-red-200">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 {error}
+              </div>
+            )}
+            
+            {success && (
+              <div className="flex items-center gap-2 bg-green-50 text-green-700 text-sm font-medium px-4 py-3 rounded-xl border border-green-200">
+                <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+                {success}
+              </div>
+            )}
+
+            {isSignUp && (
+              <div className="space-y-2">
+                <Label htmlFor="name" className="text-sm font-semibold text-primary-deep ml-1">
+                  Nome
+                </Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Seu nome completo"
+                  required={isSignUp}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="h-12 px-4 rounded-xl border-border/80 bg-white/50 focus-visible:ring-primary focus-visible:border-primary transition-all shadow-sm"
+                />
               </div>
             )}
 
@@ -152,14 +197,21 @@ function Login() {
                 className="h-12 px-4 rounded-xl border-border/80 bg-white/50 focus-visible:ring-primary focus-visible:border-primary transition-all shadow-sm"
               />
             </div>
+            
             <div className="space-y-2">
               <div className="flex items-center justify-between ml-1">
                 <Label htmlFor="password" className="text-sm font-semibold text-primary-deep">
                   Senha
                 </Label>
-                <a href="#" className="text-xs font-semibold text-primary hover:text-primary-hover transition-colors">
-                  Esqueceu a senha?
-                </a>
+                {!isSignUp && (
+                  <button 
+                    type="button" 
+                    onClick={handleForgotPassword}
+                    className="text-xs font-semibold text-primary hover:text-primary-hover transition-colors"
+                  >
+                    Esqueceu a senha?
+                  </button>
+                )}
               </div>
               <Input
                 id="password"
@@ -180,10 +232,10 @@ function Login() {
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Entrando...
+                  {isSignUp ? "Cadastrando..." : "Entrando..."}
                 </>
               ) : (
-                "Entrar"
+                isSignUp ? "Criar conta" : "Entrar"
               )}
             </Button>
           </form>
@@ -213,13 +265,17 @@ function Login() {
         </CardContent>
         <CardFooter className="flex justify-center pb-8 border-t border-border/40 pt-6">
           <p className="text-sm text-muted-foreground font-medium">
-            Ainda não tem uma conta?{' '}
+            {isSignUp ? "Já tem uma conta?" : "Ainda não tem uma conta?"}{' '}
             <button 
-              onClick={handleSignUp} 
+              onClick={() => {
+                setIsSignUp(!isSignUp);
+                setError(null);
+                setSuccess(null);
+              }} 
               className="font-bold text-primary hover:text-primary-hover transition-colors"
               type="button"
             >
-              Cadastre-se
+              {isSignUp ? "Faça login" : "Cadastre-se"}
             </button>
           </p>
         </CardFooter>
