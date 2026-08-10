@@ -346,7 +346,7 @@ function Index() {
               </p>
               
               <a href="https://wa.me/5585989059679" target="_blank" rel="noopener noreferrer">
-                <SmokyButton className="mt-10 group/btn shadow-[0_10px_30px_rgba(255,255,255,0.2)] hover:shadow-[0_15px_40px_rgba(255,255,255,0.4)] border border-white/20">
+                <SmokyButton className="mt-10 group/btn shadow-[0_10px_30px_rgba(255,255,255,0.2)] hover:shadow-[0_15px_40px_rgba(255,255,255,0.4)] border border-white/20 min-w-[320px] md:min-w-[400px]">
                   Solicitar Orçamento Exclusivo 
                   <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
                 </SmokyButton>

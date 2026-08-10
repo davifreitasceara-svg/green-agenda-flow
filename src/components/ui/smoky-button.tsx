@@ -350,12 +350,12 @@ export const SmokyButton = forwardRef<HTMLButtonElement, SmokyButtonProps>(
         {...props}
         ref={ref}
         type={type}
-        className={`relative overflow-hidden inline-flex items-center justify-center rounded-full bg-black text-white px-8 py-4 text-base font-bold transition-all duration-300 hover:scale-105 active:scale-95 ${className}`.trim()}
+        className={`relative overflow-hidden inline-flex items-center justify-start rounded-full bg-white text-black px-8 py-4 text-base font-bold transition-all duration-300 hover:scale-105 active:scale-95 shadow-md ${className}`.trim()}
       >
-        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-80" aria-hidden="true" />
-        <span className="relative z-10 flex items-center justify-center gap-2 w-full text-white drop-shadow-md">
-          {children}
-          {status ? <span className="opacity-80 text-sm ml-2">{status}</span> : null}
+        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-90" aria-hidden="true" />
+        <span className="relative z-10 flex flex-col items-start justify-center">
+          <span className="flex items-center gap-2">{children}</span>
+          {status ? <span className="text-gray-500 text-xs font-normal mt-0.5">{status}</span> : null}
         </span>
       </button>
     );
