@@ -332,8 +332,8 @@ function Index() {
             <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-white/20 blur-3xl transition-transform duration-1000 group-hover:scale-150"></div>
             
             <div className="relative z-10 flex flex-col items-center">
-              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-white/10 shadow-inner backdrop-blur-md border border-white/20">
-                <Briefcase className="h-10 w-10 text-white" />
+              <div className="mb-6 flex items-center justify-center w-20 h-20 bg-white rounded-full border-4 border-primary shadow-sm p-2 overflow-hidden hover:scale-105 transition-transform duration-300">
+                <img src={logo} alt="Multicopy" className="w-full h-full object-contain mix-blend-multiply" />
               </div>
 
               <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mb-6 tracking-wide drop-shadow-sm" style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}>
