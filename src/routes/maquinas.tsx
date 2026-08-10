@@ -58,9 +58,9 @@ function Maquinas() {
                       <ArrowRight className="h-5 w-5" />
                     </button>
                  </a>
-                 <a href="#servicos" className="w-full sm:w-auto">
+                 <a href="/frederico" className="w-full sm:w-auto">
                     <button className="w-full flex items-center justify-center gap-2 bg-white text-zinc-900 font-bold text-lg px-8 h-14 rounded-xl border-2 border-zinc-200 hover:border-zinc-300 transition-all">
-                      Conhecer Serviços
+                      Conhecer Perfil do Técnico
                     </button>
                  </a>
                </div>
