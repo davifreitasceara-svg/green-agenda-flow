@@ -25,6 +25,10 @@ export function Stories({ stories }: { stories: Story[] }) {
 
   useEffect(() => {
     if (openIndex === null || isPaused) return;
+    
+    const isVideo = active?.image.match(/\.(mp4|webm|mov|ogg)(#.*)?$/i);
+    if (isVideo) return; // Videos handle their own progress and advancing
+
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -36,7 +40,7 @@ export function Stories({ stories }: { stories: Story[] }) {
       });
     }, 50);
     return () => clearInterval(interval);
-  }, [openIndex, isPaused, stories.length]);
+  }, [openIndex, isPaused, stories.length, active]);
 
   const handlePrev = (e: React.MouseEvent | React.TouchEvent) => {
     e.stopPropagation();
@@ -54,6 +58,14 @@ export function Stories({ stories }: { stories: Story[] }) {
 
   const handlePointerDown = () => setIsPaused(true);
   const handlePointerUp = () => setIsPaused(false);
+
+  useEffect(() => {
+    const v = document.getElementById("active-story-video") as HTMLVideoElement;
+    if (v) {
+      if (isPaused) v.pause();
+      else v.play().catch(()=>{});
+    }
+  }, [isPaused]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenIndex(null);
@@ -168,23 +180,38 @@ export function Stories({ stories }: { stories: Story[] }) {
 
             {active.image.match(/\.(mp4|webm|mov|ogg)(#.*)?$/i) ? (
               <video
+                id="active-story-video"
                 src={active.image}
                 className="aspect-[9/16] w-full object-cover pointer-events-none"
                 autoPlay
                 muted
                 playsInline
-                loop={!active.image.includes("#t=")}
                 onTimeUpdate={(e) => {
+                  const video = e.currentTarget;
+                  let start = 0;
+                  let end = video.duration || 0;
+                  
                   if (active.image.includes("#t=")) {
-                    const video = e.currentTarget;
                     const match = active.image.match(/#t=([\d.]+)(?:,([\d.]+))?/);
                     if (match) {
-                      const start = parseFloat(match[1]) || 0;
-                      const end = match[2] ? parseFloat(match[2]) : video.duration;
-                      if (video.currentTime >= end) {
-                        video.currentTime = start;
-                        video.play().catch(() => {});
-                      }
+                      start = parseFloat(match[1]) || 0;
+                      end = match[2] ? parseFloat(match[2]) : (video.duration || 0);
+                    }
+                  }
+
+                  if (end > 0 && !isPaused) {
+                    const total = end - start;
+                    const current = video.currentTime - start;
+                    setProgress(Math.max(0, Math.min(100, (current / total) * 100)));
+                  }
+
+                  if (video.currentTime >= end && end > 0) {
+                    if (!isPaused) {
+                      setProgress(100);
+                      setOpenIndex((i) => (i !== null && i < stories.length - 1 ? i + 1 : null));
+                    } else {
+                      video.currentTime = end;
+                      video.pause();
                     }
                   }
                 }}
