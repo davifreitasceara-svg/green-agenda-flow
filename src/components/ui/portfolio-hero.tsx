@@ -93,6 +93,7 @@ const BlurText: React.FC<BlurTextProps> = ({
 export default function PortfolioHero() {
   const [isDark, setIsDark] = useState(false); // Default to light mode (white/green)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -102,6 +103,13 @@ export default function PortfolioHero() {
   useEffect(() => {
     // We start in light mode
     document.documentElement.classList.remove("dark");
+    
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -147,15 +155,21 @@ export default function PortfolioHero() {
         color: isDark ? "hsl(0 0% 100%)" : "hsl(0 0% 10%)",
       }}
     >
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-6">
-        <nav className="flex items-center justify-between max-w-screen-2xl mx-auto">
+      <header 
+        className={`fixed top-0 left-0 right-0 z-50 px-6 transition-all duration-500 ${
+          isScrolled ? "py-4 bg-background/80 backdrop-blur-md shadow-sm" : "py-6"
+        }`}
+        style={{
+          backgroundColor: isScrolled ? (isDark ? "rgba(20, 20, 20, 0.8)" : "rgba(255, 255, 255, 0.8)") : "transparent"
+        }}
+      >
+        <nav className="flex items-center justify-between max-w-screen-2xl mx-auto relative min-h-[56px] md:min-h-[80px]">
           {/* Menu Button */}
-          <div className="relative">
+          <div className="relative z-10">
             <button
               ref={buttonRef}
               type="button"
-              className="p-2 transition-colors duration-300 z-50 hover:opacity-70"
+              className="p-2 transition-colors duration-300 hover:opacity-70"
               style={{ color: primaryColor }}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -199,7 +213,14 @@ export default function PortfolioHero() {
           </div>
 
           {/* Multicopy Logo Video */}
-          <div className="flex items-center justify-center overflow-hidden">
+          <div 
+            className={`absolute top-1/2 -translate-y-1/2 transition-all duration-500 ease-in-out flex items-center justify-center overflow-hidden z-0
+              ${isScrolled 
+                ? "right-[80px] md:right-[100px] scale-75 md:scale-90 origin-right" 
+                : "left-1/2 -translate-x-1/2 scale-100 origin-center"
+              }
+            `}
+          >
             <video 
               src="/logo-animada.mp4" 
               autoPlay 
@@ -217,7 +238,7 @@ export default function PortfolioHero() {
           <button
             type="button"
             onClick={toggleTheme}
-            className="relative w-16 h-8 rounded-full hover:opacity-80 transition-opacity"
+            className="relative w-16 h-8 rounded-full hover:opacity-80 transition-opacity z-10"
             style={{ backgroundColor: isDark ? "hsl(0 0% 20%)" : "hsl(0 0% 90%)" }}
             aria-label="Toggle theme"
           >
