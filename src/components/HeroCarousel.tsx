@@ -37,21 +37,11 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
       >
         {images.map((img, i) => (
           <div key={i} className="relative w-full h-full shrink-0 flex items-center justify-center overflow-hidden bg-white">
-            
-            {/* Fundo Desfocado Base */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-2xl scale-110 opacity-70"
-              style={{ backgroundImage: `url(${img.src})` }}
-            />
-            
-            {/* Camada de Vidro Fosco (Frosted Glass) suave e claro */}
-            <div className="absolute inset-0 bg-white/60 backdrop-blur-md" />
-            
             {/* Imagem Principal - Desktop */}
             <img
               src={img.src}
               alt={img.alt}
-              className={`relative z-10 w-full h-full object-contain p-8 drop-shadow-xl ${img.srcMobile ? "hidden md:block" : ""}`}
+              className={`relative z-10 w-full h-full object-cover object-center ${img.srcMobile ? "hidden md:block" : ""}`}
             />
             
             {/* Imagem Principal - Mobile */}
@@ -59,7 +49,7 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
               <img
                 src={img.srcMobile}
                 alt={img.alt}
-                className="relative z-10 w-full h-full object-contain p-4 drop-shadow-xl md:hidden"
+                className="relative z-10 w-full h-full object-cover object-center md:hidden"
               />
             )}
           </div>
