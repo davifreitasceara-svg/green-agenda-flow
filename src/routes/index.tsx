@@ -42,6 +42,7 @@ import masculina2027 from "@/assets/masculina-2027.png";
 import doceComoMel from "@/assets/doce-como-mel.png";
 import bannerFofa from "@/assets/banner-fofa.png";
 import promocaoCelular from "@/assets/promoção-celuar.png.jpg";
+import bannerCandy from "@/assets/banner-candy.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -125,6 +126,7 @@ function Index() {
   const displayStories = dbStories;
 
   const carouselImages = [
+    { src: bannerCandy, srcMobile: promocaoCelular, alt: "Agenda Candy Color 2027" },
     { src: masculina2027, srcMobile: promocaoCelular, alt: "Agenda 2027 Masculina" },
     { src: doceComoMel, srcMobile: promocaoCelular, alt: "Agenda Doce como mel" },
     { src: bannerFofa, srcMobile: promocaoCelular, alt: "Coleção Fofa 2027" },
