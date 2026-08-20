@@ -126,10 +126,9 @@ function Index() {
   const displayStories = dbStories;
 
   const carouselImages = [
-    { src: bannerCandy, srcMobile: promocaoCelular, alt: "Agenda Candy Color 2027" },
     { src: masculina2027, srcMobile: promocaoCelular, alt: "Agenda 2027 Masculina" },
     { src: doceComoMel, srcMobile: promocaoCelular, alt: "Agenda Doce como mel" },
-    { src: bannerFofa, srcMobile: promocaoCelular, alt: "Coleção Fofa 2027" },
+    { src: bannerCandy, srcMobile: promocaoCelular, alt: "Agenda Candy Color 2027" },
   ];
 
   const hoverSlides: HoverSlide[] = [
