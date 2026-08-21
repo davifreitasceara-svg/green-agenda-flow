@@ -36,22 +36,12 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {images.map((img, i) => (
-          <div key={i} className="relative w-full h-full shrink-0 flex items-center justify-center overflow-hidden bg-zinc-50">
-            {/* Blurred background effect to fill empty space elegantly */}
-            <img 
-              src={img.src} 
-              alt="" 
-              className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-60 scale-110" 
-              aria-hidden="true"
-            />
-            
-            <div className="absolute inset-0 bg-white/40 backdrop-blur-sm"></div>
-
+          <div key={i} className="relative w-full h-full shrink-0 flex items-center justify-center overflow-hidden bg-[#faf8f5]">
             {/* Imagem Principal - Desktop */}
             <img
               src={img.src}
               alt={img.alt}
-              className={`relative z-10 w-full h-full object-contain p-4 md:p-12 drop-shadow-2xl ${img.srcMobile ? "hidden md:block" : ""}`}
+              className={`relative z-10 w-full h-full object-contain ${img.srcMobile ? "hidden md:block" : ""}`}
             />
             
             {/* Imagem Principal - Mobile */}
@@ -59,7 +49,7 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
               <img
                 src={img.srcMobile}
                 alt={img.alt}
-                className="relative z-10 w-full h-full object-contain p-4 drop-shadow-2xl md:hidden"
+                className="relative z-10 w-full h-full object-cover object-center md:hidden"
               />
             )}
           </div>
