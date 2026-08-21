@@ -65,7 +65,7 @@ export function Footer() {
               <Mail className="w-6 h-6 mt-1 text-primary" />
               <div className="text-sm">
                 <span className="block opacity-80 mb-1">Mande-me email</span>
-                <a href="mailto:estudiocriativog19@gmail.com" className="font-medium hover:underline text-base hover:text-primary">estudiocriativog19@gmail.com</a>
+                <a href="mailto:multicopy26@gmail.com" className="font-medium hover:underline text-base hover:text-primary">multicopy26@gmail.com</a>
               </div>
             </div>
 
