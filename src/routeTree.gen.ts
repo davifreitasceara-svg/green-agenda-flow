@@ -11,7 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as FredericoRouteImport } from './routes/frederico'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as MaquinasRouteImport } from './routes/maquinas'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ProdutoIdRouteImport } from './routes/produto/$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -24,9 +27,24 @@ const ContatoRoute = ContatoRouteImport.update({
   path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FredericoRoute = FredericoRouteImport.update({
+  id: '/frederico',
+  path: '/frederico',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MaquinasRoute = MaquinasRouteImport.update({
+  id: '/maquinas',
+  path: '/maquinas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProdutoIdRoute = ProdutoIdRouteImport.update({
@@ -38,34 +56,68 @@ const ProdutoIdRoute = ProdutoIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
+  '/frederico': typeof FredericoRoute
   '/login': typeof LoginRoute
+  '/maquinas': typeof MaquinasRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/produto/$id': typeof ProdutoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
+  '/frederico': typeof FredericoRoute
   '/login': typeof LoginRoute
+  '/maquinas': typeof MaquinasRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/produto/$id': typeof ProdutoIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
+  '/frederico': typeof FredericoRoute
   '/login': typeof LoginRoute
+  '/maquinas': typeof MaquinasRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/produto/$id': typeof ProdutoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contato' | '/login' | '/produto/$id'
+  fullPaths:
+    | '/'
+    | '/contato'
+    | '/frederico'
+    | '/login'
+    | '/maquinas'
+    | '/reset-password'
+    | '/produto/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contato' | '/login' | '/produto/$id'
-  id: '__root__' | '/' | '/contato' | '/login' | '/produto/$id'
+  to:
+    | '/'
+    | '/contato'
+    | '/frederico'
+    | '/login'
+    | '/maquinas'
+    | '/reset-password'
+    | '/produto/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/contato'
+    | '/frederico'
+    | '/login'
+    | '/maquinas'
+    | '/reset-password'
+    | '/produto/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContatoRoute: typeof ContatoRoute
+  FredericoRoute: typeof FredericoRoute
   LoginRoute: typeof LoginRoute
+  MaquinasRoute: typeof MaquinasRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ProdutoIdRoute: typeof ProdutoIdRoute
 }
 
@@ -85,11 +137,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/frederico': {
+      id: '/frederico'
+      path: '/frederico'
+      fullPath: '/frederico'
+      preLoaderRoute: typeof FredericoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/maquinas': {
+      id: '/maquinas'
+      path: '/maquinas'
+      fullPath: '/maquinas'
+      preLoaderRoute: typeof MaquinasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/produto/$id': {
@@ -105,7 +178,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContatoRoute: ContatoRoute,
+  FredericoRoute: FredericoRoute,
   LoginRoute: LoginRoute,
+  MaquinasRoute: MaquinasRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   ProdutoIdRoute: ProdutoIdRoute,
 }
 export const routeTree = rootRouteImport
