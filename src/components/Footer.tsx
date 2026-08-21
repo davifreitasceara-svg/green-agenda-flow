@@ -47,7 +47,7 @@ export function Footer() {
         </div>
 
         {/* Links Grid */}
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
           
           {/* Column 1: Contact Info */}
           <div className="flex flex-col gap-6">
@@ -79,16 +79,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Institucional */}
-          <div>
-            <h2 className="font-bold text-xl mb-6 tracking-wide text-primary">institucional</h2>
-            <ul className="space-y-4 text-sm font-medium uppercase opacity-80">
-              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">QUEM SOMOS</Link></li>
-              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">MEUS DOWNLOADS</Link></li>
-              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">CONTATO</Link></li>
-              <li><Link to="/" className="hover:text-primary hover:underline transition-colors">BLOG ESTÚDIOG19</Link></li>
-            </ul>
-          </div>
 
           {/* Column 3: Informações */}
           <div>
