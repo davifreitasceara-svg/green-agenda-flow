@@ -38,12 +38,7 @@ import delicada1 from "@/assets/colecao-delicada-1.png";
 import delicada2 from "@/assets/colecao-delicada-2.png";
 import delicada3 from "@/assets/colecao-delicada-3.png";
 import delicada4 from "@/assets/colecao-delicada-4.png";
-import masculina2027 from "@/assets/masculina-2027.png";
-import doceComoMel from "@/assets/doce-como-mel.png";
-import bannerFofa from "@/assets/banner-fofa.png";
-import promocaoCelular from "@/assets/promoção-celuar.png.jpg";
-import bannerCandy from "@/assets/banner-candy.png";
-import homemDeFe from "@/assets/homem-de-fe.jpeg";
+import banner1 from "@/assets/banner1.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -127,10 +122,7 @@ function Index() {
   const displayStories = dbStories;
 
   const carouselImages = [
-    { src: homemDeFe, srcMobile: promocaoCelular, alt: "Agenda Homem de Fé" },
-    { src: masculina2027, srcMobile: promocaoCelular, alt: "Agenda 2027 Masculina" },
-    { src: doceComoMel, srcMobile: promocaoCelular, alt: "Agenda Doce como mel" },
-    { src: bannerCandy, srcMobile: promocaoCelular, alt: "Agenda Candy Color 2027" },
+    { src: banner1, srcMobile: banner1, alt: "Lançamentos e Coleções 2027" },
   ];
 
   const hoverSlides: HoverSlide[] = [
