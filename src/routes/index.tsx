@@ -41,6 +41,7 @@ import delicada4 from "@/assets/colecao-delicada-4.png";
 import banner1 from "@/assets/banner1.jpg";
 import banner2 from "@/assets/banner2.jpg";
 import banner3 from "@/assets/banner3.jpg";
+import banner4 from "@/assets/banner4.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -127,6 +128,7 @@ function Index() {
     { src: banner1, srcMobile: banner1, alt: "Lançamentos e Coleções 2027" },
     { src: banner2, srcMobile: banner2, alt: "Novidade Exclusiva" },
     { src: banner3, srcMobile: banner3, alt: "Destaque" },
+    { src: banner4, srcMobile: banner4, alt: "Promoção Especial" },
   ];
 
   const hoverSlides: HoverSlide[] = [
