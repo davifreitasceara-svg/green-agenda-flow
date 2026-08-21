@@ -32,7 +32,7 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
     >
       {/* Slides */}
       <div
-        className="flex transition-transform duration-700 ease-in-out h-[85vh]"
+        className="flex transition-transform duration-700 ease-in-out h-[35vh] sm:h-[45vh] md:h-[85vh]"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {images.map((img, i) => (
