@@ -43,7 +43,7 @@ import doceComoMel from "@/assets/doce-como-mel.png";
 import bannerFofa from "@/assets/banner-fofa.png";
 import promocaoCelular from "@/assets/promoção-celuar.png.jpg";
 import bannerCandy from "@/assets/banner-candy.png";
-import homemDeFe from "@/assets/homem-de-fe.png";
+import homemDeFe from "@/assets/homem-de-fe.jpeg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
