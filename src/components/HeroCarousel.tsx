@@ -26,22 +26,22 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
 
   return (
     <div
-      className="relative w-full overflow-hidden aspect-[16/9] sm:aspect-[21/9] md:aspect-auto md:h-[85vh]"
+      className="relative w-full overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Slides */}
       <div
-        className="flex transition-transform duration-700 ease-in-out h-full"
+        className="flex transition-transform duration-700 ease-in-out h-auto md:h-[85vh]"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {images.map((img, i) => (
-          <div key={i} className="relative w-full h-full shrink-0 flex items-center justify-center overflow-hidden bg-[#faf8f5]">
+          <div key={i} className="relative w-full shrink-0 flex items-center justify-center overflow-hidden bg-[#faf8f5] md:h-full">
             {/* Imagem Principal - Desktop */}
             <img
               src={img.src}
               alt={img.alt}
-              className={`relative z-10 w-full h-full object-contain ${img.srcMobile ? "hidden md:block" : ""}`}
+              className={`relative z-10 w-full h-auto md:h-full md:object-contain ${img.srcMobile ? "hidden md:block" : ""}`}
             />
             
             {/* Imagem Principal - Mobile */}
@@ -49,7 +49,7 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
               <img
                 src={img.srcMobile}
                 alt={img.alt}
-                className="relative z-10 w-full h-full object-contain md:hidden"
+                className="relative z-10 w-full h-auto block md:hidden"
               />
             )}
           </div>
