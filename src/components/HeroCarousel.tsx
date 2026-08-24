@@ -32,7 +32,7 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
     >
       {/* Slides */}
       <div
-        className="flex transition-transform duration-700 ease-in-out h-[35vh] sm:h-[45vh] md:h-[85vh]"
+        className="flex transition-transform duration-700 ease-in-out aspect-[16/9] sm:aspect-[21/9] md:aspect-auto md:h-[85vh]"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {images.map((img, i) => (
@@ -49,7 +49,7 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
               <img
                 src={img.srcMobile}
                 alt={img.alt}
-                className="relative z-10 w-full h-full object-cover object-center md:hidden"
+                className="relative z-10 w-full h-full object-contain md:hidden"
               />
             )}
           </div>
