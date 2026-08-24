@@ -26,7 +26,7 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
 
   return (
     <div
-      className="relative w-full overflow-hidden h-[220px] sm:h-[300px] md:h-[85vh]"
+      className="relative w-full overflow-hidden h-[220px] sm:h-[300px] md:h-[95vh]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
