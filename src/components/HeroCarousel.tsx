@@ -49,7 +49,7 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
               <img
                 src={img.srcMobile}
                 alt={img.alt}
-                className="relative z-10 w-full h-full object-contain md:hidden"
+                className="relative z-10 w-full h-full object-cover object-center md:hidden"
               />
             )}
           </div>
