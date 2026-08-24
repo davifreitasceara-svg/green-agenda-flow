@@ -36,19 +36,19 @@ export function AboutUsScroll() {
             </div>
 
             <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center text-white">
-              <div className="w-28 h-28 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-8 border border-white/20 shadow-[0_0_40px_rgba(16,185,129,0.2)] overflow-hidden">
+              <div className="w-20 h-20 md:w-28 md:h-28 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-4 md:mb-8 border border-white/20 shadow-[0_0_40px_rgba(16,185,129,0.2)] overflow-hidden">
                 <img src={logo} alt="Multicopy Logo" className="w-full h-full object-cover rounded-full drop-shadow-md" />
               </div>
               
-              <h3 className="text-3xl md:text-5xl font-bold mb-6 leading-tight tracking-tight text-white drop-shadow-md">
+              <h3 className="text-2xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight tracking-tight text-white drop-shadow-md">
                 A <span className="text-primary font-black">Multicopy</span> é mais do que uma gráfica.
               </h3>
               
-              <p className="text-lg md:text-2xl text-gray-200 leading-relaxed font-light mb-6 max-w-3xl">
+              <p className="text-base md:text-2xl text-gray-200 leading-relaxed font-light mb-4 md:mb-6 max-w-3xl">
                 Somos uma equipe comprometida em dar vida aos seus projetos, sejam agendas personalizadas, cartões de visita, panfletos ou materiais corporativos. 
               </p>
               
-              <p className="text-base md:text-xl text-gray-300 leading-relaxed max-w-3xl">
+              <p className="text-sm md:text-xl text-gray-300 leading-relaxed max-w-3xl">
                 Cada detalhe é pensado com cuidado para que o resultado final esteja à altura das suas expectativas. Afinal, uma boa impressão faz toda a diferença.
               </p>
             </div>
