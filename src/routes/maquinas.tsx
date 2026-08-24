@@ -12,6 +12,7 @@ import {
   PenTool,
   Droplet
 } from "lucide-react";
+import fredericoImg from "@/assets/frederico-francisco.jpg";
 
 export const Route = createFileRoute("/maquinas")({
   head: () => ({
@@ -66,17 +67,51 @@ function Maquinas() {
                </div>
              </div>
              
-             {/* Hero Image / Graphic Placeholder */}
-             <div className="flex-1 w-full max-w-md lg:max-w-none relative hidden md:block">
-               <div className="aspect-square bg-surface border border-border rounded-3xl p-8 relative shadow-2xl overflow-hidden flex items-center justify-center">
-                 <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(16,185,129,0.05)_50%,transparent_75%)] bg-[size:250px_250px]"></div>
-                 <Printer className="w-48 h-48 text-primary drop-shadow-xl z-10" strokeWidth={1} />
+             {/* Hero Image / Graphic */}
+             <div className="flex-1 w-full max-w-lg lg:max-w-none relative hidden md:block lg:pl-10">
+               <div className="relative aspect-[4/5] sm:aspect-square lg:aspect-[4/5] rounded-[2.5rem] shadow-2xl overflow-hidden border-4 border-white group">
+                 {/* Main Image */}
+                 <img 
+                   src={fredericoImg} 
+                   alt="Especialista Frederico Francisco" 
+                   className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 z-10"
+                 />
+
+                 {/* Gradient Overlay */}
+                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-zinc-900/10 to-transparent z-20"></div>
+                 
+                 {/* Content over image */}
+                 <div className="absolute bottom-0 left-0 right-0 p-8 z-30 translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                   <div className="flex items-center gap-3 mb-3">
+                     <div className="flex -space-x-3">
+                       {[...Array(4)].map((_, i) => (
+                         <div key={i} className="w-10 h-10 rounded-full border-2 border-zinc-900 bg-zinc-800 flex items-center justify-center overflow-hidden shadow-sm">
+                           <Printer className="w-4 h-4 text-primary" />
+                         </div>
+                       ))}
+                     </div>
+                     <p className="text-white font-semibold text-sm drop-shadow-md">Mais de 500+ reparos</p>
+                   </div>
+                   <h3 className="text-white text-3xl font-black drop-shadow-lg">Excelência Técnica</h3>
+                   <p className="text-zinc-200 mt-2 font-medium drop-shadow-md">Diagnóstico preciso e manutenção eficiente.</p>
+                 </div>
                </div>
                
-               {/* Floating badges */}
-               <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-zinc-100 flex items-center gap-4 animate-bounce hover:pause" style={{ animationDuration: '3s' }}>
-                 <div className="bg-primary/20 p-2 rounded-full">
-                   <ShieldCheck className="h-6 w-6 text-primary" />
+               {/* Floating badge 1 */}
+               <div className="absolute top-10 -left-8 bg-white p-4 rounded-2xl shadow-2xl border border-zinc-100 flex items-center gap-4 animate-bounce hover:pause z-40" style={{ animationDuration: '4s' }}>
+                 <div className="bg-primary/20 p-3 rounded-full text-primary">
+                   <Wrench className="h-6 w-6" />
+                 </div>
+                 <div>
+                   <p className="text-xs text-zinc-500 font-semibold uppercase">Multimarcas</p>
+                   <p className="font-bold text-zinc-900">Especialista</p>
+                 </div>
+               </div>
+
+               {/* Floating badge 2 */}
+               <div className="absolute -bottom-6 -right-6 lg:-left-8 lg:right-auto bg-white p-4 rounded-2xl shadow-2xl border border-zinc-100 flex items-center gap-4 animate-bounce hover:pause z-40" style={{ animationDuration: '3.5s', animationDelay: '1s' }}>
+                 <div className="bg-emerald-50 p-3 rounded-full text-emerald-600">
+                   <ShieldCheck className="h-6 w-6" />
                  </div>
                  <div>
                    <p className="text-xs text-zinc-500 font-semibold uppercase">Garantia de Serviço</p>
