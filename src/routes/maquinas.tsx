@@ -75,9 +75,6 @@ function Maquinas() {
                  <div className="absolute inset-0 bg-primary z-10 overflow-hidden transition-transform duration-700 group-hover:scale-105">
                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
                    <div className="absolute bottom-0 left-0 w-80 h-80 bg-black/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4"></div>
-                   <div className="absolute inset-0 flex items-center justify-center opacity-20 pb-20">
-                     <Printer className="w-64 h-64 text-black" strokeWidth={1} />
-                   </div>
                  </div>
 
                  {/* Gradient Overlay */}
