@@ -26,13 +26,13 @@ export function HeroCarousel({ images, autoPlayMs = 4000 }: HeroCarouselProps) {
 
   return (
     <div
-      className="relative w-full overflow-hidden"
+      className="relative w-full overflow-hidden aspect-[16/9] sm:aspect-[21/9] md:aspect-auto md:h-[85vh]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Slides */}
       <div
-        className="flex transition-transform duration-700 ease-in-out aspect-[16/9] sm:aspect-[21/9] md:aspect-auto md:h-[85vh]"
+        className="flex transition-transform duration-700 ease-in-out h-full"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {images.map((img, i) => (
