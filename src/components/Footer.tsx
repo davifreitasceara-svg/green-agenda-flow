@@ -16,35 +16,6 @@ export function Footer() {
       </div>
 
       <div className="mx-auto max-w-7xl px-6 relative z-10 bg-black pb-16">
-        {/* Newsletter Section */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mb-16 border-b border-white/10 pb-12">
-          
-          {/* Phone Mockup Integration */}
-          <div className="hidden lg:flex w-1/3 justify-center">
-            <PhoneMockup />
-          </div>
-
-          <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left w-full">
-            <div className="mb-8">
-              <h2 className="text-5xl md:text-7xl text-primary mb-2 tracking-wide" style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}>
-                fique por dentro
-              </h2>
-              <p className="text-lg font-bold">cadastre-se!</p>
-              <p className="text-sm opacity-80">receba nossas novidades</p>
-            </div>
-            
-            <div className="flex w-full max-w-2xl gap-2 bg-white/5 p-1.5 rounded-lg shadow-sm border border-white/10">
-              <input 
-                type="email" 
-                placeholder="Cadastre seu e-mail..." 
-                className="flex-1 bg-transparent px-4 py-3 outline-none text-sm text-white placeholder-gray-400"
-              />
-              <button className="bg-primary text-black px-8 py-3 rounded-md font-bold text-sm uppercase transition-colors hover:bg-primary/80">
-                Enviar
-              </button>
-            </div>
-          </div>
-        </div>
 
         {/* Links Grid */}
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
