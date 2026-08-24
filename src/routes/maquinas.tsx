@@ -68,21 +68,18 @@ function Maquinas() {
              </div>
              
              {/* Hero Image / Graphic */}
-             <div className="flex-1 w-full max-w-lg lg:max-w-none relative hidden md:block lg:pl-10">
-               <div className="relative aspect-[4/5] sm:aspect-square lg:aspect-[4/5] rounded-[2.5rem] shadow-2xl overflow-hidden border-4 border-white group">
+             <div className="flex-1 w-full max-w-lg lg:max-w-none relative hidden md:block lg:pl-10 mt-10 lg:mt-0">
+               <div className="relative rounded-[2.5rem] shadow-2xl overflow-hidden border-4 border-white group">
                  
                  {/* Premium Background instead of photo */}
-                 <div className="absolute inset-0 bg-primary z-10 overflow-hidden transition-transform duration-700 group-hover:scale-105">
+                 <div className="absolute inset-0 bg-primary z-10 overflow-hidden transition-transform duration-700 group-hover:scale-[1.05]">
                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
                    <div className="absolute bottom-0 left-0 w-80 h-80 bg-black/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4"></div>
                  </div>
-
-                 {/* Gradient Overlay */}
-                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-20"></div>
                  
-                 {/* Content over image */}
-                 <div className="absolute bottom-0 left-0 right-0 p-8 z-30 translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
-                   <div className="flex items-center gap-3 mb-3">
+                 {/* Content */}
+                 <div className="relative p-10 z-30 transition-transform duration-500 group-hover:scale-[1.02]">
+                   <div className="flex items-center gap-3 mb-4">
                      <div className="flex -space-x-3">
                        {[...Array(4)].map((_, i) => (
                          <div key={i} className="w-10 h-10 rounded-full border-2 border-zinc-900 bg-zinc-800 flex items-center justify-center overflow-hidden shadow-sm">
@@ -98,7 +95,7 @@ function Maquinas() {
                </div>
                
                {/* Floating badge 1 */}
-               <div className="absolute top-10 -left-8 bg-white p-4 rounded-2xl shadow-2xl border border-zinc-100 flex items-center gap-4 animate-bounce hover:pause z-40" style={{ animationDuration: '4s' }}>
+               <div className="absolute -top-8 right-0 bg-white p-4 rounded-2xl shadow-2xl border border-zinc-100 flex items-center gap-4 animate-bounce hover:pause z-40" style={{ animationDuration: '4s' }}>
                  <div className="bg-primary/20 p-3 rounded-full text-primary">
                    <Wrench className="h-6 w-6" />
                  </div>
@@ -109,7 +106,7 @@ function Maquinas() {
                </div>
 
                {/* Floating badge 2 */}
-               <div className="absolute -bottom-6 -right-6 lg:-left-8 lg:right-auto bg-white p-4 rounded-2xl shadow-2xl border border-zinc-100 flex items-center gap-4 animate-bounce hover:pause z-40" style={{ animationDuration: '3.5s', animationDelay: '1s' }}>
+               <div className="absolute -bottom-8 lg:-left-4 lg:right-auto bg-white p-4 rounded-2xl shadow-2xl border border-zinc-100 flex items-center gap-4 animate-bounce hover:pause z-40" style={{ animationDuration: '3.5s', animationDelay: '1s' }}>
                  <div className="bg-emerald-50 p-3 rounded-full text-emerald-600">
                    <ShieldCheck className="h-6 w-6" />
                  </div>
