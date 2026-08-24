@@ -52,7 +52,7 @@ function Maquinas() {
                </p>
                
                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                 <a href="https://wa.me/5585989059679" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                 <a href="https://wa.me/558596668021" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
                     <button className="w-full flex items-center justify-center gap-2 bg-primary text-black font-bold text-lg px-8 h-14 rounded-xl hover:bg-emerald-400 hover:-translate-y-1 transition-all shadow-[0_10px_20px_rgba(16,185,129,0.2)]">
                       Falar com Frederico
                       <ArrowRight className="h-5 w-5" />
@@ -176,7 +176,7 @@ function Maquinas() {
                
                <div className="relative z-10 w-full md:w-auto shrink-0 text-center">
                  <div className="bg-white/10 p-4 rounded-3xl border border-white/10 backdrop-blur-sm">
-                   <a href="https://wa.me/5585989059679" target="_blank" rel="noopener noreferrer">
+                   <a href="https://wa.me/558596668021" target="_blank" rel="noopener noreferrer">
                      <button className="w-full md:w-auto bg-primary hover:bg-emerald-400 text-black font-black text-lg px-8 py-5 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-3">
                        Falar no WhatsApp
                        <ArrowRight className="h-6 w-6" />

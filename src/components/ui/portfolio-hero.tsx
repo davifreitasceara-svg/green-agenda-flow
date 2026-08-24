@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Briefcase, Building2, Wrench } from "lucide-react";
 import fredericoImg from "@/assets/frederico-francisco.jpg";
 import maquina1 from "@/assets/maquina-1.png";
 import maquina2 from "@/assets/maquina-2.png";
@@ -144,7 +144,7 @@ export default function PortfolioHero() {
     { label: "SOBRE MIM", href: "#" },
     { label: "SERVIÇOS", href: "#" },
     { label: "EXPERIÊNCIA", href: "#" },
-    { label: "CONTATO", href: "https://wa.me/5585989059679" },
+    { label: "CONTATO", href: "https://wa.me/558596668021" },
   ];
 
   return (
@@ -330,9 +330,8 @@ export default function PortfolioHero() {
             construí minha base resolvendo problemas reais de empresas do setor gráfico e de tecnologia.
           </p>
           <p>
-            Sou <strong>ex-técnico da Digiloc</strong>, onde adquiri profundo conhecimento prático e teórico, lidando com 
-            os mais variados tipos de máquinas, impressoras de grande formato, plotters e equipamentos corporativos. 
-            Essa experiência me permitiu dominar desde a mecânica de precisão até a calibração de softwares e placas lógicas.
+            Ao longo da minha trajetória, atuei em grandes referências do setor técnico corporativo, passando por empresas como <strong>DIGILOC</strong>, <strong>CDMAX</strong> e <strong>TECNOVETTI</strong>. 
+            Essas experiências me permitiram lidar com os mais variados tipos de máquinas, impressoras de grande formato e plotters, dominando desde a mecânica de precisão até a calibração de softwares e placas lógicas.
           </p>
           <p>
             Hoje, aplico todo esse <i>know-how</i> de três décadas para garantir que sua produção nunca pare. 
@@ -346,8 +345,8 @@ export default function PortfolioHero() {
             <p className="font-semibold text-base md:text-lg leading-tight" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Anos de Carreira</p>
           </div>
           <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-center" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
-            <h3 className="text-3xl md:text-4xl font-black mb-2" style={{ color: primaryColor }}>Digiloc</h3>
-            <p className="font-semibold text-base md:text-lg leading-tight" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Ex-Técnico Especialista</p>
+            <h3 className="text-3xl md:text-4xl font-black mb-2" style={{ color: primaryColor }}>Multimarcas</h3>
+            <p className="font-semibold text-base md:text-lg leading-tight" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Especialista Técnico</p>
           </div>
           <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-center" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
             <h3 className="text-3xl md:text-4xl font-black mb-2" style={{ color: primaryColor }}>Sócio</h3>
@@ -356,6 +355,84 @@ export default function PortfolioHero() {
           <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-center" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
             <h3 className="text-3xl md:text-4xl font-black mb-2" style={{ color: primaryColor }}>500+</h3>
             <p className="font-semibold text-base md:text-lg leading-tight" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Máquinas Reparadas</p>
+          </div>
+        </div>
+
+        <div className="mt-20 pt-16 border-t" style={{ borderColor: isDark ? "#27272a" : "#e4e4e7" }}>
+          <h3 className="text-3xl font-black mb-12 text-center" style={{ color: primaryColor }}>
+            Experiência Profissional
+          </h3>
+          <div className="relative max-w-3xl mx-auto">
+            {/* Linha vertical (timeline) */}
+            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-gradient-to-b from-transparent via-emerald-500 to-transparent opacity-30" />
+            
+            <div className="space-y-12 relative">
+              {/* DIGILOC */}
+              <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between group">
+                <div className="hidden md:block w-5/12 text-right pr-8">
+                  <h4 className="text-2xl font-black transition-colors duration-300 group-hover:text-emerald-500" style={{ color: isDark ? "#fff" : "#18181b" }}>DIGILOC</h4>
+                  <p className="text-lg font-medium" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Técnico Especialista</p>
+                </div>
+                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border-4 flex items-center justify-center bg-white dark:bg-zinc-900 transition-transform duration-300 group-hover:scale-125 shadow-lg z-10" style={{ borderColor: primaryColor }}>
+                  <Briefcase className="w-5 h-5" style={{ color: primaryColor }} />
+                </div>
+                <div className="md:hidden pl-20 pb-2">
+                  <h4 className="text-2xl font-black" style={{ color: isDark ? "#fff" : "#18181b" }}>DIGILOC</h4>
+                  <p className="text-lg font-medium" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Técnico Especialista</p>
+                </div>
+                <div className="w-full md:w-5/12 pl-20 md:pl-8 text-left">
+                  <div className="p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+                    <p style={{ color: isDark ? "#d4d4d8" : "#3f3f46" }}>
+                      Profundo conhecimento prático e teórico, lidando com máquinas corporativas, impressoras de grande formato e plotters.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* CDMAX */}
+              <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between group">
+                <div className="w-full md:w-5/12 pl-20 md:pr-8 md:pl-0 text-left md:text-right order-2 md:order-1">
+                  <div className="p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+                    <p style={{ color: isDark ? "#d4d4d8" : "#3f3f46" }}>
+                      Atuação direta na manutenção corretiva e preventiva de equipamentos de alto desempenho em diversos clientes.
+                    </p>
+                  </div>
+                </div>
+                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border-4 flex items-center justify-center bg-white dark:bg-zinc-900 transition-transform duration-300 group-hover:scale-125 shadow-lg z-10 order-1 md:order-2" style={{ borderColor: primaryColor }}>
+                  <Building2 className="w-5 h-5" style={{ color: primaryColor }} />
+                </div>
+                <div className="md:hidden pl-20 pb-2 order-1">
+                  <h4 className="text-2xl font-black" style={{ color: isDark ? "#fff" : "#18181b" }}>CDMAX</h4>
+                  <p className="text-lg font-medium" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Suporte & Manutenção</p>
+                </div>
+                <div className="hidden md:block w-5/12 text-left pl-8 order-3">
+                  <h4 className="text-2xl font-black transition-colors duration-300 group-hover:text-emerald-500" style={{ color: isDark ? "#fff" : "#18181b" }}>CDMAX</h4>
+                  <p className="text-lg font-medium" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Suporte & Manutenção</p>
+                </div>
+              </div>
+
+              {/* TECNOVETTI */}
+              <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between group">
+                <div className="hidden md:block w-5/12 text-right pr-8">
+                  <h4 className="text-2xl font-black transition-colors duration-300 group-hover:text-emerald-500" style={{ color: isDark ? "#fff" : "#18181b" }}>TECNOVETTI</h4>
+                  <p className="text-lg font-medium" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Técnico de Campo</p>
+                </div>
+                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border-4 flex items-center justify-center bg-white dark:bg-zinc-900 transition-transform duration-300 group-hover:scale-125 shadow-lg z-10" style={{ borderColor: primaryColor }}>
+                  <Wrench className="w-5 h-5" style={{ color: primaryColor }} />
+                </div>
+                <div className="md:hidden pl-20 pb-2">
+                  <h4 className="text-2xl font-black" style={{ color: isDark ? "#fff" : "#18181b" }}>TECNOVETTI</h4>
+                  <p className="text-lg font-medium" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Técnico de Campo</p>
+                </div>
+                <div className="w-full md:w-5/12 pl-20 md:pl-8 text-left">
+                  <div className="p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+                    <p style={{ color: isDark ? "#d4d4d8" : "#3f3f46" }}>
+                      Solução de problemas complexos em campo, calibração e integração de sistemas de impressão corporativos.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
