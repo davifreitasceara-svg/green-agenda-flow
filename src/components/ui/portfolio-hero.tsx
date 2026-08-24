@@ -344,9 +344,9 @@ export default function PortfolioHero() {
             <h3 className="text-3xl md:text-4xl font-black mb-2" style={{ color: primaryColor }}>30+</h3>
             <p className="font-semibold text-base md:text-lg leading-tight" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Anos de Carreira</p>
           </div>
-          <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-center" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
-            <h3 className="text-3xl md:text-4xl font-black mb-2" style={{ color: primaryColor }}>Multimarcas</h3>
-            <p className="font-semibold text-base md:text-lg leading-tight" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Especialista Técnico</p>
+          <div className="p-4 sm:p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-center" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
+            <h3 className="text-2xl sm:text-3xl md:text-2xl lg:text-3xl xl:text-4xl font-black mb-2 tracking-tight" style={{ color: primaryColor, wordBreak: 'break-word' }}>Multimarcas</h3>
+            <p className="font-semibold text-sm sm:text-base md:text-sm lg:text-lg leading-tight" style={{ color: isDark ? "#a1a1aa" : "#52525b" }}>Especialista Técnico</p>
           </div>
           <div className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-center" style={{ borderColor: isDark ? "#3f3f46" : "#e4e4e7", backgroundColor: isDark ? "hsl(0 0% 12%)" : "hsl(0 0% 98%)" }}>
             <h3 className="text-3xl md:text-4xl font-black mb-2" style={{ color: primaryColor }}>Sócio</h3>
