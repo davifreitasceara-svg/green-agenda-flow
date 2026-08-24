@@ -70,15 +70,18 @@ function Maquinas() {
              {/* Hero Image / Graphic */}
              <div className="flex-1 w-full max-w-lg lg:max-w-none relative hidden md:block lg:pl-10">
                <div className="relative aspect-[4/5] sm:aspect-square lg:aspect-[4/5] rounded-[2.5rem] shadow-2xl overflow-hidden border-4 border-white group">
-                 {/* Main Image */}
-                 <img 
-                   src={fredericoImg} 
-                   alt="Especialista Frederico Francisco" 
-                   className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 z-10"
-                 />
+                 
+                 {/* Premium Background instead of photo */}
+                 <div className="absolute inset-0 bg-primary z-10 overflow-hidden transition-transform duration-700 group-hover:scale-105">
+                   <div className="absolute top-0 right-0 w-64 h-64 bg-white/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                   <div className="absolute bottom-0 left-0 w-80 h-80 bg-black/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4"></div>
+                   <div className="absolute inset-0 flex items-center justify-center opacity-20 pb-20">
+                     <Printer className="w-64 h-64 text-black" strokeWidth={1} />
+                   </div>
+                 </div>
 
                  {/* Gradient Overlay */}
-                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-zinc-900/10 to-transparent z-20"></div>
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-20"></div>
                  
                  {/* Content over image */}
                  <div className="absolute bottom-0 left-0 right-0 p-8 z-30 translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
