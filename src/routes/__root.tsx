@@ -91,8 +91,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "Multicopy Gráfica — Agendas e Planners Personalizados" },
       { name: "twitter:description", content: "Agendas diárias, planners 2027, modelos executivos e personalizados impressos com acabamento artesanal. Compre online na Multicopy Gráfica." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/df86eac5-968d-47a6-a351-e510f27d54c4/id-preview-a1057fd4--3db1628b-514e-407c-91b1-328f24e1b916.lovable.app-1785802901213.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/df86eac5-968d-47a6-a351-e510f27d54c4/id-preview-a1057fd4--3db1628b-514e-407c-91b1-328f24e1b916.lovable.app-1785802901213.png" },
+      { property: "og:image", content: "https://multicopy.site/favicon.png" },
+      { name: "twitter:image", content: "https://multicopy.site/favicon.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -105,7 +105,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
 
   }),
