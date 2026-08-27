@@ -338,17 +338,16 @@ function Index() {
               </div>
 
               <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mb-6 tracking-wide drop-shadow-sm" style={{ fontFamily: "'Dancing Script', 'Pacifico', cursive" }}>
-                Agendas corporativas com a sua marca
+                Monte sua agenda agora
               </h2>
               
               <p className="mx-auto mt-2 max-w-2xl text-lg md:text-xl text-white/90 leading-relaxed font-light">
-                Pedidos a partir de <strong className="font-semibold text-white">50 unidades</strong> com logo em hot stamping, 
-                miolo customizado e embalagem individual. Receba um orçamento em até 24 horas.
+                Personalize cada detalhe com a Multicopy. Entre em contato e <strong className="font-semibold text-white">faça o seu orçamento</strong>!
               </p>
               
               <a href="https://wa.me/558596668021" target="_blank" rel="noopener noreferrer">
                 <SmokyButton className="mt-10 group/btn shadow-[0_10px_30px_rgba(255,255,255,0.2)] hover:shadow-[0_15px_40px_rgba(255,255,255,0.4)] border border-white/20 min-w-[320px] md:min-w-[400px]">
-                  Solicitar Orçamento Exclusivo 
+                  Faça o seu orçamento 
                   <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
                 </SmokyButton>
               </a>
