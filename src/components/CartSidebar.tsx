@@ -35,7 +35,7 @@ export function CartSidebar() {
     message += `Aguardo o retorno para prosseguir com o pagamento e envio das informações de personalização!`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/558596668021?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/558589059679?text=${encodedMessage}`;
 
     window.open(whatsappUrl, "_blank");
     clearCart();
