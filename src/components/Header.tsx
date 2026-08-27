@@ -115,7 +115,7 @@ export function Header() {
               </Link>
             )}
 
-            <a href="https://wa.me/558596668021" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary text-black flex items-center justify-center shadow-sm hover:bg-black hover:text-primary transition-all hover:scale-110 hover:-rotate-12 border-2 border-transparent">
+            <a href="https://wa.me/558589059679" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary text-black flex items-center justify-center shadow-sm hover:bg-black hover:text-primary transition-all hover:scale-110 hover:-rotate-12 border-2 border-transparent">
               <MessageCircle className="w-5 h-5" />
             </a>
 
